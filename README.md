@@ -1,2 +1,2 @@
 Bar Management System
-This project is a web application designed to streamline lounge bar operations by managing real-time table bookings, product inventory, and customer orders. The platform features distinct interfaces for customers to book and review service, and for staff to monitor sales and performance analytics;
+This project is a web application designed to streamline lounge bar operations by managing real-time table bookings, product inventory, and customer orders. The platform features distinct interfaces for customers to book and review service, and for staff to monitor sales and performance analytics.
