@@ -1,0 +1,26 @@
+services:
+  web:
+    image: tomcat:latest
+    ports:
+      - "8081:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./target/...
+      -
+
+  db:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data/
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 10s
+      retries: 50
