@@ -7,7 +7,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./target/...
+      - ./target/loungebar.war:/usr/local/tomcat/webapps/loungebar.war
       -
 
   db:

@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1773827264.55028 "c:/Users/Usuario/wa2526-bar/homework1/main.tex" "main.pdf" "main" 1773827266.1849 2
+["pdflatex"] 1774861408.70775 "c:/Users/Usuario/wa2526-bar/homework1/main.tex" "main.pdf" "main" 1774861409.81907 2
   "C:/Users/Usuario/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1773826839.90386 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Usuario/AppData/Local/MiKTeX/fonts/pk/ljfour/public/cmbright/dpi600/cmbr10.pk" 1773826595.69889 9388 8eda8526cad00b918e3b92a6f2c540f6 ""
   "C:/Users/Usuario/AppData/Local/MiKTeX/fonts/pk/ljfour/public/cmbright/dpi600/cmbrbx10.pk" 1773826593.14603 9396 dbd6fb92b14ab9c84e547644740cc2e0 ""
@@ -55,11 +55,11 @@
   "ClassDiagram.pdf" 0 -1 0 ""
   "ERSchema.pdf" 0 -1 0 ""
   "c:/Users/Usuario/wa2526-bar/homework1/main.tex" 1773825597.10798 359 36e15e20eafdf4c7109ec21fba4dd203 ""
-  "groupdata.tex" 1773827261.58221 572 63bf46d787d1d3b6594af1d91d8da082 ""
+  "groupdata.tex" 1774861404.16857 671 53ebd2ba1b44e8833aabbb668343d8a9 ""
   "local_macros.tex" 1773825597.1008 1690 543160e1efb08fa5920abcd76a6b5a18 ""
   "logos/DEI.pdf" 1773825597.12449 295786 102091f2d6f41bf9bb23fa5dff020c61 ""
   "logos/logo-unipd800.pdf" 1773825597.13953 394708 be556d91cb06553017a36b322e90a8da ""
-  "main.aux" 1773827265.93507 2247 fe2acdddcbf86c75d1ffd9cc599f1e08 "pdflatex"
+  "main.aux" 1774861409.63847 2247 fe2acdddcbf86c75d1ffd9cc599f1e08 "pdflatex"
   "mockup.pdf" 0 -1 0 ""
   "sections/BLL/ClassDiagram.tex" 1773825597.20125 561 c718bc08f875f4d3d18584f86eafe2f3 ""
   "sections/BLL/RESTAPIDetails.tex" 1773825597.20877 836 2f6e116072873574dbf289cdd0c7d922 ""
