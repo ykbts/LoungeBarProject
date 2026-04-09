@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Reservation {
 
-    private long id;
+    private final long id;
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
     private final int people;
@@ -12,7 +12,8 @@ public class Reservation {
     private final int table;
 
 
-    public Reservation(LocalDateTime startTime, LocalDateTime endTime, int people, String customer, int table) {
+    public Reservation(long id, LocalDateTime startTime, LocalDateTime endTime, int people, String customer, int table) {
+        this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.people = people;

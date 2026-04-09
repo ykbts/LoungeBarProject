@@ -4,14 +4,15 @@ import java.time.LocalDateTime;
 
 public class Orders {
 
-    private long id;
+    private final long id;
     private final LocalDateTime dateTime;
     private final String status;
     private final String payMethod;
     private final String waiterID;
     private final int tableID;
 
-    public Orders(LocalDateTime dateTime, String status, String payMethod, String waiterID, int tableID) {
+    public Orders(long id, LocalDateTime dateTime, String status, String payMethod, String waiterID, int tableID) {
+        this.id = id;
         this.dateTime = dateTime;
         this.status = status;
         this.payMethod = payMethod;
