@@ -1,6 +1,6 @@
 package dei.unipd.it.resources;
 
-public class Table {
+public class Tables {
     /**
      * The unique number identifying the table
      */
@@ -22,7 +22,7 @@ public class Table {
      * @param capacity the seating capacity of the table.
      * @param isAvailable the availability status of the table.
      */
-    public Table(final int number, final int capacity, final boolean isAvailable) {
+    public Tables(final int number, final int capacity, final boolean isAvailable) {
         this.number = number;
         this.capacity = capacity;
         this.isAvailable = isAvailable;

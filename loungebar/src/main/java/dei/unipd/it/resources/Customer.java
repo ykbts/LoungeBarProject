@@ -2,9 +2,9 @@ package dei.unipd.it.resources;
 
 public class Customer {
 
-    private String phone;
-    private String name;
-    private String surname;
+    private final String phone;
+    private final String name;
+    private final String surname;
 
     public Customer(String phone, String name, String surname) {
         this.phone = phone;
