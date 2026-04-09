@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Context>
+    <Resource
+            name="jdbc/loungebardb"
+            auth="Container"
+            type="javax.sql.DataSource"
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+            driverClassName="org.postgresql.Driver"
+            url="jdbc:postgresql://database:5432/loungebardb"
+            username="fskcl"
+            password="ferrothebest"
+            testOnBorrow="true"
+            validationQuery="SELECT 1"
+            timeBetweenEvictionRunsMillis="30000"
+            maxActive="10"
+            minIdle="5"
+            maxWait="10000"
+            initialSize="2"
+            removeAbandoned="true"
+            removeAbandonedTimeout="60"
+            closeMethod="close"
+    />
+</Context>

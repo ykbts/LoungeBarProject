@@ -18,8 +18,8 @@ services:
     ports:
       - "5433:5432"
     environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=ferrothebest
+      - POSTGRES_USER=fskcl
     volumes:
       - ./data/db:/var/lib/postgresql
     healthcheck:
