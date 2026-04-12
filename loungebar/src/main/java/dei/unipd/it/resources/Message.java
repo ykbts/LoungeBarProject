@@ -42,6 +42,7 @@ public class Message extends AbstractResource {
         return isError;
     }
 
+
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
 

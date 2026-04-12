@@ -108,7 +108,7 @@ public abstract class AbstractRR implements RestResource {
 
         Message m = null;
 
-        // if there is no header _accept_
+        // if there is no header _accept_ = no media type specified
         if (accept == null) {
             LOGGER.error("Output media type not specified. Accept request header missing.");
             m = new Message("Output media type not specified.", "E4A1", "Accept request header missing.");
