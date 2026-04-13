@@ -27,7 +27,7 @@ public class CreateReservationDAO extends AbstractDAO<Reservation> {
     /** prepare and execute the query */
     protected final void doAccess() throws SQLException {
 
-        ResultSet rs = null;
+        ResultSet rs;
         Reservation r = null;
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(STATEMENT)) {
