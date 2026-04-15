@@ -6,14 +6,14 @@ public class User {
     private String name;
     private String surname;
     private String phone;
-    private String role;
+    private UserRole role;
 
     public User(String username, String password){
         this.username = username;
         this.password = password;
     }
 
-    public User(String username, String name, String surname, String phone, String role) {
+    public User(String username, String name, String surname, String phone, UserRole role) {
         this.username = username;
         this.name = name;
         this.surname = surname;
@@ -36,7 +36,7 @@ public class User {
     public String getName() { return name; }
     public String getSurname() { return surname; }
     public String getPhone() { return phone; }
-    public String getRole() { return role; }
+    public String getRole() { return role.toString(); }
     public String getPassword() { return password; }
 
 }

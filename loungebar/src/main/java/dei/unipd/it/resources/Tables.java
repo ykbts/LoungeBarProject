@@ -1,6 +1,15 @@
 package dei.unipd.it.resources;
 
-public class Tables {
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
+
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class Tables extends AbstractResource {
     /**
      * The unique number identifying the table
      */
@@ -50,6 +59,73 @@ public class Tables {
      */
     public final boolean isAvailable() {
         return isAvailable;
+    }
+
+    @Override
+    protected void writeJSON(OutputStream out) throws IOException {
+
+        final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
+
+        jg.writeStartObject();
+
+        jg.writeFieldName("table");
+
+        jg.writeStartObject();
+
+        jg.writeNumberField("number", number);
+        jg.writeNumberField("capacity", capacity);
+        jg.writeBooleanField("is-available", isAvailable);
+
+        jg.writeEndObject();
+
+        jg.writeEndObject();
+
+        jg.flush();
+    }
+
+    public static Tables fromJSON (InputStream in) throws IOException {
+
+        int jNumber = -1;
+        int jCapacity = -1;
+        boolean jIsAvailable = false;
+
+        try {
+            final JsonParser jp = JSON_FACTORY.createParser(in);
+
+            while (jp.getCurrentToken() != JsonToken.FIELD_NAME || !"table".equals(jp.getCurrentName())) {
+
+                if (jp.nextToken() == null) {
+                    LOGGER.error("No TABLE object found in the stream.");
+                    throw new EOFException("Unable to parse JSON: no TABLE object found.");
+                }
+            }
+
+            while (jp.nextToken() != JsonToken.END_OBJECT) {
+
+                if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
+
+                    switch (jp.getCurrentName()) {
+                        case "number":
+                            jp.nextToken();
+                            jNumber = jp.getIntValue();
+                            break;
+                        case "capacity":
+                            jp.nextToken();
+                            jCapacity = jp.getIntValue();
+                            break;
+                        case "is-available":
+                            jp.nextToken();
+                            jIsAvailable = jp.getBooleanValue();
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.error("Unable to parse a TABLE object from JSON.", e);
+            throw e;
+        }
+
+        return new Tables(jNumber, jCapacity, jIsAvailable);
     }
 }
 

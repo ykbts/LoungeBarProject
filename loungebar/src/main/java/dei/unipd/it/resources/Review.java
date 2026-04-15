@@ -1,6 +1,15 @@
 package dei.unipd.it.resources;
 
-public class Review {
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
+
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class Review extends AbstractResource {
 
     private final String waiterID;
     private final String customerID;
@@ -12,6 +21,13 @@ public class Review {
         this.customerID = customerID;
         this.score = score;
         this.comment = comment;
+    }
+
+    public Review(String waiterID, String customerID, int score) {
+        this.waiterID = waiterID;
+        this.customerID = customerID;
+        this.score = score;
+        this.comment = null;
     }
 
     public String getWaiterID() {
@@ -28,5 +44,78 @@ public class Review {
 
     public String getComment() {
         return comment;
+    }
+
+    @Override
+    protected void writeJSON(OutputStream out) throws IOException {
+
+        final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
+
+        jg.writeStartObject();
+
+        jg.writeFieldName("review");
+
+        jg.writeStartObject();
+
+        jg.writeStringField("waiter-id", waiterID);
+        jg.writeStringField("customer-id", customerID);
+        jg.writeNumberField("score", score);
+        jg.writeStringField("comment", comment);
+
+        jg.writeEndObject();
+
+        jg.writeEndObject();
+
+        jg.flush();
+    }
+
+    public static Review fromJSON(InputStream in) throws IOException {
+
+        String jWaiter = null;
+        String jCustomer = null;
+        int jScore = -1;
+        String jComment = null;
+
+        try {
+            final JsonParser jp = JSON_FACTORY.createParser(in);
+
+            while (jp.getCurrentToken() != JsonToken.FIELD_NAME || !"review".equals(jp.getCurrentName())) {
+
+                if (jp.nextToken() == null) {
+                    LOGGER.error("No REVIEW object found in the stream.");
+                    throw new EOFException("Unable to parse JSON: no REVIEW object found.");
+                }
+            }
+
+            while (jp.nextToken() != JsonToken.END_OBJECT) {
+
+                if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
+
+                    switch (jp.getCurrentName()) {
+                        case "waiter-id":
+                            jp.nextToken();
+                            jWaiter = jp.getText();
+                            break;
+                        case "customer-id":
+                            jp.nextToken();
+                            jCustomer = jp.getText();
+                            break;
+                        case "score":
+                            jp.nextToken();
+                            jScore = jp.getIntValue();
+                            break;
+                        case "comment":
+                            jp.nextToken();
+                            jComment = jp.getText();
+                            break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.error("Unable to parse a WORK object from JSON.", e);
+            throw e;
+        }
+
+        return new Review(jWaiter, jCustomer, jScore, jComment);
     }
 }
