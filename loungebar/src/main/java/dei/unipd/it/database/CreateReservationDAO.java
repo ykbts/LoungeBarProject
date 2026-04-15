@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class CreateReservationDAO extends AbstractDAO<Reservation> {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO ... (startTime, endTime, people, customer, table) VALUES (?, ?, ?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Reservation (startTime, endTime, people, customer, table) VALUES (?, ?, ?, ?, ?) RETURNING *";
     private final Reservation reservation;
 
     public CreateReservationDAO (final Connection connection, final Reservation reservation) {

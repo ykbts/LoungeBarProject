@@ -6,12 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class CreateUserDAO extends AbstractDAO<User> {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO ... (username, name, surname, phone, role) VALUES (?, ?, ?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Users (username, name, surname, phone, role) VALUES (?, ?, ?, ?, ?) RETURNING *";
     private final User user;
 
     public CreateUserDAO(final Connection connection, final User user) {
