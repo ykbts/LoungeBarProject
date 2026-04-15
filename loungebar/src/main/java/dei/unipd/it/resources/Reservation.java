@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 public class Reservation extends AbstractResource {
 
-    private final long id;
+    private final int id;
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
     private final int people;
@@ -20,7 +20,7 @@ public class Reservation extends AbstractResource {
     private final int table;
 
 
-    public Reservation(long id, LocalDateTime startTime, LocalDateTime endTime, int people, String customer, int table) {
+    public Reservation(int id, LocalDateTime startTime, LocalDateTime endTime, int people, String customer, int table) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -29,7 +29,7 @@ public class Reservation extends AbstractResource {
         this.table = table;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
     public LocalDateTime getStartTime() {
@@ -76,7 +76,7 @@ public class Reservation extends AbstractResource {
     public static Reservation fromJSON (InputStream in) throws IOException {
 
         // fields read from JSON
-        long jId = -1;
+        int jId = -1;
         LocalDateTime jStartTime = null;
         LocalDateTime jEndTime = null;
         int jPeople = -1;
@@ -94,7 +94,7 @@ public class Reservation extends AbstractResource {
                 // no more elements
                 if (jp.nextToken() == null) {
                     LOGGER.error("No RESERVATION object found in the stream.");
-                    throw new EOFException("Unable to parse JSON: no Reservation object found.");
+                    throw new EOFException("Unable to parse JSON: no RESERVATION object found.");
                 }
             }
 
@@ -106,7 +106,7 @@ public class Reservation extends AbstractResource {
                     switch (jp.getCurrentName()) {
                         case "id":
                             jp.nextToken();
-                            jId = jp.getLongValue();
+                            jId = jp.getIntValue();
                             break;
                         case "startTime":
                             jp.nextToken();

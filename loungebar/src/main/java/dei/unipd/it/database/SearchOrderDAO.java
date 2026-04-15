@@ -1,6 +1,8 @@
 package dei.unipd.it.database;
 
+import dei.unipd.it.resources.OrderState;
 import dei.unipd.it.resources.Orders;
+import dei.unipd.it.resources.PayMethod;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -110,10 +112,10 @@ public final class SearchOrderDAO extends AbstractDAO<List<Orders>> {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                ordersList.add(new Orders(rs.getLong("id"),
+                ordersList.add(new Orders(rs.getInt("id"),
                         rs.getObject("dateTime", LocalDateTime.class),
-                        rs.getString("status"),
-                        rs.getString("payMethod"),
+                        OrderState.valueOf(rs.getString("status")),
+                        PayMethod.valueOf(rs.getString("payMethod")),
                         rs.getString("waiterID"),
                         rs.getInt("tableID")));
             }

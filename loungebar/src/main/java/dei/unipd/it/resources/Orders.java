@@ -1,21 +1,25 @@
 package dei.unipd.it.resources;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonToken;
 
+import java.io.EOFException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 
 public class Orders extends AbstractResource {
 
-    private final long id;
+    private final int id;
     private final LocalDateTime dateTime;
-    private final String status;
-    private final String payMethod;
+    private final OrderState status;
+    private final PayMethod payMethod;
     private final String waiterID;
     private final int tableID;
 
-    public Orders(long id, LocalDateTime dateTime, String status, String payMethod, String waiterID, int tableID) {
+    public Orders(int id, LocalDateTime dateTime, OrderState status, PayMethod payMethod, String waiterID, int tableID) {
         this.id = id;
         this.dateTime = dateTime;
         this.status = status;
@@ -24,7 +28,7 @@ public class Orders extends AbstractResource {
         this.tableID = tableID;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -32,11 +36,11 @@ public class Orders extends AbstractResource {
         return dateTime;
     }
 
-    public String getStatus() {
+    public OrderState getStatus() {
         return status;
     }
 
-    public String getPayMethod() {
+    public PayMethod getPayMethod() {
         return payMethod;
     }
 
@@ -55,21 +59,87 @@ public class Orders extends AbstractResource {
 
         jg.writeStartObject();
 
-        jg.writeFieldName("reservation");
+        jg.writeFieldName("order");
 
         jg.writeStartObject();
 
         jg.writeNumberField("id", id);
         jg.writeStringField("date-time", MAPPER.writeValueAsString(dateTime));
-        jg.writeStringField("endTime", MAPPER.writeValueAsString(endTime));
-        jg.writeNumberField("people", people);
-        jg.writeStringField("customer", customer);
-        jg.writeNumberField("table", table);
+        jg.writeStringField("status", status.toString());
+        jg.writeStringField("pay-method", payMethod.toString());
+        jg.writeStringField("waiter", waiterID);
+        jg.writeNumberField("table", tableID);
 
         jg.writeEndObject();
 
         jg.writeEndObject();
 
         jg.flush();
+    }
+
+    public static Orders fromJSON(InputStream in) throws IOException {
+
+        int jId = -1;
+        LocalDateTime jDateTime = null;
+        OrderState jStatus = null;
+        PayMethod jPayMethod = null;
+        String jWaiter = null;
+        int jTable = -1;
+
+        try {
+            // create parser
+            final JsonParser jp = JSON_FACTORY.createParser(in);
+
+            // advance to next element until we are to the start of the desired element
+            //  or the current element is not a token element
+            while (jp.getCurrentToken() != JsonToken.FIELD_NAME || !"order".equals(jp.getCurrentName())) {
+
+                // no more elements
+                if (jp.nextToken() == null) {
+                    LOGGER.error("No ORDER object found in the stream.");
+                    throw new EOFException("Unable to parse JSON: no ORDER object found.");
+                }
+            }
+
+            // once found our object
+            while (jp.nextToken() != JsonToken.END_OBJECT) {
+
+                if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
+
+                    switch (jp.getCurrentName()) {
+                        case "id":
+                            jp.nextToken();
+                            jId = jp.getIntValue();
+                            break;
+                        case "date-time":
+                            jp.nextToken();
+                            jDateTime = MAPPER.readValue(jp, LocalDateTime.class);
+                            break;
+                        case "status":
+                            jp.nextToken();
+                            jStatus = OrderState.valueOf(jp.getText());
+                            break;
+                        case "pay-method":
+                            jp.nextToken();
+                            jPayMethod = PayMethod.valueOf(jp.getText());
+                            break;
+                        case "waiter":
+                            jp.nextToken();
+                            jWaiter = jp.getText();
+                            break;
+                        case "table":
+                            jp.nextToken();
+                            jTable = jp.getIntValue();
+                            break;
+                    }
+                }
+            }
+        }
+        catch (IOException e) {
+            LOGGER.error("Unable to parse a RESERVATION object from JSON.", e);
+            throw e;
+        }
+
+        return new Orders(jId, jDateTime, jStatus, jPayMethod, jWaiter, jTable);
     }
 }
