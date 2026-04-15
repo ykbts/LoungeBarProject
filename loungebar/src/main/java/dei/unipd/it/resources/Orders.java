@@ -1,5 +1,7 @@
 package dei.unipd.it.resources;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
@@ -49,6 +51,25 @@ public class Orders extends AbstractResource {
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
 
+        final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
+        jg.writeStartObject();
+
+        jg.writeFieldName("reservation");
+
+        jg.writeStartObject();
+
+        jg.writeNumberField("id", id);
+        jg.writeStringField("date-time", MAPPER.writeValueAsString(dateTime));
+        jg.writeStringField("endTime", MAPPER.writeValueAsString(endTime));
+        jg.writeNumberField("people", people);
+        jg.writeStringField("customer", customer);
+        jg.writeNumberField("table", table);
+
+        jg.writeEndObject();
+
+        jg.writeEndObject();
+
+        jg.flush();
     }
 }

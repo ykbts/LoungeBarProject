@@ -1,6 +1,6 @@
 package dei.unipd.it.database;
 
-import dei.unipd.it.resources.Reservation;
+import dei.unipd.it.resources.Orders;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class SearchOrdersDAO extends AbstractDAO<List<Orders>> {
+public final class SearchOrderDAO extends AbstractDAO<List<Orders>> {
     /**
      * The SQL statement to be executed
      */
@@ -24,7 +24,7 @@ public final class SearchOrdersDAO extends AbstractDAO<List<Orders>> {
     private final int tableID;
 
 
-    public SearchOrdersDAO(final Connection con, long id, LocalDateTime dateTime, String status, String payMethod, String waiterID, int tableID) {
+    public SearchOrderDAO(final Connection con, long id, LocalDateTime dateTime, String status, String payMethod, String waiterID, int tableID) {
         super(con);
         this.id = id;
         this.dateTime = dateTime;
@@ -75,7 +75,7 @@ public final class SearchOrdersDAO extends AbstractDAO<List<Orders>> {
 
 
         try {
-            pstmt = con.prepareStatement(sb.toString());
+            pstmt = conn.prepareStatement(sb.toString());
 
             int clauseCount = 1;
 
@@ -91,7 +91,7 @@ public final class SearchOrdersDAO extends AbstractDAO<List<Orders>> {
                 pstmt.setString(clauseCount, status);
                 clauseCount+=1;
             }
-            if(payMethod>=0) {
+            if(payMethod!=null) {
                 pstmt.setString(clauseCount, payMethod);
                 clauseCount += 1;
             }
@@ -110,7 +110,12 @@ public final class SearchOrdersDAO extends AbstractDAO<List<Orders>> {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                ordersList.add(new Orders(rs.getLong("id"), rs.getObject("dateTime", LocalDateTime.class), rs.getString("status"), rs.getString("payMethod"), rs.getString("waiterID"), rs.getInt("tableID")));
+                ordersList.add(new Orders(rs.getLong("id"),
+                        rs.getObject("dateTime", LocalDateTime.class),
+                        rs.getString("status"),
+                        rs.getString("payMethod"),
+                        rs.getString("waiterID"),
+                        rs.getInt("tableID")));
             }
 
             LOGGER.info("Order(s) successfully listed.");
