@@ -1,9 +1,7 @@
 package dei.unipd.it.database;
 
-import dei.unipd.it.resources.OrderState;
 import dei.unipd.it.resources.Orders;
 import dei.unipd.it.resources.OrderItem;
-import dei.unipd.it.resources.PayMethod;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,8 +44,8 @@ public class CreateOrderDAO extends AbstractDAO<Orders> {
             if (rs.next()) {
                 o = new Orders (rs.getInt("id"),
                         LocalDateTime.parse(rs.getString("dateTime")),
-                        OrderState.valueOf(rs.getString("status")),
-                        PayMethod.valueOf(rs.getString("payMethod")),
+                        rs.getString("status"),
+                        rs.getString("payMethod"),
                         rs.getString("waiterID"),
                         rs.getInt("tableID"));
 
