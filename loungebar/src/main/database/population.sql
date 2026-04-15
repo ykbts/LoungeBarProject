@@ -85,26 +85,26 @@ INSERT INTO lounge."user" (username, password_hash, name, surname, phone, role) 
 --      ORDERS POPULATION
 -- ##########################################################
 INSERT INTO lounge.Orders (date_time, status, pay_method, user_waiterID, tableID) VALUES
-    ('2026-04-12 12:00:00', 'PAID', 'CASH', 'ecaterina_i', 1),
-    ('2026-04-12 12:15:00', 'PAID', 'DEBIT CARD', 'claudia_f', 2),
-    ('2026-04-12 12:30:00', 'PENDING', NULL, 'fulvio_b', 3),
-    ('2026-04-12 13:00:00', 'PAID', 'BANCOMAT', 'ecaterina_i', 5);
+('2026-04-12 12:00:00', 'PAID', 'CASH', 'ecaterina_i', 1),
+('2026-04-12 12:15:00', 'PAID', 'DEBIT CARD', 'claudia_f', 2),
+('2026-04-12 12:30:00', 'PENDING', NULL, 'fulvio_b', 3),
+('2026-04-12 13:00:00', 'PAID', 'BANCOMAT', 'ecaterina_i', 5);
 
 -- ##########################################################
 --      ORDERITEM POPULATION
 -- ##########################################################
 INSERT INTO lounge.OrderItem (drink_name, orderID, quantity) VALUES
 ('Gin Tonic', 1, 2), ('Acqua Naturale', 1, 2),
- ('Coca Cola Can', 2, 2), ('Mojito', 2, 5),
+('Coca Cola Can', 2, 2), ('Mojito', 2, 5),
 ('Negroni', 3, 1), ('IPA Beer Draft', 3, 2);
 
 -- ##########################################################
 --      RESERVATION POPULATION
 -- ##########################################################
-INSERT INTO lounge.Reservation (reservation_date, start_time, end_time, n_people, tableNumber, user_customerID) VALUES
-('2026-04-21', '12:00', '14:00', 2, 1, 'nicola_ferro'),
-('2026-04-21', '18:00', '19:30', 2, 7, 'giulia_f'),
-('2026-04-22', '19:00', '21:00', 4, 9, 'luca_b');
+INSERT INTO lounge.Reservation (start_time, end_time, n_people, tableNumber, user_customerID) VALUES
+('2026-04-21 12:00:00', '2026-04-21 14:00:00', 2, 1, 'nicola_ferro'),
+('2026-04-21 18:00:00', '2026-04-21 19:30:00', 2, 7, 'giulia_f'),
+('2026-04-22 19:00:00', '2026-04-22 21:00:00', 4, 9, 'luca_b');
 
 -- ##########################################################
 --      REVIEW POPULATION
@@ -116,10 +116,10 @@ INSERT INTO lounge.Review (user_waiterID, user_customerID, score, comment) VALUE
 -- ##########################################################
 --      SHIFT POPULATION
 -- ##########################################################
-INSERT INTO lounge.Shift (shift_date, start_time, end_time) VALUES
-    ('2026-04-13', '09:00', '13:00'),
-    ('2026-04-13', '13:00', '17:00'),
-    ('2026-04-13', '17:00', '22:00');
+INSERT INTO lounge.Shift (start_time, end_time) VALUES
+('2026-04-13 09:00:00', '2026-04-13 13:00:00'),
+('2026-04-13 13:00:00', '2026-04-13 17:00:00'),
+('2026-04-13 17:00:00', '2026-04-13 22:00:00');
 
 -- ##########################################################
 --      WORK POPULATION
