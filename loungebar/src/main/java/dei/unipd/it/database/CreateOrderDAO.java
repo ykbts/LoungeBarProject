@@ -1,7 +1,6 @@
 package dei.unipd.it.database;
 
 import dei.unipd.it.resources.Orders;
-import dei.unipd.it.resources.OrderItem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
