@@ -5,8 +5,17 @@
   <artifactId>loungebar</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
+
   <name>loungebar Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>17</java.version>
+    <log4j.version>2.20.0</log4j.version>
+  </properties>
 
   <build>
     <finalName>loungebar</finalName>
@@ -20,6 +29,7 @@
             <destDir>javadoc</destDir>
         </configuration>
       </plugin>
+
     </plugins>
 
   </build>
@@ -32,12 +42,28 @@
       <scope>test</scope>
     </dependency>
 
+<!--    for servlets -->
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
       <version>6.0.0</version>
       <scope>provided</scope>
     </dependency>
+
+<!--    for JSPs and servlets -->
+    <dependency>
+      <groupId>jakarta.servlet.jsp.jstl</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+<!--    for using JSPs -->
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+
 
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -62,6 +88,20 @@
       <artifactId>tomcat-jdbc</artifactId>
       <version>10.1.7</version>
       <scope>provided</scope>
+    </dependency>
+
+<!--    for using JSON tools -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.14.2</version>
+    </dependency>
+
+<!--    for JSON data formatter (like dates) -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.15.2</version>
     </dependency>
 
   </dependencies>

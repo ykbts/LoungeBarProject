@@ -1,0 +1,172 @@
+package dei.unipd.it.rest;
+
+import dei.unipd.it.resources.LogContext;
+import dei.unipd.it.resources.Message;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.Connection;
+
+public abstract class AbstractRR implements RestResource {
+
+    protected static final Logger LOGGER = LogManager.getLogger(AbstractRR.class, StringFormatterMessageFactory.INSTANCE);
+
+    protected static final String JSON_MEDIA_TYPE = "application/json";
+    protected static final String JSON_UTF_8_MEDIA_TYPE = "application/json; charset=utf-8";
+    protected static final String ALL_MEDIA_TYPE = "*/*";
+
+    protected final HttpServletRequest req;
+    protected final HttpServletResponse resp;
+    protected final Connection conn;
+
+    private final String action;
+
+    public AbstractRR (final String action, final HttpServletRequest req, final HttpServletResponse resp, final Connection conn) {
+
+        if (action == null || action.isBlank()) {
+            LOGGER.warn("Action is null or empty.");
+        }
+        this.action = action;
+        LogContext.setAction(action);
+
+        if (req == null) {
+            LOGGER.error("The HTTP request cannot be null.");
+            throw new NullPointerException("The HTTP request cannot be null.");
+        }
+        this.req = req;
+
+        if (resp == null) {
+            LOGGER.error("The HTTP response cannot be null.");
+            throw new NullPointerException("The HTTP response cannot be null.");
+        }
+        this.resp = resp;
+
+        if (conn == null) {
+            LOGGER.error("The connection cannot be null.");
+            throw new NullPointerException("The connection cannot be null.");
+        }
+        this.conn = conn;
+
+    }
+
+    public void serve() throws IOException {
+
+        try {
+            // if the request method and/or the MIME media type are not allowed, return.
+            // Appropriate error message sent by {@code checkMethodMediaType}
+            if (!checkMethodMediaType(req, resp)) {
+                return;
+            }
+
+            doServe();
+        }
+        catch (Throwable t) {
+            LOGGER.error("Unable to serve the REST request.", t);
+
+            final Message m = new Message(String.format("Unable to serve the REST request: %s.", action), "E5A1", t.getMessage());
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            m.toJSON(resp.getOutputStream());
+        }
+        finally {
+            LogContext.removeAction();
+            LogContext.removeResource();
+        }
+    }
+
+    /**
+     * Performs the actual logic needed for serving the REST request.
+     *
+     * Subclasses have to implement this method in order to define the actual strategy for serving the REST request.
+     *
+     * @throws IOException if any error occurs in the client/server communication.
+     */
+    protected abstract void doServe() throws IOException;
+
+    /**
+     * Checks that the request method and MIME media type are allowed.
+     *
+     * Subclasses may override it to customize their behaviour, e.g. not limiting the MIME media types to JSON.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     *
+     * @return {@code true} if the request method and the MIME type are allowed; {@code false} otherwise.
+     *
+     * @throws IOException if any error occurs in the client/server communication.
+     */
+    protected boolean checkMethodMediaType (final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+
+        final String method = req.getMethod();
+        final String contentType = req.getHeader("Content-Type");
+        final String accept = req.getHeader("Accept");
+        final OutputStream out = res.getOutputStream();
+
+        Message m = null;
+
+        // if there is no header _accept_ = no media type specified
+        if (accept == null) {
+            LOGGER.error("Output media type not specified. Accept request header missing.");
+            m = new Message("Output media type not specified.", "E4A1", "Accept request header missing.");
+            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            m.toJSON(out);
+            return false;
+        }
+
+        // if header _accept_ is not the desired one
+        if (!accept.contains(JSON_MEDIA_TYPE) && !accept.equals(ALL_MEDIA_TYPE)) {
+            LOGGER.error(
+                    String.format("Unsupported output media type. Resources are represented only in application/json. Requested representation is %s.",
+                    accept));
+            m = new Message("Unsupported output media type. Resources are represented only in application/json.",
+                    "E4A2", String.format("Requested representation is %s.", accept));
+            res.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            m.toJSON(out);
+            return false;
+        }
+
+        // if the method is supposed to send a body, check its MIME media type
+        switch (method) {
+            case "GET":
+            case "DELETE":
+                // nothing to do
+                break;
+            case "POST":
+            case "PUT":
+                if (contentType == null) {
+
+                    LOGGER.error("Input media type not specified. Content-Type request header missing.");
+                    m = new Message("Input media type not specified.", "E4A3", "Content-Type request header missing.");
+                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    m.toJSON(out);
+                    return false;
+                }
+
+                if (!contentType.contains(JSON_MEDIA_TYPE)) {
+
+                    LOGGER.error(
+                            String.format("Unsupported input media type. Resources are represented only in application/json. Submitted representation is %s.",
+                            contentType));
+                    m = new Message("Unsupported input media type. Resources are represented only in application/json.",
+                            "E4A4", String.format("Submitted representation is %s.", contentType));
+                    res.setStatus(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+                    m.toJSON(out);
+                    return false;
+                }
+
+                break;
+            default:
+                LOGGER.error(String.format("Unsupported operation. Requested operation %s.", method));
+                m = new Message("Unsupported operation.", "E4A5", String.format("Requested operation %s.", method));
+                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                m.toJSON(out);
+                return false;
+        }
+
+        return true;
+    }
+}
