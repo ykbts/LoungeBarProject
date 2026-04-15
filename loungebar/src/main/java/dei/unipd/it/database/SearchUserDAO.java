@@ -1,8 +1,7 @@
+package dei.unipd.it.database;
 
-package it.unipd.dei.webapp.database;
-
-
-import it.unipd.dei.webapp.resource.User;
+import dei.unipd.it.resources.User;
+import dei.unipd.it.resources.UserRole;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,7 +72,7 @@ public final class SearchUserDAO extends AbstractDAO<List<User>> {
 
 
         try {
-            pstmt = con.prepareStatement(sb.toString());
+            pstmt = conn.prepareStatement(sb.toString());
 
             int clauseCount = 1;
 
@@ -102,7 +101,12 @@ public final class SearchUserDAO extends AbstractDAO<List<User>> {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                users.add(new User(rs.getString("username"), rs.getString("password"), rs.getString("name"), rs.getString("surname"), rs.getString("phone"), rs.getString("role") ));
+                users.add(new User(rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("phone"),
+                        UserRole.valueOf(rs.getString("role"))));
             }
 
             LOGGER.info("User(s) successfully listed.");

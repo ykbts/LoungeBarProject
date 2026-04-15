@@ -42,8 +42,8 @@ public final class SearchReservationDAO extends AbstractDAO<List<Reservation>> {
 
 		// the results of the search
 		// the results of the search
-		final List<Reservation> reservations = new ArrayList<Reservation>();
-		final List<String> clauses= new ArrayList<String>();
+		final List<Reservation> reservations = new ArrayList<>();
+		final List<String> clauses= new ArrayList<>();
 
 
 		if(id>=0){ clauses.add(" lounge.Reservation.id = ? "); }
@@ -56,14 +56,19 @@ public final class SearchReservationDAO extends AbstractDAO<List<Reservation>> {
 		StringBuilder sb = new StringBuilder();
 		sb.append(STATEMENT);
 		sb.append(" ");
-		if(clauses.size()>0){
+
+		if(!clauses.isEmpty()){
+
 			sb.append(" WHERE ");
 			boolean first= true;
+
 			for(String s : clauses){
-				if(first){
+
+				if (first){
 					first=false;
 					sb.append(s);
-				}else {
+				}
+				else {
 					sb.append(" AND ");
 					sb.append(s);
 				}
@@ -75,7 +80,7 @@ public final class SearchReservationDAO extends AbstractDAO<List<Reservation>> {
 
 
 		try {
-			pstmt = con.prepareStatement(sb.toString());
+			pstmt = conn.prepareStatement(sb.toString());
 
 			int clauseCount = 1;
 

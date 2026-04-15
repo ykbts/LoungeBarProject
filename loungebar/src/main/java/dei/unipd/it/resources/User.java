@@ -2,7 +2,7 @@ package dei.unipd.it.resources;
 
 public class User {
     private final String username;
-    private String password;
+    private final String password;
     private String name;
     private String surname;
     private String phone;
@@ -13,8 +13,9 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String name, String surname, String phone, UserRole role) {
+    public User(String username, String password, String name, String surname, String phone, UserRole role) {
         this.username = username;
+        this.password = password;
         this.name = name;
         this.surname = surname;
         this.phone = phone;

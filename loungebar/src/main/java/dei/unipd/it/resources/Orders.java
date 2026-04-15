@@ -1,8 +1,10 @@
 package dei.unipd.it.resources;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 
-public class Orders {
+public class Orders extends AbstractResource {
 
     private final long id;
     private final LocalDateTime dateTime;
@@ -42,5 +44,11 @@ public class Orders {
 
     public int getTableID() {
         return tableID;
+    }
+
+    @Override
+    protected void writeJSON(OutputStream out) throws IOException {
+
+
     }
 }
