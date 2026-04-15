@@ -25,7 +25,7 @@ public class CreateUserDAO extends AbstractDAO<User> {
     protected final void doAccess() throws SQLException {
 
         ResultSet rs;
-        User r = null;
+        User u = null;
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(STATEMENT)) {
 
@@ -38,17 +38,17 @@ public class CreateUserDAO extends AbstractDAO<User> {
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                r = new User(rs.getString("username"),
+                u = new User(rs.getString("username"),
                         rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("phone"),
                         rs.getString("role"));
 
-                LOGGER.info("User {} successfully stored.", r.getUsername());
+                LOGGER.info("User {} successfully stored.", u.getUsername());
             }
         }
 
-        outputParam = r;
+        outputParam = u;
     
     }
 }
