@@ -8,22 +8,15 @@ BEGIN
         SELECT 1
         FROM lounge.Reservation
         WHERE tableNumber = NEW.tableNumber
-          AND reservation_date = NEW.reservation_date
           AND (NEW.id IS NULL OR id != NEW.id)
-          AND (
-            (NEW.start_time, NEW.end_time) OVERLAPS (start_time, end_time)
-            )
+          AND NEW.start_time < end_time
+          AND NEW.end_time > start_time
     ) THEN
         RAISE EXCEPTION 'Table % is already reserved for the selected time slot.', NEW.tableNumber;
     END IF;
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trg_prevent_reservation_overlap
-    BEFORE INSERT OR UPDATE ON lounge.Reservation
-    FOR EACH ROW
-EXECUTE FUNCTION lounge.check_reservation_overlap();
 
 
 --Checking of the table's capacity
@@ -78,7 +71,7 @@ CREATE TRIGGER trg_check_and_update_supply
 
 --Automatic table availability check
 CREATE OR REPLACE FUNCTION lounge.sync_table_status()
-RETURNS TRIGGER AS $$
+    RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.status = 'PENDING' THEN
         UPDATE lounge.Tables SET is_available = FALSE WHERE number = NEW.tableID;
