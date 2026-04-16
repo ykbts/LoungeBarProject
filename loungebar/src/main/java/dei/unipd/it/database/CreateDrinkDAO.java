@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class CreateDrinkDAO extends AbstractDAO<Drink> {
 
-    private static final String STATEMENT = "INSERT INTO lounge.Drink (name, price, isAlcoholic) VALUES (?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Drink (name, price, is_alcoholic) VALUES (?, ?, ?) RETURNING *";
     private final Drink drink;
 
     public CreateDrinkDAO (final Connection connection, final Drink drink) {
@@ -40,7 +40,7 @@ public class CreateDrinkDAO extends AbstractDAO<Drink> {
                 r = new Drink (
                         rs.getString("name"),
                         rs.getDouble("price"),
-                        rs.getBoolean("isAlcoholic"));
+                        rs.getBoolean("is_alcoholic"));
 
                 LOGGER.info("Drink {} successfully stored.", r.getName());
             }

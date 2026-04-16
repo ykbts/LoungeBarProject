@@ -1,7 +1,9 @@
 package dei.unipd.it.database;
 
+import dei.unipd.it.resources.OrderState;
 import dei.unipd.it.resources.Orders;
 import dei.unipd.it.resources.OrderItem;
+import dei.unipd.it.resources.PayMethod;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 public class CreateOrderDAO extends AbstractDAO<Orders> {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO lounge.Orders (dateTime, status, payMethod, waiterID, tableID) VALUES (?, ?, ?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Orders (date_time, status, pay_method, user_waiterID, tableID) VALUES (?, ?, ?, ?, ?) RETURNING *";
     private final Orders orders;
 
     public CreateOrderDAO (final Connection connection, final Orders orders) {
@@ -33,9 +35,9 @@ public class CreateOrderDAO extends AbstractDAO<Orders> {
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(STATEMENT)) {
 
-            preparedStatement.setString(1, orders.getDateTime().toString());
+            preparedStatement.setObject(1, orders.getDateTime());
             preparedStatement.setString(2, orders.getStatus().toString());
-            preparedStatement.setString(3, orders.getPayMethod().toString());
+            preparedStatement.setString(3, orders.getPayMethod() != null ? orders.getPayMethod().toString() : null);
             preparedStatement.setString(4, orders.getWaiterID());
             preparedStatement.setInt(5, orders.getTableID());
 
@@ -43,10 +45,10 @@ public class CreateOrderDAO extends AbstractDAO<Orders> {
 
             if (rs.next()) {
                 o = new Orders (rs.getInt("id"),
-                        LocalDateTime.parse(rs.getString("dateTime")),
-                        rs.getString("status"),
-                        rs.getString("payMethod"),
-                        rs.getString("waiterID"),
+                        LocalDateTime.parse(rs.getString("date_time")),
+                        OrderState.valueOf(rs.getString("status")),
+                        rs.getString("pay_method") != null ? PayMethod.valueOf(rs.getString("pay_method")) : null,
+                        rs.getString("user_waiterID"),
                         rs.getInt("tableID"));
 
                 LOGGER.info("Order {} successfully stored.", o.getId());
