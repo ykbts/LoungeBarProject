@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class CreateReservationDAO extends AbstractDAO<Reservation> {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO lounge.Reservation (startTime, endTime, people, customer, table) VALUES (?, ?, ?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Reservation (start_time, end_time, n_people, tableNumber, user_customerID) VALUES (?, ?, ?, ?, ?) RETURNING *";
     private final Reservation reservation;
 
     public CreateReservationDAO (final Connection connection, final Reservation reservation) {
@@ -32,21 +32,21 @@ public class CreateReservationDAO extends AbstractDAO<Reservation> {
 
         try (PreparedStatement preparedStatement = conn.prepareStatement(STATEMENT)) {
 
-            preparedStatement.setString(1, reservation.getStartTime().toString());
-            preparedStatement.setString(2, reservation.getEndTime().toString());
+            preparedStatement.setObject(1, reservation.getStartTime());
+            preparedStatement.setObject(2, reservation.getEndTime());
             preparedStatement.setInt(3, reservation.getPeople());
-            preparedStatement.setString(4, reservation.getCustomer());
-            preparedStatement.setInt(5, reservation.getTable());
+            preparedStatement.setInt(4, reservation.getTable());
+            preparedStatement.setString(5, reservation.getCustomer());
 
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 r = new Reservation (rs.getInt("id"),
-                        LocalDateTime.parse(rs.getString("startTime")),
-                        LocalDateTime.parse(rs.getString("endTime")),
-                        rs.getInt("people"),
-                        rs.getString("customer"),
-                        rs.getInt("table"));
+                        LocalDateTime.parse(rs.getString("start_time")),
+                        LocalDateTime.parse(rs.getString("end_time")),
+                        rs.getInt("n_people"),
+                        rs.getString("user_customerID"),
+                        rs.getInt("tableNumber"));
 
                 LOGGER.info("Reservation {} successfully stored.", r.getId());
             }

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class CreateOrderItemDAO extends AbstractDAO<OrderItem> {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO lounge.OrderItem (drinkName, orderID, quantity) VALUES (?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.OrderItem (drink_name, orderID, quantity) VALUES (?, ?, ?) RETURNING *";
     private final OrderItem orderItem;
 
     public CreateOrderItemDAO (final Connection connection, final OrderItem orderItem) {
@@ -37,7 +37,7 @@ public class CreateOrderItemDAO extends AbstractDAO<OrderItem> {
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                oi = new OrderItem(rs.getString("drinkName"),
+                oi = new OrderItem(rs.getString("drink_name"),
                         rs.getLong("orderID"),
                         rs.getInt("quantity"));
 

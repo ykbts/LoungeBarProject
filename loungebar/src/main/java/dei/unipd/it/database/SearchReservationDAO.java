@@ -47,11 +47,11 @@ public final class SearchReservationDAO extends AbstractDAO<List<Reservation>> {
 
 
 		if(id>=0){ clauses.add(" lounge.Reservation.id = ? "); }
-		if(startTime != null ){ clauses.add(" lounge.Reservation.startTime = ? "); }
-		if(endTime != null ){ clauses.add(" lounge.Reservation.endTime = ? "); }
-		if(people>=0){ clauses.add(" lounge.Reservation.people = ? "); }
-		if(customer != null ){ clauses.add(" lounge.Reservation.customer = ? "); }
-		if(table>=0){ clauses.add(" lounge.Reservation.table = ? "); }
+		if(startTime != null ){ clauses.add(" lounge.Reservation.start_time = ? "); }
+		if(endTime != null ){ clauses.add(" lounge.Reservation.end_time = ? "); }
+		if(people>=0){ clauses.add(" lounge.Reservation.n_people = ? "); }
+		if(customer != null && !customer.isEmpty()){ clauses.add(" lounge.Reservation.user_customerID = ? "); }
+		if(table>=0){ clauses.add(" lounge.Reservation.tableNumber = ? "); }
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(STATEMENT);
@@ -115,8 +115,14 @@ public final class SearchReservationDAO extends AbstractDAO<List<Reservation>> {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				reservations.add(new Reservation(rs.getLong("id"), rs.getObject("startTime", LocalDateTime.class), rs.getObject("endTime", LocalDateTime.class), rs.getInt("people"), rs.getString("customer"), rs.getInt("table")));
-			}
+				reservations.add(new Reservation(
+						rs.getInt("id"),
+						rs.getObject("start_time", LocalDateTime.class),
+						rs.getObject("end_time", LocalDateTime.class),
+						rs.getInt("n_people"),
+						rs.getString("user_customerID"),
+						rs.getInt("tableNumber")
+				));			}
 
 			LOGGER.info("Reservation(s) successfully listed.");
 		} finally {
