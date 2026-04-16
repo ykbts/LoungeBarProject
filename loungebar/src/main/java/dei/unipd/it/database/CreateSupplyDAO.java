@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class CreateSupplyDAO extends AbstractDAO<Supply> {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO lounge.Supply (name, unitsAvailable) VALUES (?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Supply (name, units_available) VALUES (?, ?) RETURNING *";
     private final Supply supply;
 
     public CreateSupplyDAO(final Connection connection, final Supply supply) {
@@ -37,7 +37,7 @@ public class CreateSupplyDAO extends AbstractDAO<Supply> {
             if (rs.next()) {
                 u = new Supply(
                         rs.getString("name"),
-                        rs.getInt("unitsAvailable")
+                        rs.getInt("units_available")
                 );
 
                 LOGGER.info("Supply {} successfully stored.", u.getName());

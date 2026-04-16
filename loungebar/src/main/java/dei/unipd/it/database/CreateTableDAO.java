@@ -9,7 +9,7 @@ import dei.unipd.it.resources.Tables;
 
 
 public class CreateTableDAO extends AbstractDAO<Tables> {
-    private static final String STATEMENT = "INSERT INTO lounge.Tables (number, capacity, isAvailable) VALUES (?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Tables (number, capacity, is_available) VALUES (?, ?, ?) RETURNING *";
     private final Tables table;
 
     public CreateTableDAO(final Connection connection, final Tables table) {
@@ -37,7 +37,7 @@ public class CreateTableDAO extends AbstractDAO<Tables> {
             if (rs.next()) {
                 t = new Tables(rs.getInt("number"),
                         rs.getInt("capacity"),
-                        rs.getBoolean("isAvailable"));
+                        rs.getBoolean("is_available"));
 
                 LOGGER.info("Table {} successfully stored.", t.getNumber());
             }
