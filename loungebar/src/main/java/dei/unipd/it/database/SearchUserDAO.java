@@ -12,7 +12,7 @@ import java.util.List;
 
 public final class SearchUserDAO extends AbstractDAO<List<User>> {
 
-    private static final String STATEMENT = "SELECT * FROM lounge.Users ";
+    private static final String STATEMENT = "SELECT * FROM lounge.User ";
 
     private final String username;
     private final String password;
@@ -43,12 +43,12 @@ public final class SearchUserDAO extends AbstractDAO<List<User>> {
         final List<String> clauses= new ArrayList<String>();
 
 
-        if(username != null ){ clauses.add(" username = ? "); }
-        if(password != null ){ clauses.add(" password = ? "); }
-        if(name != null ){ clauses.add(" name = ? "); }
-        if(surname != null ){ clauses.add(" surname = ? "); }
-        if(phone != null ){ clauses.add(" phone = ? "); }
-        if(role != null ){ clauses.add(" role = ? "); }
+        if (username != null && !username.isEmpty()) { clauses.add(" username = ? "); }
+        if (password != null && !password.isEmpty()) { clauses.add(" password = ? "); }
+        if (name != null && !name.isEmpty()) { clauses.add(" name = ? "); }
+        if (surname != null && !surname.isEmpty()) { clauses.add(" surname = ? "); }
+        if (phone != null && !phone.isEmpty()) { clauses.add(" phone = ? "); }
+        if (role != null && !role.isEmpty()) { clauses.add(" role::text = ? "); }
 
 
         StringBuilder sb = new StringBuilder();
@@ -77,22 +77,22 @@ public final class SearchUserDAO extends AbstractDAO<List<User>> {
             int clauseCount = 1;
 
 
-            if(username!=null){
+            if(username!=null && !username.isEmpty()){
                 pstmt.setString(clauseCount++, username);
             }
-            if(password!=null){
+            if(password!=null && !password.isEmpty()){
                 pstmt.setString(clauseCount++, password);
             }
-            if(name!=null) {
+            if(name!=null && !name.isEmpty()) {
                 pstmt.setString(clauseCount++, name);
             }
-            if(surname!=null) {
+            if(surname!=null && !surname.isEmpty()) {
                 pstmt.setString(clauseCount++, surname);
             }
-            if(phone!=null) {
+            if(phone!=null && !phone.isEmpty()) {
                 pstmt.setString(clauseCount++, phone);
             }
-            if(role!=null) {
+            if(role!=null && !role.isEmpty()) {
                 pstmt.setString(clauseCount++, role);
             }
 

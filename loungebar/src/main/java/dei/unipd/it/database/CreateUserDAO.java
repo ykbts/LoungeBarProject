@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class CreateUserDAO extends AbstractDAO<User> {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO lounge.Users (username, password, name, surname, phone, role) VALUES (?, ?, ?, ?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.User (username, password, name, surname, phone, role) VALUES (?, ?, ?, ?, ?, ?) RETURNING *";
     private final User user;
 
     public CreateUserDAO(final Connection connection, final User user) {
@@ -31,10 +31,11 @@ public class CreateUserDAO extends AbstractDAO<User> {
         try (PreparedStatement preparedStatement = conn.prepareStatement(STATEMENT)) {
 
             preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getSurname());
-            preparedStatement.setString(4, user.getPhone());
-            preparedStatement.setString(5, user.getRole());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getSurname());
+            preparedStatement.setString(5, user.getPhone());
+            preparedStatement.setString(6, user.getRole());
 
             rs = preparedStatement.executeQuery();
 
