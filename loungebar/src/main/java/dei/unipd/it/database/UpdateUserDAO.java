@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public final class UpdateUserDAO extends AbstractDAO<Void> {
+public final class UpdateUserDAO extends AbstractDAO<User> {
 
     /**
      * The SQL statement to be executed
@@ -48,6 +48,7 @@ public final class UpdateUserDAO extends AbstractDAO<Void> {
             pstmt.execute();
 
             LOGGER.info("User {} successfully updated.", user.getUsername());
+            this.outputParam = user;
 
         } finally {
 
