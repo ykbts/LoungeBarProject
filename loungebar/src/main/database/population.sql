@@ -68,7 +68,7 @@ INSERT INTO lounge.Tables (number, capacity, is_available) VALUES
 -- ##########################################################
 --      USER POPULATION
 -- ##########################################################
-INSERT INTO lounge."user" (username, password_hash, name, surname, phone, role) VALUES
+INSERT INTO lounge."user" (username, password, name, surname, phone, role) VALUES
 -- Waiters
 ('ecaterina_i', 'hash1', 'Ecaterina', 'Iacobet', '+393401234567', 'WAITER'),
 ('claudia_f', 'hash2', 'Claudia', 'Foffano', '+393409876543', 'WAITER'),
