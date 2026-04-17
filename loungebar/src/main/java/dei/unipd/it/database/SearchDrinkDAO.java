@@ -17,14 +17,14 @@ public final class SearchDrinkDAO extends AbstractDAO<List<Drink>> {
 
     private final String name;
     private final double price;
-    private final Boolean isAlcoholic;
+    private final Boolean is_Alcoholic;
 
 
-    public SearchDrinkDAO(final Connection con, String name, double price, Boolean isAlcoholic) {
+    public SearchDrinkDAO(final Connection con, String name, double price, Boolean is_Alcoholic) {
         super(con);
         this.name = name;
         this.price = price;
-        this.isAlcoholic = isAlcoholic;
+        this.is_Alcoholic = is_Alcoholic;
     }
 
     @Override
@@ -41,7 +41,7 @@ public final class SearchDrinkDAO extends AbstractDAO<List<Drink>> {
 
         if(name != null){ clauses.add(" lounge.Drink.name = ? "); }
         if(price >=0){ clauses.add(" lounge.Drink.price = ? "); }
-        if(isAlcoholic != null ){ clauses.add(" lounge.Drink.isAlcoholic = ? "); }
+        if(is_Alcoholic != null ){ clauses.add(" lounge.Drink.is_Alcoholic = ? "); }
 
         StringBuilder sb = new StringBuilder();
         sb.append(STATEMENT);
@@ -78,8 +78,8 @@ public final class SearchDrinkDAO extends AbstractDAO<List<Drink>> {
                 pstmt.setObject(clauseCount, price);
                 clauseCount+=1;
             }
-            if(isAlcoholic != null){
-                pstmt.setBoolean(clauseCount, isAlcoholic);
+            if(is_Alcoholic != null){
+                pstmt.setBoolean(clauseCount, is_Alcoholic);
                 clauseCount+=1;
             }
 
@@ -91,7 +91,7 @@ public final class SearchDrinkDAO extends AbstractDAO<List<Drink>> {
                 drinkList.add(new Drink(
                         rs.getString("name"),
                         rs.getDouble("price"),
-                        rs.getBoolean("isAlcoholic")));
+                        rs.getBoolean("is_Alcoholic")));
             }
 
             LOGGER.info("Drink(s) successfully listed.");
