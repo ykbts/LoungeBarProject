@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class CreateReviewDAO extends AbstractDAO<Review> {
 
-    private static final String STATEMENT = "INSERT INTO lounge.Review (waiterID, customerID, score, comment,) VALUES (?, ?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Review (user_waiterID, user_customerID, score, comment) VALUES (?, ?, ?, ?) RETURNING *";
     private final Review review;
 
     public CreateReviewDAO (final Connection connection, final Review review) {
@@ -38,10 +38,11 @@ public class CreateReviewDAO extends AbstractDAO<Review> {
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
-                r = new Review (rs.getString("waiterID"),
-                        rs.getString("customerID"),
+                r = new Review (rs.getString("user_waiterID"),
+                        rs.getString("user_customerID"),
                         rs.getInt("score"),
-                        rs.getString("comment"));
+                        rs.getString("comment")
+                );
 
                 LOGGER.info("Review for waiter {} successfully stored.", r.getWaiterID());
             }

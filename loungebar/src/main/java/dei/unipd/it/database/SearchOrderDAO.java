@@ -49,10 +49,10 @@ public final class SearchOrderDAO extends AbstractDAO<List<Orders>> {
 
 
         if(id>=0){ clauses.add(" lounge.Orders.id = ? "); }
-        if(dateTime != null ){ clauses.add(" lounge.Orders.dateTime = ? "); }
-        if(status != null ){ clauses.add(" lounge.Orders.status = ? "); }
-        if(payMethod != null){ clauses.add(" lounge.Orders.payMethod = ? "); }
-        if(waiterID != null ){ clauses.add(" lounge.Orders.waiterID = ? "); }
+        if(dateTime != null ){ clauses.add(" lounge.Orders.date_time = ? "); }
+        if(status != null ){ clauses.add(" lounge.Orders.status::text = ? "); }
+        if(payMethod != null){ clauses.add(" lounge.Orders.pay_method::text = ? "); }
+        if(waiterID != null ){ clauses.add(" lounge.Orders.user_waiterID = ? "); }
         if(tableID>=0){ clauses.add(" lounge.Orders.tableID = ? "); }
 
         StringBuilder sb = new StringBuilder();
@@ -112,11 +112,12 @@ public final class SearchOrderDAO extends AbstractDAO<List<Orders>> {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
+
                 ordersList.add(new Orders(rs.getInt("id"),
-                        rs.getObject("dateTime", LocalDateTime.class),
+                        rs.getObject("date_time", LocalDateTime.class),
                         OrderState.valueOf(rs.getString("status")),
-                        PayMethod.valueOf(rs.getString("payMethod")),
-                        rs.getString("waiterID"),
+                        rs.getString("pay_method") != null ? PayMethod.valueOf(rs.getString("pay_method")) : null,
+                        rs.getString("user_waiterID"),
                         rs.getInt("tableID")));
             }
 

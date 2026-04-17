@@ -38,7 +38,7 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
 
 
         if(name != null ){ clauses.add(" lounge.Supply.name = ? "); }
-        if(unitsAvailable >= 0 ){ clauses.add(" lounge.Supply.unitsAvailable = ? "); }
+        if(unitsAvailable >= 0 ){ clauses.add(" lounge.Supply.units_available = ? "); }
 
         StringBuilder sb = new StringBuilder();
         sb.append(STATEMENT);
@@ -81,7 +81,7 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
             while (rs.next()) {
                 supplyList.add(new Supply(
                         rs.getString("name"),
-                        rs.getInt("unitsAvailable")));
+                        rs.getInt("units_available")));
             }
 
             LOGGER.info("Supply(s) successfully listed.");
