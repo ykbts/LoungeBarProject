@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class CreateWorkDAO extends AbstractDAO<Work> {
 
-    private static final String STATEMENT = "INSERT INTO lounge.Work (WaiterID, shiftID) VALUES (?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Work (waiterID, shiftID) VALUES (?, ?) RETURNING *";
     private final Work work;
 
     public CreateWorkDAO (final Connection connection, final Work work) {
