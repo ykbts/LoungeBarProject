@@ -32,11 +32,9 @@ public final class SearchReviewDAO extends AbstractDAO<List<Review>> {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        // The results of the search
         final List<Review> reviews = new ArrayList<>();
         final List<String> clauses = new ArrayList<>();
 
-        // Dynamic clause building
         if (waiterID != null) { clauses.add(" lounge.Review.user_waiterID = ? "); }
         if (customerID != null) { clauses.add(" lounge.Review.user_customerID = ? "); }
         if (score != null && score >= 1 && score <= 5) { clauses.add(" lounge.Review.score = ? "); }

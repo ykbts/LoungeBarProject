@@ -35,7 +35,6 @@ public final class SearchCompositionDAO extends AbstractDAO<List<Composition>> {
         final List<Composition> compositionList = new ArrayList<>();
         final List<String> clauses = new ArrayList<>();
 
-        // Build dynamic clauses based on provided parameters
         if (drinkName != null) { clauses.add(" lounge.Composition.drink_name = ? "); }
         if (supplyName != null) { clauses.add(" lounge.Composition.supply_name = ? "); }
         if (amount != null && amount > 0) { clauses.add(" lounge.Composition.amount = ? "); }
