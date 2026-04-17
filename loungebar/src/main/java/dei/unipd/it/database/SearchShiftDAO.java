@@ -17,15 +17,15 @@ public final class SearchShiftDAO extends AbstractDAO<List<Shift>> {
     private static final String STATEMENT = "SELECT * FROM lounge.Shift";
 
     private final int id;
-    private final LocalDateTime startTime;
-    private final LocalDateTime endTime;
+    private final LocalDateTime start_time;
+    private final LocalDateTime end_time;
 
 
-    public SearchShiftDAO(final Connection con, int id, LocalDateTime startTime, LocalDateTime endTime) {
+    public SearchShiftDAO(final Connection con, int id, LocalDateTime start_time, LocalDateTime end_time) {
         super(con);
         this.id = id;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.start_time = start_time;
+        this.end_time = end_time;
     }
 
     @Override
@@ -41,8 +41,8 @@ public final class SearchShiftDAO extends AbstractDAO<List<Shift>> {
 
 
         if(id>=0){ clauses.add(" lounge.Shift.id = ? "); }
-        if(startTime != null ){ clauses.add(" lounge.Shift.start_time = ? "); }
-        if(endTime != null ){ clauses.add(" lounge.Shift.end_time = ? "); }
+        if(start_time != null ){ clauses.add(" lounge.Shift.start_time = ? "); }
+        if(end_time != null ){ clauses.add(" lounge.Shift.end_time = ? "); }
 
         StringBuilder sb = new StringBuilder();
         sb.append(STATEMENT);
@@ -79,12 +79,12 @@ public final class SearchShiftDAO extends AbstractDAO<List<Shift>> {
                 pstmt.setInt(clauseCount, id);
                 clauseCount += 1;
             }
-            if(startTime!=null){
-                pstmt.setObject(clauseCount, startTime);
+            if(start_time!=null){
+                pstmt.setObject(clauseCount, start_time);
                 clauseCount+=1;
             }
-            if(endTime!=null){
-                pstmt.setObject(clauseCount, endTime);
+            if(end_time!=null){
+                pstmt.setObject(clauseCount, end_time);
                 clauseCount+=1;
             }
 
