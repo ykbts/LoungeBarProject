@@ -58,7 +58,7 @@ public final class DeleteUserDAO extends AbstractDAO<User> {
 
                 LOGGER.info("User {} successfully deleted.", deletedUser.getUsername());
             } else {
-                LOGGER.warn("No user found with username {}. Nothing was deleted.", user.getUsername());
+                LOGGER.warn("Nothing was deleted", user.getUsername());
             }
 
         } finally {
