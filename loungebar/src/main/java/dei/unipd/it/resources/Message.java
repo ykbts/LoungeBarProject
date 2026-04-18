@@ -49,14 +49,13 @@ public class Message extends AbstractResource {
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
         jg.writeStartObject();
-
-        jg.writeStringField("message", message);
+        jg.writeFieldName("message");
 
         jg.writeStartObject();
 
+        jg.writeStringField("message", message);
         if (errorCode != null)
             jg.writeStringField("error-code", errorCode);
-
         if (errorDetails != null)
             jg.writeStringField("error-details", errorDetails);
 
