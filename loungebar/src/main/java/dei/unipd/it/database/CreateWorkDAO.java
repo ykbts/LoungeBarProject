@@ -37,7 +37,7 @@ public class CreateWorkDAO extends AbstractDAO<Work> {
 
             if (rs.next()) {
                 r = new Work (
-                        rs.getString("waiterID"),
+                        rs.getString("user_waiterID"),
                         rs.getInt("shiftID"));
 
                 LOGGER.info("Work {} successfully stored.", r.getWaiterID(), r.getShiftID());
