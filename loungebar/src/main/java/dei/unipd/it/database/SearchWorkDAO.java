@@ -37,7 +37,7 @@ public final class SearchWorkDAO extends AbstractDAO<List<Work>> {
         final List<String> clauses= new ArrayList<>();
 
 
-        if(waiterID != null){ clauses.add(" lounge.Work.waiterID = ? "); }
+        if(waiterID != null){ clauses.add(" lounge.Work.user_waiterID = ? "); }
         if(shiftID >=0){ clauses.add(" lounge.Work.shiftID = ? "); }
 
         StringBuilder sb = new StringBuilder();
@@ -82,7 +82,7 @@ public final class SearchWorkDAO extends AbstractDAO<List<Work>> {
             while (rs.next()) {
 
                 workList.add(new Work(
-                        rs.getString("waiterID"),
+                        rs.getString("user_waiterID"),
                         rs.getInt("shiftID")));
             }
 
