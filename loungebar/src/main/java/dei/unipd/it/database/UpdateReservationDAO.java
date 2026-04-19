@@ -14,13 +14,14 @@ public final class UpdateReservationDAO extends AbstractDAO<Reservation>{
 
     private static final String STATEMENT = "UPDATE lounge.Reservation SET";
     private final Reservation reservation;
+
     /**
      * create a new DAO for updating a reservation's details
      *
      * @param conn      the connection to the database
      * @param reservation   the updated Reservation instance containing the new information
      */
-    public UpdateReservationDAO(Connection conn, Reservation reservation) {
+    public UpdateReservationDAO(final Connection conn, final Reservation reservation) {
         super(conn);
 
         if (reservation == null) {
@@ -36,13 +37,14 @@ public final class UpdateReservationDAO extends AbstractDAO<Reservation>{
 
         PreparedStatement ps = null;
         ResultSet rs = null;
+
         // the updated reservation
         Reservation r = null;
-
 
         // build SET clause dynamically based on non-null fields
         List<String> clauses = new ArrayList<>();
         List<Object> params = new ArrayList<>();
+
 
         if (reservation.getStartTime() != null) {
             clauses.add("start_time = ?");
@@ -71,6 +73,7 @@ public final class UpdateReservationDAO extends AbstractDAO<Reservation>{
             return;
         }
 
+
         StringBuilder sb = new StringBuilder();
         sb.append(STATEMENT);
         sb.append(" ");
@@ -78,7 +81,7 @@ public final class UpdateReservationDAO extends AbstractDAO<Reservation>{
         // append not null clauses
         sb.append(String.join(", ", clauses));
 
-        sb.append(" WHERE id = ?");
+        sb.append(" WHERE id = ? RETURNING *");
         sb.append(";");
 
 
@@ -102,7 +105,7 @@ public final class UpdateReservationDAO extends AbstractDAO<Reservation>{
 //                LOGGER.info("Reservation with id {} successfully updated.", reservation.getId());
 //            }
 
-            while (rs.next()) {
+            if (rs.next()) {
                 r = new Reservation(
                         rs.getInt("id"),
                         rs.getObject("start_time", LocalDateTime.class),

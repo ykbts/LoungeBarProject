@@ -18,12 +18,12 @@ public class Tables extends AbstractResource {
     /**
      * The maximum seating capacity of the table
      */
-    private final int capacity;
+    private final Integer capacity;
 
     /**
      * The availability status of the table
      */
-    private final boolean isAvailable;
+    private final Boolean isAvailable;
 
     /**
      * Creates a new Table.
@@ -31,7 +31,7 @@ public class Tables extends AbstractResource {
      * @param capacity the seating capacity of the table.
      * @param isAvailable the availability status of the table.
      */
-    public Tables(final int number, final int capacity, final boolean isAvailable) {
+    public Tables(final int number, final Integer capacity, final Boolean isAvailable) {
         this.number = number;
         this.capacity = capacity;
         this.isAvailable = isAvailable;
@@ -49,7 +49,7 @@ public class Tables extends AbstractResource {
      * Returns the seating capacity of the table.
      * * @return the seating capacity of the table.
      */
-    public final int getCapacity() {
+    public final Integer getCapacity() {
         return capacity;
     }
 
@@ -57,7 +57,7 @@ public class Tables extends AbstractResource {
      * Returns the availability status of the table.
      * * @return {@code true} if the table is available; {@code false} otherwise.
      */
-    public final boolean isAvailable() {
+    public final Boolean isAvailable() {
         return isAvailable;
     }
 
@@ -86,8 +86,8 @@ public class Tables extends AbstractResource {
     public static Tables fromJSON (InputStream in) throws IOException {
 
         int jNumber = -1;
-        int jCapacity = -1;
-        boolean jIsAvailable = false;
+        Integer jCapacity = null;
+        Boolean jIsAvailable = null;
 
         try {
             final JsonParser jp = JSON_FACTORY.createParser(in);
