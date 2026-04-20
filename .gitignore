@@ -7,6 +7,7 @@
 target/
 javadoc/
 log/
+data/
 # Package Files
 *.jar
 *.war
