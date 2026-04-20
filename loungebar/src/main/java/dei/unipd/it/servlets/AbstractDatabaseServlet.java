@@ -14,18 +14,18 @@ import java.sql.SQLException;
 
 public class AbstractDatabaseServlet extends HttpServlet {
 
-    protected static final Logger logger = LogManager.getLogger(AbstractDatabaseServlet.class, StringFormatterMessageFactory.INSTANCE);
-    private DataSource ds;
+	protected static final Logger LOGGER = LogManager.getLogger(AbstractDatabaseServlet.class, StringFormatterMessageFactory.INSTANCE);
+	private DataSource ds;
 
 
-    public void init(ServletConfig config) throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 
 		// the JNDI lookup context
 		InitialContext cxt;
 
 		try {
 			cxt = new InitialContext();
-			ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/sigir-db");
+			ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/bar");
 
 			LOGGER.info("Connection pool to the database pool successfully acquired.");
 		} catch (NamingException e) {
@@ -63,4 +63,4 @@ public class AbstractDatabaseServlet extends HttpServlet {
 
 }
 
-}
+
