@@ -2,7 +2,6 @@ package dei.unipd.it.database;
 
 import dei.unipd.it.resources.OrderState;
 import dei.unipd.it.resources.Orders;
-import dei.unipd.it.resources.OrderItem;
 import dei.unipd.it.resources.PayMethod;
 
 import java.sql.Connection;

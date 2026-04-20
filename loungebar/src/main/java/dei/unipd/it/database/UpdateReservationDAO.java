@@ -52,19 +52,19 @@ public final class UpdateReservationDAO extends AbstractDAO<Reservation>{
         }
         if (reservation.getEndTime() != null) {
             clauses.add("end_time = ?");
-            params.add(reservation.getStartTime());
+            params.add(reservation.getEndTime());
         }
         if (reservation.getPeople() > 0) {
             clauses.add("n_people = ?");
-            params.add(reservation.getStartTime());
+            params.add(reservation.getPeople());
         }
         if (reservation.getTable() > 0) {
             clauses.add("tableNumber = ?");
-            params.add(reservation.getStartTime());
+            params.add(reservation.getTable());
         }
         if (reservation.getCustomer() != null) {
             clauses.add("user_customerID = ?");
-            params.add(reservation.getStartTime());
+            params.add(reservation.getCustomer());
         }
 
         // if no fields to update, return immediately
