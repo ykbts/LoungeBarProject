@@ -87,7 +87,7 @@ CREATE TABLE lounge.Orders (
     user_waiterID VARCHAR(20),
     tableID SMALLINT,
     PRIMARY KEY (id),
-    FOREIGN KEY (user_waiterID) REFERENCES lounge."user"(username),
+    FOREIGN KEY (user_waiterID) REFERENCES lounge.User(username),
     FOREIGN KEY (tableID) REFERENCES lounge.Tables(number),
     CONSTRAINT payment_check CHECK (
         (status = 'PAID' AND pay_method IS NOT NULL) OR
@@ -119,7 +119,7 @@ CREATE TABLE lounge.Reservation (
     tableNumber SMALLINT,
     PRIMARY KEY (id),
     FOREIGN KEY (tableNumber) REFERENCES lounge.Tables(number),
-    FOREIGN KEY (user_customerID) REFERENCES lounge."user"(username),
+    FOREIGN KEY (user_customerID) REFERENCES lounge.User(username),
     CONSTRAINT reservation_duration_check CHECK (
         (end_time - start_time) BETWEEN INTERVAL '1 hour' AND INTERVAL '4 hours'
         )
@@ -134,8 +134,8 @@ CREATE TABLE lounge.Review (
             CHECK (score >= 1 AND score <= 5),
     comment VARCHAR(500),
     PRIMARY KEY (user_waiterID, user_customerID),
-    FOREIGN KEY (user_waiterID) REFERENCES lounge."user"(username),
-    FOREIGN KEY (user_customerID) REFERENCES lounge."user"(username)
+    FOREIGN KEY (user_waiterID) REFERENCES lounge.User(username),
+    FOREIGN KEY (user_customerID) REFERENCES lounge.User(username)
 );
 
 -- Shift table
@@ -155,6 +155,6 @@ CREATE TABLE lounge.Work (
     user_waiterID VARCHAR(50),
     shiftID INT,
     PRIMARY KEY (user_waiterID, shiftID),
-    FOREIGN KEY (user_waiterID) REFERENCES lounge."user"(username),
+    FOREIGN KEY (user_waiterID) REFERENCES lounge.User(username),
     FOREIGN KEY (shiftID) REFERENCES lounge.Shift(id)
 );
