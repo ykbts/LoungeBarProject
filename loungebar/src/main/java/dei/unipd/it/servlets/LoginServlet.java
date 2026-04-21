@@ -15,6 +15,7 @@ import org.apache.logging.log4j.message.StringFormattedMessage;
 
 import dei.unipd.it.database.CreateUserDAO;
 import dei.unipd.it.database.SearchUserDAO;
+import dei.unipd.it.database.SearchUserLogInDAO;
 import dei.unipd.it.filter.ProtectedResourceFilter;
 import dei.unipd.it.resources.LogContext;
 import dei.unipd.it.resources.User;
@@ -173,27 +174,26 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
                     // try to find the user in the database
                     password=org.apache.commons.codec.digest.DigestUtils.sha256Hex(password); //hashing the password
                     username=username.toLowerCase();
-                    userList = new SearchUserDAO(getConnection(), username, password, null, null, null, role)
-                                    .access()
-                                    .getOutputParam();
+                    User user = new SearchUserLogInDAO(getConnection(), username, password).access().getOutputParam();
+
 
 
                     //the UserDAO will tell us if the username exists and the password
                     //matches
-                    if ( userList.size() < 1){
-                        //if not, tell it to the user
-                        m = new Message("The user does not exist"+userList.size(),"E200","Missing user");
-                        LOGGER.error(new StringFormattedMessage("problems with user:  %s.", m.getMessage()));
-
-
-                    }
-                    else{
-                        HttpSession session = req.getSession();
-                        session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, userList.get(0).getUsername());
-                        
-                        session.setAttribute("role", role);
-                        m = new Message("Login success");
-                        LOGGER.info(new StringFormattedMessage("the USER %s LOGGED IN", userList.get(0).getUsername()));
+                    if (user == null) {
+                    m = new Message("Invalid username or password.", "E200", "Authentication failed");
+                    LOGGER.warn("Login failed: Credentials do not match for user {}", username);
+                }
+                    else {
+                
+                HttpSession session = req.getSession();
+                
+                
+                session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, user.getUsername());
+                session.setAttribute("role", user.getRole().toString());
+                
+                m = new Message("Login successful!");
+                LOGGER.info("User {} logged in successfully as {}", username, user.getRole());
 
                     }
                 }
@@ -243,7 +243,7 @@ public void registrationOperations(HttpServletRequest req, HttpServletResponse r
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String password_check = req.getParameter("password_check");
-        String name = req.getParameter("firstname"); // El mismo name que en el JSP
+        String name = req.getParameter("firstname"); 
         String surname = req.getParameter("surname");
         String phone = req.getParameter("phone");
         String role = req.getParameter("role");
@@ -294,6 +294,7 @@ public void registrationOperations(HttpServletRequest req, HttpServletResponse r
         else {
             // We create it if it doesn't exist
             User newUser = new User(username, password,name, surname, phone, roleEnum); 
+            LOGGER.info("Attempting to insert user: {} with role: {}", username, roleEnum);
             
             new CreateUserDAO(getConnection(), newUser).access();
             LOGGER.info(new StringFormattedMessage("REGISTERED NEW %s: %s.", role.toUpperCase(), username));

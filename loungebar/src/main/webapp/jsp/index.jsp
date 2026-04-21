@@ -17,10 +17,10 @@
             </div>
 
             <div class="role-card">
-                <h2>Client</h2>
-                <a href="login?role=client"><button>Login</button></a>
+                <h2>Customer</h2>
+                <a href="login?role=customer"><button>Login</button></a>
                 <br>
-                <a href="signup?role=client"><button>Sign-up</button></a>
+                <a href="signup?role=customer"><button>Sign-up</button></a>
             </div>
         </div>
     </div>
