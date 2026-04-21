@@ -17,7 +17,12 @@
             <div class="card"><h3>Check reviews</h3><button>Click</button></div>
             <div class="card"><h3>List supplies</h3><button>Click</button></div>
             <div class="card"><h3>Check orders</h3><button>Click</button></div>
-            <div class="card"><h3>List supplies</h3><button>Click</button></div>
+            <div class="card">
+                <h3>List supplies</h3>
+                <a href="<c:url value="/jsp/search-supply-form.jsp"/>">
+                    <button>Click</button>
+                </a>
+            </div>
             <div class="card"><h3>Create an order</h3><button>Click</button></div>
             <div class="card"><h3>Create shifts</h3><button>Click</button></div>
 
