@@ -13,7 +13,7 @@ public final class ReviewProcessor extends AbstractProcessor {
 
 
     @Override
-    public boolean doProcess(HttpServletRequest req, HttpServletResponse resp, Connection conn) throws Exception {
+    protected boolean doProcess(HttpServletRequest req, HttpServletResponse resp, Connection conn) throws Exception {
 
         final String uri = req.getRequestURI();
         final int segmentIndex = uri.lastIndexOf("rest/" + SEGMENT);
