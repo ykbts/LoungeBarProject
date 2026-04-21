@@ -90,6 +90,13 @@
       <scope>provided</scope>
     </dependency>
 
+
+    <dependency>
+			<groupId>org.netbeans.external</groupId>
+			<artifactId>org-apache-commons-codec</artifactId>
+			<version>RELEASE250</version>
+		</dependency>
+
 <!--    for using JSON tools -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>

@@ -8,10 +8,10 @@ services:
         condition: service_healthy
     volumes:
       - ./target/loungebar.war:/usr/local/tomcat/webapps/loungebar.war
-      - ./tmp/server.xml:/usr/local/tomcat/conf/server.xml
-      - ./logs:/usr/local/tomcat/webapps/my-logs
-      - ./tmp/context.xml:/usr/local/tomcat/webapps.dist/manager/META-INF/context.xml 
-      - ./tmp/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+      #- ./tmp/server.xml:/usr/local/tomcat/conf/server.xml
+      #- ./logs:/usr/local/tomcat/webapps/my-logs
+      #- ./tmp/context.xml:/usr/local/tomcat/webapps.dist/manager/META-INF/context.xml 
+      #- ./tmp/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
 
   db:
     image: postgres
@@ -22,6 +22,8 @@ services:
       - POSTGRES_USER=fskcl
     volumes:
       - ./data/db:/var/lib/postgresql
+      - ./src/main/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./src/main/database/population.sql:/docker-entrypoint-initdb.d/02-data.sql
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U fskcl" ]
       interval: 5s
