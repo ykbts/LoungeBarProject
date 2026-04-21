@@ -31,6 +31,8 @@ public class LoginServlet extends AbstractDatabaseServlet {
         String role = req.getParameter("role"); 
         req.setAttribute("role", role); 
 
+        req.setAttribute("message", null);
+
         LogContext.setIPAddress(req.getRemoteAddr());
         LogContext.setResource(req.getRequestURI());
 
@@ -39,61 +41,39 @@ public class LoginServlet extends AbstractDatabaseServlet {
         LOGGER.info(new StringFormattedMessage("operation performed %s.", op));
 
 
-        switch (op){
+        switch (op) {
+        case "login":
+            LogContext.setAction("SHOW_LOGIN");
+            // No llames a loginOperations aquí, ve directo al JSP
+            req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
+            break;
 
-            case "login":
-                LogContext.setAction("LOGIN");
-                loginOperations(req, res, false);
-                break;
-            case "signup":
-                LogContext.setAction("SIGNUP");
-                registrationOperations(req, res);
-                break;
-            default:
-                Message m = new Message("An error occurred default","E200","Operation Unknown");
-                LOGGER.error(new StringFormattedMessage("stacktrace:  %s.", m.getMessage()));
-        }
+        case "signup":
+            LogContext.setAction("SHOW_SIGNUP");
+            // No llames a registrationOperations aquí, ve directo al JSP
+            req.getRequestDispatcher("/jsp/signup.jsp").forward(req, res);
+            break;
 
-
-
-
+        default:
+            req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
     }
+}
+
 
 
 
     
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        
-        // 1. Logs and config
-        LogContext.setIPAddress(req.getRemoteAddr());
-        LogContext.setResource(req.getRequestURI());
+protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    String op = req.getRequestURI();
+    op = op.substring(op.lastIndexOf("/") + 1);
 
-        String op = req.getRequestURI();
-        op = op.substring(op.lastIndexOf("/") + 1);
-        LOGGER.info(new StringFormattedMessage("operation: %s.", op));
-
-        // Get role
-        String role = req.getParameter("role");
-        req.setAttribute("role", role); 
-
-        switch (op) {
-            case "login":
-                LogContext.setAction("LOGIN");
-                
-                loginOperations(req, res, false); 
-                break;
-
-            case "signup":
-                LogContext.setAction("SIGNUP");
-                registrationOperations(req, res);
-                break;
-
-            default:
-                Message m = new Message("An error occurred default", "E200", "Operation Unknown");
-                LOGGER.error(new StringFormattedMessage("stacktrace: %s.", m.getMessage()));
-        }
+    if ("login".equals(op)) {
+        loginOperations(req, res, false);
+    } else if ("signup".equals(op)) {
+        registrationOperations(req, res);
     }
+}
 
 public void loginOperations(HttpServletRequest req, HttpServletResponse res, boolean isValid) throws ServletException, IOException {
         String op="login";
@@ -215,9 +195,10 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
 
             req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
             }else{
-               // else we go to the home page
-               req.getRequestDispatcher("/").forward(req, res);
-           }
+                // we move to home page
+               res.sendRedirect(req.getContextPath() + "/jsp/home.jsp"); 
+        }   
+
 
             LogContext.removeIPAddress();
             LogContext.removeAction();

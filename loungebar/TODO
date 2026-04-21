@@ -7,6 +7,7 @@
 [ ] IMPLEMENT login service: Claudia
 [ ] IMPLEMENT protected resource mechanism with filters
 [ ] INSERT mail manager system
+[] CHECK dockercompose
 [ ] CONNECT dispatched resources with REST logic : 
         -> create jsp that ask for a request and wait for the response
 [] Servelts: - Kate and Luis
