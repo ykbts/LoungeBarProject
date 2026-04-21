@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class CreateReservationRR extends AbstractRR {
+public final class CreateReservationRR extends AbstractRR {
 
     public CreateReservationRR(final HttpServletRequest req, final HttpServletResponse resp, Connection conn) {
         // the constructor set the parameters only
