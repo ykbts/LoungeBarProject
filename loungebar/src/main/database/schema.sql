@@ -1,7 +1,7 @@
-CREATE DATABASE bar OWNER baradmin ENCODING = 'UTF8';
+--CREATE DATABASE bar OWNER baradmin ENCODING = 'UTF8';
 
 -- Connect to the db
-\c bar
+--\c bar
 
 CREATE SCHEMA lounge;
 

@@ -15,6 +15,7 @@ import org.apache.logging.log4j.message.StringFormattedMessage;
 
 import dei.unipd.it.database.CreateUserDAO;
 import dei.unipd.it.database.SearchUserDAO;
+import dei.unipd.it.database.SearchUserLogInDAO;
 import dei.unipd.it.filter.ProtectedResourceFilter;
 import dei.unipd.it.resources.LogContext;
 import dei.unipd.it.resources.User;
@@ -30,6 +31,8 @@ public class LoginServlet extends AbstractDatabaseServlet {
         String role = req.getParameter("role"); 
         req.setAttribute("role", role); 
 
+        req.setAttribute("message", null);
+
         LogContext.setIPAddress(req.getRemoteAddr());
         LogContext.setResource(req.getRequestURI());
 
@@ -38,61 +41,39 @@ public class LoginServlet extends AbstractDatabaseServlet {
         LOGGER.info(new StringFormattedMessage("operation performed %s.", op));
 
 
-        switch (op){
+        switch (op) {
+        case "login":
+            LogContext.setAction("SHOW_LOGIN");
+            // No llames a loginOperations aquí, ve directo al JSP
+            req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
+            break;
 
-            case "login":
-                LogContext.setAction("LOGIN");
-                loginOperations(req, res, false);
-                break;
-            case "signup":
-                LogContext.setAction("SIGNUP");
-                registrationOperations(req, res);
-                break;
-            default:
-                Message m = new Message("An error occurred default","E200","Operation Unknown");
-                LOGGER.error(new StringFormattedMessage("stacktrace:  %s.", m.getMessage()));
-        }
+        case "signup":
+            LogContext.setAction("SHOW_SIGNUP");
+            // No llames a registrationOperations aquí, ve directo al JSP
+            req.getRequestDispatcher("/jsp/signup.jsp").forward(req, res);
+            break;
 
-
-
-
+        default:
+            req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
     }
+}
+
 
 
 
     
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        
-        // 1. Logs and config
-        LogContext.setIPAddress(req.getRemoteAddr());
-        LogContext.setResource(req.getRequestURI());
+protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    String op = req.getRequestURI();
+    op = op.substring(op.lastIndexOf("/") + 1);
 
-        String op = req.getRequestURI();
-        op = op.substring(op.lastIndexOf("/") + 1);
-        LOGGER.info(new StringFormattedMessage("operation: %s.", op));
-
-        // Get role
-        String role = req.getParameter("role");
-        req.setAttribute("role", role); 
-
-        switch (op) {
-            case "login":
-                LogContext.setAction("LOGIN");
-                
-                loginOperations(req, res, false); 
-                break;
-
-            case "signup":
-                LogContext.setAction("SIGNUP");
-                registrationOperations(req, res);
-                break;
-
-            default:
-                Message m = new Message("An error occurred default", "E200", "Operation Unknown");
-                LOGGER.error(new StringFormattedMessage("stacktrace: %s.", m.getMessage()));
-        }
+    if ("login".equals(op)) {
+        loginOperations(req, res, false);
+    } else if ("signup".equals(op)) {
+        registrationOperations(req, res);
     }
+}
 
 public void loginOperations(HttpServletRequest req, HttpServletResponse res, boolean isValid) throws ServletException, IOException {
         String op="login";
@@ -173,27 +154,26 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
                     // try to find the user in the database
                     password=org.apache.commons.codec.digest.DigestUtils.sha256Hex(password); //hashing the password
                     username=username.toLowerCase();
-                    userList = new SearchUserDAO(getConnection(), username, password, null, null, null, role)
-                                    .access()
-                                    .getOutputParam();
+                    User user = new SearchUserLogInDAO(getConnection(), username, password).access().getOutputParam();
+
 
 
                     //the UserDAO will tell us if the username exists and the password
                     //matches
-                    if ( userList.size() < 1){
-                        //if not, tell it to the user
-                        m = new Message("The user does not exist"+userList.size(),"E200","Missing user");
-                        LOGGER.error(new StringFormattedMessage("problems with user:  %s.", m.getMessage()));
-
-
-                    }
-                    else{
-                        HttpSession session = req.getSession();
-                        session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, userList.get(0).getUsername());
-                        
-                        session.setAttribute("role", role);
-                        m = new Message("Login success");
-                        LOGGER.info(new StringFormattedMessage("the USER %s LOGGED IN", userList.get(0).getUsername()));
+                    if (user == null) {
+                    m = new Message("Invalid username or password.", "E200", "Authentication failed");
+                    LOGGER.warn("Login failed: Credentials do not match for user {}", username);
+                }
+                    else {
+                
+                HttpSession session = req.getSession();
+                
+                
+                session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, user.getUsername());
+                session.setAttribute("role", user.getRole().toString());
+                
+                m = new Message("Login successful!");
+                LOGGER.info("User {} logged in successfully as {}", username, user.getRole());
 
                     }
                 }
@@ -215,9 +195,10 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
 
             req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
             }else{
-               // else we go to the home page
-               req.getRequestDispatcher("/").forward(req, res);
-           }
+                // we move to home page
+               res.sendRedirect(req.getContextPath() + "/jsp/home.jsp"); 
+        }   
+
 
             LogContext.removeIPAddress();
             LogContext.removeAction();
@@ -243,7 +224,7 @@ public void registrationOperations(HttpServletRequest req, HttpServletResponse r
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String password_check = req.getParameter("password_check");
-        String name = req.getParameter("firstname"); // El mismo name que en el JSP
+        String name = req.getParameter("firstname"); 
         String surname = req.getParameter("surname");
         String phone = req.getParameter("phone");
         String role = req.getParameter("role");
@@ -294,6 +275,7 @@ public void registrationOperations(HttpServletRequest req, HttpServletResponse r
         else {
             // We create it if it doesn't exist
             User newUser = new User(username, password,name, surname, phone, roleEnum); 
+            LOGGER.info("Attempting to insert user: {} with role: {}", username, roleEnum);
             
             new CreateUserDAO(getConnection(), newUser).access();
             LOGGER.info(new StringFormattedMessage("REGISTERED NEW %s: %s.", role.toUpperCase(), username));
