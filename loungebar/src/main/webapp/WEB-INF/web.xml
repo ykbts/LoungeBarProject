@@ -22,25 +22,10 @@
         <servlet-class>dei.unipd.it.servlets.LoginServlet</servlet-class>
     </servlet>
 
-<servlet>
-    <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>dei.unipd.it.servlets.HomeServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/home</url-pattern>
-</servlet-mapping>
-
-<servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
-</servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/signup</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.HomeServlet</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>CreateSupplyServlet</servlet-name>
@@ -52,11 +37,45 @@
         <servlet-class>dei.unipd.it.servlets.SearchSupplyServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>SearchWaiterShiftServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.SearchWaiterShiftServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CreateSupplyServlet</servlet-name>
+        <url-pattern>/supply/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SearchSupplyServlet</servlet-name>
+        <url-pattern>/supply/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SearchWaiterShiftServlet</servlet-name>
+        <url-pattern>/shift/search-by-waiter</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>rest</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
-
 
     <resource-ref>
         <description>PostgreSQL Datasource</description>
