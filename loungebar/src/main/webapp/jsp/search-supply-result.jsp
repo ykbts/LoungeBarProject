@@ -40,6 +40,6 @@
 
         <hr/>
         <p><a href="<c:url value="/jsp/search-supply-form.jsp"/>">Back to Search/List</a></p>
-        <p><a href="<c:url value="/index.jsp"/>">Back to Home</a></p>
+        <p><a href="<c:url value="/jsp/home.jsp"/>">Back to Home</a></p>
     </body>
 </html>

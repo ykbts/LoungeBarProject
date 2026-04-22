@@ -29,6 +29,20 @@
         </form>
 
         <hr/>
-        <p><a href="<c:url value="/index.jsp"/>">Back to Home</a></p>
+
+        <h2>Create New Supply</h2>
+        <form method="POST" action="<c:url value="/supply/create"/>">
+            <label for="nameID">Supply Name:</label>
+            <input id="nameID" name="name" type="text" required/><br/>
+
+            <label for="unitsID">Units Available:</label>
+            <input id="unitsID" name="units" type="text" required/><br/><br/>
+
+            <button type="submit">Submit</button>
+            <button type="reset">Reset the form</button>
+        </form>
+
+        <hr/>
+        <p><a href="<c:url value="/jsp/home.jsp"/>">Back to Home</a></p>
     </body>
 </html>
