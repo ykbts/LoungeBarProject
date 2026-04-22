@@ -77,7 +77,7 @@ public class ProtectedResourceFilter implements Filter {
 
         try {
             cxt = new InitialContext();
-            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/sigir-db");
+            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/bar");
         } catch (NamingException e) {
             ds = null;
 

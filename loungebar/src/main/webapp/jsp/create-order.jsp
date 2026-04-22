@@ -1,7 +1,17 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<form action="${pageContext.request.contextPath}/order/create" method="POST">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>LoungeBar - Create Order Form</title>
+    </head>
+
+    <body>
+        <h1>Create Order Form</h1>
+        <hr/>
+<form method="POST" action="<c:url value="/order/create"/>">
     
     <div class="form-group">
     <label>Waiter ID:</label>

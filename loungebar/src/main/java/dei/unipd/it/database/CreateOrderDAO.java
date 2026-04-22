@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 public class CreateOrderDAO extends AbstractDAO<Orders> {
 
     /** SQL statement to be executed */
-    private static final String STATEMENT = "INSERT INTO lounge.Orders (date_time, status, pay_method, user_waiterID, tableID) VALUES (?, ?, ?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Orders (date_time, status, pay_method, user_waiterID, tableID) " +
+    "VALUES (?, ?::lounge.ordersstate, ?::lounge.payment, ?, ?) RETURNING *";
     private final Orders orders;
 
     public CreateOrderDAO (final Connection connection, final Orders orders) {
@@ -44,7 +45,7 @@ public class CreateOrderDAO extends AbstractDAO<Orders> {
 
             if (rs.next()) {
                 o = new Orders (rs.getInt("id"),
-                        LocalDateTime.parse(rs.getString("date_time")),
+                        LocalDateTime.parse(rs.getString("date_time").replace(" ", "T")),
                         OrderState.valueOf(rs.getString("status")),
                         rs.getString("pay_method") != null ? PayMethod.valueOf(rs.getString("pay_method")) : null,
                         rs.getString("user_waiterID"),

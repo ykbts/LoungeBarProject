@@ -17,6 +17,7 @@ import dei.unipd.it.database.CreateUserDAO;
 import dei.unipd.it.database.SearchUserDAO;
 import dei.unipd.it.database.SearchUserLogInDAO;
 import dei.unipd.it.filter.ProtectedResourceFilter;
+import dei.unipd.it.resources.Actions;
 import dei.unipd.it.resources.LogContext;
 import dei.unipd.it.resources.User;
 import dei.unipd.it.resources.UserRole;
@@ -43,14 +44,12 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
         switch (op) {
         case "login":
-            LogContext.setAction("SHOW_LOGIN");
-            // No llames a loginOperations aquí, ve directo al JSP
+            LogContext.setAction(Actions.SHOW_LOGIN);
             req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
             break;
 
         case "signup":
-            LogContext.setAction("SHOW_SIGNUP");
-            // No llames a registrationOperations aquí, ve directo al JSP
+            LogContext.setAction(Actions.SHOW_SIGNUP);
             req.getRequestDispatcher("/jsp/signup.jsp").forward(req, res);
             break;
 
@@ -76,7 +75,6 @@ protected void doPost(HttpServletRequest req, HttpServletResponse res) throws Se
 }
 
 public void loginOperations(HttpServletRequest req, HttpServletResponse res, boolean isValid) throws ServletException, IOException {
-        String op="login";
         List<User> userList=null;
         Message m = null;
 
@@ -94,7 +92,6 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
 
 
             if(isValid){
-                op="register";
                 // try to find the user in the database
                 password=org.apache.commons.codec.digest.DigestUtils.sha256Hex(password); //hashing the password
                 username=username.toLowerCase();
