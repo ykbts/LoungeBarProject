@@ -22,7 +22,6 @@
         <servlet-class>dei.unipd.it.servlets.LoginServlet</servlet-class>
     </servlet>
 
-<<<<<<< HEAD
 <servlet>
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>dei.unipd.it.servlets.HomeServlet</servlet-class>
@@ -47,12 +46,12 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
-=======
+
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.HomeServlet</servlet-class>
     </servlet>
->>>>>>> 7dfa2670913a446d9ad9f4a12c13d218047d45a9
+
 
 
 

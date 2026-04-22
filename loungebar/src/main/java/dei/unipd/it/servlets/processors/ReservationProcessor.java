@@ -18,7 +18,7 @@ public final class ReservationProcessor extends AbstractProcessor {
     // devo vedere se SEGMENT si può impostare protected abstract e definire qui
     @Override
     protected boolean doProcess(HttpServletRequest req, HttpServletResponse resp, Connection conn) throws Exception {
-        LOGGER.info("¡HOLA! Entrando al Processor. URI: " + req.getRequestURI());
+
         final String uri = req.getRequestURI();
         final int segmentIndex = uri.lastIndexOf("rest/" + SEGMENT);
 
