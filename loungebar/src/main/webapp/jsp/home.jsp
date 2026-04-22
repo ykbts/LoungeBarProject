@@ -19,7 +19,12 @@
     <%-- Waiter view --%>
     <c:when test="${role == 'WAITER'}">
         <div class="menu-grid">
-            <div class="card"><h3>Check reviews</h3><button>Click</button></div>
+            <div class="card">
+                <h3>Check reviews</h3>
+                <form action="${pageContext.request.contextPath}/review/search-by-waiter" method="post">
+                    <button type="submit">Click</button>
+                </form>
+            </div>
             <div class="card"><h3>List supplies</h3><button>Click</button></div>
             <div class="card"><h3>Check orders</h3><button>Click</button></div>
             <div class="card">

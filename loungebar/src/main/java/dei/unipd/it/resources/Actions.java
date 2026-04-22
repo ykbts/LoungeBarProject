@@ -9,6 +9,7 @@ public final class Actions {
     public static final String SEARCH_WAITER_SHIFT = "SEARCH_WAITER_SHIFT";
     public static final String CREATE_SUPPLY = "SUPPLY_CREATE";
     public static final String SEARCH_SUPPLY = "SEARCH_SUPPLY";
+    public static final String SEARCH_WAITER_REVIEWS = "SEARCH_WAITER_REVIEWS";
 
 
     private Actions() {

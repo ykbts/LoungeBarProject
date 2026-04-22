@@ -47,6 +47,15 @@
         <servlet-class>dei.unipd.it.servlets.CreateOrderServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>SearchReviewByWaiterServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.CreateOrderServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchReviewByWaiterServlet</servlet-name>
+        <url-pattern>/review/search-by-waiter</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -82,8 +91,6 @@
         <servlet-name>CreateOrderServlet</servlet-name>
         <url-pattern>/order/create</url-pattern>
     </servlet-mapping>
-
-
 
     <servlet-mapping>
         <servlet-name>rest</servlet-name>
