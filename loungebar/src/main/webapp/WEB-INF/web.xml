@@ -49,7 +49,12 @@
 
     <servlet>
         <servlet-name>SearchReviewByWaiterServlet</servlet-name>
-        <servlet-class>dei.unipd.it.servlets.CreateOrderServlet</servlet-class>
+        <servlet-class>dei.unipd.it.servlets.SearchReviewByWaiterServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CreateShiftServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.CreateShiftServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -90,6 +95,11 @@
     <servlet-mapping>
         <servlet-name>CreateOrderServlet</servlet-name>
         <url-pattern>/order/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CreateShiftServlet</servlet-name>
+        <url-pattern>/shift/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

@@ -45,8 +45,13 @@
                 <a href="<c:url value="/jsp/create-order.jsp"/>">
                     <button>Click</button>
                 </a>
-            <div class="card"><h3>Create shifts</h3><button>Click</button></div>
+            </div>
 
-        </div>
+            <div class="card">
+                <h3>Create shift</h3>
+                <a href="<c:url value="/jsp/create-shift-form.jsp"/>">
+                    <button>Click</button>
+                </a>
+            </div>
     </c:when>
 </c:choose>
