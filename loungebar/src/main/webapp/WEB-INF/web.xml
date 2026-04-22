@@ -28,34 +28,6 @@
 </servlet>
 
 <servlet>
-    <servlet-name>CreateOrderServlet</servlet-name>
-    <servlet-class>dei.unipd.it.servlets.CreateOrderServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/home</url-pattern>
-</servlet-mapping>
-
-<servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
-</servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/signup</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>dei.unipd.it.servlets.HomeServlet</servlet-class>
-    </servlet>
-
-
-
-
-    <servlet>
         <servlet-name>CreateSupplyServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.CreateSupplyServlet</servlet-class>
     </servlet>
@@ -64,15 +36,17 @@
         <servlet-name>SearchSupplyServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.SearchSupplyServlet</servlet-class>
     </servlet>
-<servlet-mapping>
-        <servlet-name>CreateOrderServlet</servlet-name>
-        <url-pattern>/create-order</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>SearchWaiterShiftServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.SearchWaiterShiftServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>CreateOrderServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.CreateOrderServlet</servlet-class>
+    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -103,6 +77,13 @@
         <servlet-name>SearchWaiterShiftServlet</servlet-name>
         <url-pattern>/shift/search-by-waiter</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CreateOrderServlet</servlet-name>
+        <url-pattern>/order/create</url-pattern>
+    </servlet-mapping>
+
+
 
     <servlet-mapping>
         <servlet-name>rest</servlet-name>

@@ -28,8 +28,7 @@
                     <button>Click</button>
                 </a>
             </div>
-<<<<<<< Updated upstream
-            <div class="card"><h3>Create an order</h3><button>Click</button></div>
+            
 
             <div class="card">
                 <h3>View your shift</h3>
@@ -37,13 +36,11 @@
                     <button type="submit">Click</button>
                 </form>
             </div>
-=======
             <div class="card"><h3>Create an order</h3>
                 <a href="<c:url value="/jsp/create-order.jsp"/>">
                     <button>Click</button>
                 </a>
             <div class="card"><h3>Create shifts</h3><button>Click</button></div>
->>>>>>> Stashed changes
 
         </div>
     </c:when>
