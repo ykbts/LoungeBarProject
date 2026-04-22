@@ -22,12 +22,16 @@ async function createReservation() {
     }
 
     // ── build payload ──────────────────────────────────────────────────────
+    const dataToSend = {
+        startTime: startTime.replace(" ", "T") + ":00",
+        endTime:   endTime.replace(" ", "T") + ":00",
+        customer:  customerName,
+        table:     parseInt(tableNumber),
+        people:    parseInt(numberOfPeople)
+    };
+
     const payload = {
-        startTime:      startTime,
-        endTime:        endTime,
-        customerName:   customerName,
-        tableNumber:    parseInt(tableNumber),
-        numberOfPeople: parseInt(numberOfPeople)
+    reservation: dataToSend
     };
 
     btn.disabled = true;
