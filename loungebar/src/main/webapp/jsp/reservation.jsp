@@ -35,9 +35,9 @@
 			<input type="number" id="numberOfPeople" min="1">
 		</div>
 		
-		<button type="submit" id="confirmReservation" onclick="createReservation()">
-			Confirm Reservation
-		</button><br/>
+		<button type="button" id="confirmReservation" onclick="createReservation()">
+    	Confirm Reservation
+		</button>
 		
 	</div>
 

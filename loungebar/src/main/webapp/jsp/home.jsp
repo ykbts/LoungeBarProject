@@ -5,7 +5,12 @@
     <%-- Customer view --%>
     <c:when test="${role == 'CUSTOMER'}">
         <div class="menu-grid">
-            <div class="card"><h3>Reserve a table</h3><button>Click</button></div>
+            <div class="card">
+                <h3>Reserve a table</h3>
+                <a href="${pageContext.request.contextPath}/jsp/reservation.jsp">
+                    <button type="button">Go to Reservations</button>
+                </a>
+            </div>
             <div class="card"><h3>Leave a review</h3><button>Click</button></div>
             <div class="card"><h3>Check orders</h3><button>Click</button></div>
         </div>

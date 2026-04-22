@@ -1,5 +1,5 @@
 
-const ENDPOINT = "loungebar/rest/reservation"; // adjust to your servlet mapping
+const ENDPOINT = "/loungebar/rest/reservation"; // adjust to your servlet mapping
 
 async function createReservation() {
     const btn = document.getElementById("confirmReservation");
@@ -128,11 +128,16 @@ function showError(message) {
     // panel.className = "error";
     // panel.style.display = "block";
 
-    const div = document.getElementById("results");
-    div.replaceChildren();
-    div.appendChild(document.createTextNode(message));
+    const div = document.getElementById("result");
+    if (div) {
+        div.style.display = "block";
+        div.className = "error-panel"; // O el estilo que prefieras
+        div.textContent = message;
+    } else {
+        // Si no existe el div, al menos lo vemos en un alert para debuguear
+        alert("Error: " + message);
 }
-
+}
 /**
  * Formats a field value for display (e.g. datetime strings).
  */
