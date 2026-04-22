@@ -12,7 +12,7 @@
         <h1>Supply Inventory</h1>
         <hr/>
 
-        <c:import url="/jsp/include/show-message.jsp"/>
+        
 
         <c:if test='${not empty supplyList && !message.error}'>
             <table border="1" cellpadding="5">
