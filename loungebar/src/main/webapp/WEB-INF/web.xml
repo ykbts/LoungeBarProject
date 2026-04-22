@@ -88,11 +88,6 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>SearchWaiterShiftServlet</servlet-name>
-        <url-pattern>/shift/search-by-waiter</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
         <servlet-name>CreateOrderServlet</servlet-name>
         <url-pattern>/order/create</url-pattern>
     </servlet-mapping>
