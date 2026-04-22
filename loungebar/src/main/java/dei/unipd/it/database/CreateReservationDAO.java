@@ -42,8 +42,8 @@ public class CreateReservationDAO extends AbstractDAO<Reservation> {
 
             if (rs.next()) {
                 r = new Reservation (rs.getInt("id"),
-                        LocalDateTime.parse(rs.getString("start_time")),
-                        LocalDateTime.parse(rs.getString("end_time")),
+                        LocalDateTime.parse(rs.getString("start_time").replace(" ", "T")),
+                        LocalDateTime.parse(rs.getString("end_time").replace(" ", "T")),
                         rs.getInt("n_people"),
                         rs.getString("user_customerID"),
                         rs.getInt("tableNumber"));

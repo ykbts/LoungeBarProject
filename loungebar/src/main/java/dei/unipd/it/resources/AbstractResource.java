@@ -12,6 +12,7 @@ import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.time.format.DateTimeFormatter;
 
 public abstract class AbstractResource implements Resource {
 
@@ -29,6 +30,11 @@ public abstract class AbstractResource implements Resource {
      * The Object Mapper to serialize / deserialize JSON objects
      */
     protected static final ObjectMapper MAPPER;
+
+    /**
+     * The object that define the datetime format
+     */
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     static {
         // set up the JSON factory

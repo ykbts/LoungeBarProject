@@ -2,7 +2,7 @@
 [X] CREATE corresponding resources (java classes of Entity)
 [ ] VERIFY reliability of the data (i.e. syntax of LocalDateTime class and db format of now():
     now() -> 2026-04-13 11:15:32.927675
-    LocalDateTime -> 
+    LocalDateTime -> 2026-04-13T11:15:32.927675
 [ ] IMPLEMENT units conversion algorithm
 [ ] IMPLEMENT login service: Claudia
 [ ] IMPLEMENT protected resource mechanism with filters

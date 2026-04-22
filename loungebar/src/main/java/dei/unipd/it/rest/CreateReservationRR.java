@@ -34,7 +34,7 @@ public final class CreateReservationRR extends AbstractRR {
             LogContext.setResource(Long.toString(r.getId()));
 
             /// create a new DAO for accessing the database and store the Reservation
-            reservation = new CreateReservationDAO(conn, reservation).access().getOutputParam();
+            reservation = new CreateReservationDAO(conn, r).access().getOutputParam();
 
             if (reservation != null) {
 

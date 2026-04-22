@@ -60,8 +60,8 @@ public class Reservation extends AbstractResource {
         jg.writeStartObject();
 
         jg.writeNumberField("id", id);
-        jg.writeStringField("startTime", MAPPER.writeValueAsString(startTime));
-        jg.writeStringField("endTime", MAPPER.writeValueAsString(endTime));
+        jg.writeStringField("startTime", startTime.format(FORMATTER));
+        jg.writeStringField("endTime", endTime.format(FORMATTER));
         jg.writeNumberField("people", people);
         jg.writeStringField("customer", customer);
         jg.writeNumberField("table", table);
