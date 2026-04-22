@@ -36,7 +36,7 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
         final List<String> clauses= new ArrayList<String>();
 
 
-        if(name != null ){ clauses.add(" lounge.Supply.name = ? "); }
+        if(name != null ){ clauses.add(" LOWER(lounge.Supply.name) LIKE LOWER(?) "); }
         if(unitsAvailable >= 0 ){ clauses.add(" lounge.Supply.units_available = ? "); }
 
         StringBuilder sb = new StringBuilder();
@@ -66,7 +66,7 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
             int clauseCount = 1;
 
             if(name != null) {
-                pstmt.setString(clauseCount, name);
+                pstmt.setString(clauseCount, "%" + name + "%");
                 clauseCount += 1;
             }
             if(unitsAvailable >= 0 ){
