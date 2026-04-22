@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Shift extends AbstractResource{
 
@@ -32,6 +33,16 @@ public class Shift extends AbstractResource{
 
     public LocalDateTime getEndTime() {
         return endTime;
+    }
+
+    public String getFormattedStartTime() {
+        if (startTime == null) return "";
+        return startTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    }
+
+    public String getFormattedEndTime() {
+        if (endTime == null) return "";
+        return endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     @Override

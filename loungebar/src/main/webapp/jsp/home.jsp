@@ -29,7 +29,13 @@
                 </a>
             </div>
             <div class="card"><h3>Create an order</h3><button>Click</button></div>
-            <div class="card"><h3>Create shifts</h3><button>Click</button></div>
+
+            <div class="card">
+                <h3>View your shift</h3>
+                <form action="${pageContext.request.contextPath}/shift/search-by-waiter" method="post">
+                    <button type="submit">Click</button>
+                </form>
+            </div>
 
         </div>
     </c:when>
