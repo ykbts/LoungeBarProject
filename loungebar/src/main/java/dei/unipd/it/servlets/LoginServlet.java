@@ -162,16 +162,22 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         LOGGER.warn("Login failed: Credentials do not match for user {}", username);
                     }
                     else {
+                        if (!user.getRole().toString().equalsIgnoreCase(role)) {
+                            m = new Message("Access denied: You are registered as a " + user.getRole() + ", not a " + role + ".", "E200", "Role Mismatch");
+                            LOGGER.warn("User {} tried to log in as {} but is a {}", username, role, user.getRole());
+                        }
+                        else {
 
-                        HttpSession session = req.getSession();
+                            HttpSession session = req.getSession();
 
 
-                        session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, user.getUsername());
-                        session.setAttribute("role", user.getRole().toString());
+                            session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, user.getUsername());
+                            session.setAttribute("role", user.getRole().toString());
 
-                        m = new Message("Login successful!");
-                        LOGGER.info("User {} logged in successfully as {}", username, user.getRole());
+                            m = new Message("Login successful!");
+                            LOGGER.info("User {} logged in successfully as {}", username, user.getRole());
 
+                        }
                     }
                 }
             }
