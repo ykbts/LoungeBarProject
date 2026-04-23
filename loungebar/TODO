@@ -4,27 +4,27 @@
     now() -> 2026-04-13 11:15:32.927675
     LocalDateTime -> 2026-04-13T11:15:32.927675
 [ ] IMPLEMENT units conversion algorithm
-[ ] IMPLEMENT login service: Claudia
+[X] IMPLEMENT login service: Claudia
 [ ] IMPLEMENT protected resource mechanism with filters
 [ ] INSERT mail manager system
-[] CHECK dockercompose
+[ ] CHECK dockercompose
 [ ] CONNECT dispatched resources with REST logic : 
         -> create jsp that ask for a request and wait for the response
-[] Servelts: - Kate and Luis
+[ ] Servelts: - Kate and Luis
         Reservation: All in one (modify..). 
         Review
         OrderItem(check my order)
         Waiter view: Check my order is the order server. 
         Supply: Create order both, create and post.
         Shift Servlet: joint with work. 
-[] JSPs for each Servlet. -  Kate and Luis
+[ ] JSPs for each Servlet. -  Kate and Luis
         Reservation: Same JSP but depending on role. Waiter can't post.
         Review: Same JSP but depending on role. Client post and waiter checks.
         OrderItem: Check(list) my orders (Client). Create order (Waiter)
         Order: Check order (Waiter)
         Supply: Just for the Waiter. List supplies
         Shifts: Just for Waiter. List
-[] REST Resources: 
+[ ] REST Resources:
         Think were to add new REST Resources, such as adding
 
         

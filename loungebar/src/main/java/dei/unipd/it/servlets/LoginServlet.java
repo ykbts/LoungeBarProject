@@ -61,7 +61,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
 
 
-    
+
     @Override
 protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     String op = req.getRequestURI();
@@ -151,26 +151,26 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
                     // try to find the user in the database
                     password=org.apache.commons.codec.digest.DigestUtils.sha256Hex(password); //hashing the password
                     username=username.toLowerCase();
-                    User user = new SearchUserLogInDAO(getConnection(), username, password).access().getOutputParam();
+                    User user = new SearchUserLogInDAO(getConnection(), username, password, role).access().getOutputParam();
 
 
 
                     //the UserDAO will tell us if the username exists and the password
                     //matches
                     if (user == null) {
-                    m = new Message("Invalid username or password.", "E200", "Authentication failed");
-                    LOGGER.warn("Login failed: Credentials do not match for user {}", username);
+                    m = new Message("Access denied: Invalid credentials or incorrect role for this login link, E200, Authentication failed");
+                    LOGGER.warn("Login failed: Credentials do not match for user {}", username, role);
                 }
                     else {
                 
-                HttpSession session = req.getSession();
+                        HttpSession session = req.getSession();
                 
                 
-                session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, user.getUsername());
-                session.setAttribute("role", user.getRole().toString());
+                        session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, user.getUsername());
+                        session.setAttribute("role", user.getRole().toString());
                 
-                m = new Message("Login successful!");
-                LOGGER.info("User {} logged in successfully as {}", username, user.getRole());
+                        m = new Message("Login successful!");
+                        LOGGER.info("User {} logged in successfully as {}", username, user.getRole());
 
                     }
                 }
