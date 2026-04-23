@@ -62,5 +62,13 @@
                     <button>Click</button>
                 </a>
             </div>
+
+            <br>
+
+            <div>
+                <a href="<c:url value="/logout"/>">
+                    <button>Logout</button>
+                </a>
+            </div>
     </c:when>
 </c:choose>

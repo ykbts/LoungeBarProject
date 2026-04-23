@@ -23,6 +23,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.HomeServlet</servlet-class>
     </servlet>
@@ -61,7 +66,8 @@
         <servlet-name>SearchOrderServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.SearchOrderServlet</servlet-class>
     </servlet>
-    
+
+
 
     <servlet-mapping>
         <servlet-name>SearchReviewByWaiterServlet</servlet-name>
@@ -76,11 +82,12 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+        <url-pattern>/signup</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/signup</url-pattern>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -108,11 +115,11 @@
         <url-pattern>/order/search</url-pattern>
     </servlet-mapping>
 
-    
     <servlet-mapping>
         <servlet-name>rest</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
+
 
     <resource-ref>
         <description>PostgreSQL Datasource</description>
