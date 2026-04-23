@@ -14,6 +14,7 @@ public final class Actions {
     public static final String CREATE_ORDER = "CREATE_ORDER";
     public static final String SHOW_LOGIN = "SHOW_LOGIN";
     public static final String SHOW_SIGNUP = "SHOW_SIGNUP";
+    public static final String LOGOUT = "LOGOUT";
 
 
     private Actions() {
