@@ -50,7 +50,7 @@
     </c:if>
 
     <br/>
-    <a href="<c:url value='/index.jsp'/>">Back to Home</a>
+    <a href="${pageContext.request.contextPath}/home">Back to Home</a>
 
     <script type="text/javascript" src="<c:url value='/js/update-order.js'/>"></script>
 </body>

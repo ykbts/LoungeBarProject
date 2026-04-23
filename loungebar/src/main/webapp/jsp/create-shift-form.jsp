@@ -24,3 +24,5 @@
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     document.getElementById('startTimeInput').value = now.toISOString().slice(0, 16);
 </script>
+
+    <a href="${pageContext.request.contextPath}/home">Back to Home</a>

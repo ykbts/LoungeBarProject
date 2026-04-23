@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a customer order in the lounge bar.
@@ -62,6 +63,12 @@ public class Orders extends AbstractResource {
     public int getTableID() {
         return tableID;
     }
+
+    public String getFormattedDate() {
+        if (dateTime == null) return "";
+        return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    }
+
 
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
