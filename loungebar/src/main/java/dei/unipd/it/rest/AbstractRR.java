@@ -12,20 +12,56 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Connection;
 
+/**
+ * Represents a generic REST resource.
+ */
 public abstract class AbstractRR implements RestResource {
 
+    /**
+     * A LOGGER available for all the subclasses.
+     */
     protected static final Logger LOGGER = LogManager.getLogger(AbstractRR.class, StringFormatterMessageFactory.INSTANCE);
 
+    /**
+     * The JSON MIME media type
+     */
     protected static final String JSON_MEDIA_TYPE = "application/json";
+
+    /**
+     * The JSON UTF-8 MIME media type
+     */
     protected static final String JSON_UTF_8_MEDIA_TYPE = "application/json; charset=utf-8";
+
+    /**
+     * The any MIME media type
+     */
     protected static final String ALL_MEDIA_TYPE = "*/*";
 
+    /**
+     * The HTTP request
+     */
     protected final HttpServletRequest req;
+
+    /**
+     * The HTTP response
+     */
     protected final HttpServletResponse resp;
+
+    /**
+     * The connection to the database
+     */
     protected final Connection conn;
 
     private final String action;
 
+    /**
+     * Creates a new REST resource.
+     *
+     * @param action the action performed by this REST resource.
+     * @param req    the HTTP request.
+     * @param resp    the HTTP response.
+     * @param conn    the connection to the database.
+     */
     public AbstractRR (final String action, final HttpServletRequest req, final HttpServletResponse resp, final Connection conn) {
 
         if (action == null || action.isBlank()) {
@@ -54,6 +90,10 @@ public abstract class AbstractRR implements RestResource {
 
     }
 
+    /**
+     * Entry point for processing REST requests.
+     * @throws IOException if response streaming fails.
+     */
     public void serve() throws IOException {
 
         try {

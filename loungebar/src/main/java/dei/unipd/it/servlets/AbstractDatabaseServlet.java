@@ -12,12 +12,30 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Gets the {@code DataSource} for managing the connection pool to the database.
+ */
 public class AbstractDatabaseServlet extends HttpServlet {
 
+	/**
+	 * A LOGGER available for all the subclasses.
+	 */
 	protected static final Logger LOGGER = LogManager.getLogger(AbstractDatabaseServlet.class, StringFormatterMessageFactory.INSTANCE);
+
+	/**
+	 * The connection pool to the database.
+	 */
 	private DataSource ds;
+	protected static final String JSON_UTF_8_MEDIA_TYPE = "application/json; charset=utf-8";
 
-
+	/**
+	 * Gets the {@code DataSource} for managing the connection pool to the database.
+	 *
+	 * @param config a {@code ServletConfig} object containing the servlet's configuration and initialization
+	 *               parameters.
+	 *
+	 * @throws ServletException if an exception has occurred that interferes with the servlet's normal operation
+	 */
 	public void init(ServletConfig config) throws ServletException {
 
 		// the JNDI lookup context

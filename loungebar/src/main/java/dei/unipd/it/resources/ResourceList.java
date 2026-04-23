@@ -5,10 +5,23 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Represents a list of {@link AbstractResource} objects.
+ * @param <T>
+ *            the type of the actual class extending {@code AbstractResource}.
+ */
 public final class ResourceList<T extends Resource> extends AbstractResource {
 
+    /**
+     * The list of {@code AbstractResource}s.
+     */
     private final Iterable<T> list;
 
+    /**
+     * Creates a list of {@code AbstractResource}s.
+     *
+     * @param list the list of {@code AbstractResource}s.
+     */
     public ResourceList(final Iterable<T> list) {
 
         if(list == null) {

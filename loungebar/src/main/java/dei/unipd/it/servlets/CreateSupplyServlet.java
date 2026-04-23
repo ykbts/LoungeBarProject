@@ -1,6 +1,7 @@
 package dei.unipd.it.servlets;
 
 import dei.unipd.it.database.CreateSupplyDAO;
+import dei.unipd.it.resources.Actions;
 import dei.unipd.it.resources.Supply;
 import dei.unipd.it.resources.Message;
 import dei.unipd.it.resources.LogContext;
@@ -14,9 +15,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.message.StringFormattedMessage;
 
+/**
+ * Servlet for creating a new supply.
+ * * <p>It reads the supply name and quantity, saves them to the database
+ * using a DAO and forwards the result to a JSP page.</p>
+ */
 @WebServlet(name = "CreateSupplyServlet", value = "/supply/*")
 public final class CreateSupplyServlet extends AbstractDatabaseServlet {
 
+    /**
+     * Handles the creation of a supply via POST.
+     * * @param req the request from the user.
+     * @param res the response to the user.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
@@ -26,7 +39,7 @@ public final class CreateSupplyServlet extends AbstractDatabaseServlet {
         String pathInfo = req.getPathInfo();
         String op = (pathInfo != null) ? pathInfo.replace("/", "") : "";
 
-        LogContext.setAction("SUPPLY_" + op.toUpperCase());
+        LogContext.setAction(Actions.CREATE_SUPPLY);
 
         String name = null;
         int unitsAvailable = -1;

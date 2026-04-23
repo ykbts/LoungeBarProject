@@ -13,8 +13,18 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * A REST resource for creating a new {@link Reservation}.
+ */
 public final class CreateReservationRR extends AbstractRR {
 
+    /**
+     * Creates a new REST resource for creating a {@code Reservation}.
+     *
+     * @param req the HTTP request.
+     * @param resp the HTTP response.
+     * @param conn the connection to the database.
+     */
     public CreateReservationRR(final HttpServletRequest req, final HttpServletResponse resp, Connection conn) {
         // the constructor set the parameters only
         super(Actions.CREATE_RESERVATION, req, resp, conn);
@@ -76,6 +86,5 @@ public final class CreateReservationRR extends AbstractRR {
                 message.toJSON(resp.getOutputStream());
             }
         }
-
     }
 }

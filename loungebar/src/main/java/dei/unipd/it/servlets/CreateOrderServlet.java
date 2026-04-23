@@ -18,10 +18,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-
+/**
+ * Servlet for creating a new order.
+ * * <p>It reads order data from a web form, saves it to the database
+ * using a DAO, and shows the result on a JSP page.</p>
+ */
 @WebServlet(name = "CreateOrderServlet", value = "/order/*")
 public final class CreateOrderServlet extends AbstractDatabaseServlet {
 
+    /**
+     * Handles the creation of a new order via POST.
+     * * @param req the request from the user.
+     * @param res the response to the user.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
@@ -71,8 +82,12 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
 
     } catch (Exception ex) {
         // Capture everything
-        m = new Message("Cannot create order", "E500", ex.getMessage());
         LOGGER.error("Order creation failed", ex);
+
+        m = new Message("Cannot create order", "E500", ex.getMessage());
+//        res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//        res.setContentType(JSON_UTF_8_MEDIA_TYPE);
+//        m.toJSON(res.getOutputStream());
     }
 
     try {

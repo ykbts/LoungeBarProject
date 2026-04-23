@@ -9,22 +9,33 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Represents the assignment of a waiter to a specific work shift.
+ */
 public class Work extends AbstractResource {
 
+    /** The identifier of the waiter. */
     private final String waiterID;
+
+    /** The identifier of the assigned shift. */
     private final int shiftID;
 
-    public Work (String waiterID, int shiftID) {
+    /**
+     * @param waiterID the ID of the waiter
+     * @param shiftID the ID of the shift
+     */
+    public Work(String waiterID, int shiftID) {
         this.waiterID = waiterID;
         this.shiftID = shiftID;
     }
+
     public String getWaiterID() {
         return waiterID;
     }
+
     public int getShiftID() {
         return shiftID;
     }
-
 
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
@@ -32,21 +43,25 @@ public class Work extends AbstractResource {
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
         jg.writeStartObject();
-
         jg.writeFieldName("work");
-
         jg.writeStartObject();
 
         jg.writeStringField("waiter-id", waiterID);
         jg.writeNumberField("shift-id", shiftID);
 
         jg.writeEndObject();
-
         jg.writeEndObject();
 
         jg.flush();
     }
 
+    /**
+     * Parses a Work object from a JSON input stream.
+     *
+     * @param in the input stream
+     * @return a new Work instance
+     * @throws IOException if parsing fails
+     */
     public static Work fromJSON(InputStream in) throws IOException {
 
         String jWaiter = null;
@@ -56,7 +71,6 @@ public class Work extends AbstractResource {
             final JsonParser jp = JSON_FACTORY.createParser(in);
 
             while (jp.getCurrentToken() != JsonToken.FIELD_NAME || !"work".equals(jp.getCurrentName())) {
-
                 if (jp.nextToken() == null) {
                     LOGGER.error("No WORK object found in the stream.");
                     throw new EOFException("Unable to parse JSON: no WORK object found.");
@@ -64,9 +78,7 @@ public class Work extends AbstractResource {
             }
 
             while (jp.nextToken() != JsonToken.END_OBJECT) {
-
                 if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
-
                     switch (jp.getCurrentName()) {
                         case "waiter-id":
                             jp.nextToken();
@@ -76,7 +88,6 @@ public class Work extends AbstractResource {
                             jp.nextToken();
                             jShift = jp.getIntValue();
                             break;
-
                     }
                 }
             }

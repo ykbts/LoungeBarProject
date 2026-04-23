@@ -9,11 +9,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Represents an inventory item or ingredient in the lounge bar.
+ */
 public class Supply extends AbstractResource {
 
     private final String name;
     private final int unitsAvailable;
 
+    /**
+     * @param name the unique name of the supply
+     * @param unitsAvailable the current quantity in stock
+     */
     public Supply(final String name, final int unitsAvailable) {
         this.name = name;
         this.unitsAvailable = unitsAvailable;
@@ -27,29 +34,32 @@ public class Supply extends AbstractResource {
         return unitsAvailable;
     }
 
-
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
 
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
         jg.writeStartObject();
-
         jg.writeFieldName("supply");
-
         jg.writeStartObject();
 
         jg.writeStringField("name", name);
         jg.writeNumberField("units-available", unitsAvailable);
 
         jg.writeEndObject();
-
         jg.writeEndObject();
 
         jg.flush();
     }
 
-    public static Supply fromJSON (InputStream in) throws IOException {
+    /**
+     * Parses a Supply from a JSON input stream.
+     *
+     * @param in the input stream
+     * @return a new Supply instance
+     * @throws IOException if parsing fails
+     */
+    public static Supply fromJSON(InputStream in) throws IOException {
 
         String jName = null;
         int jUnitsAvailable = -1;
@@ -58,7 +68,6 @@ public class Supply extends AbstractResource {
             final JsonParser jp = JSON_FACTORY.createParser(in);
 
             while (jp.getCurrentToken() != JsonToken.FIELD_NAME || !"supply".equals(jp.getCurrentName())) {
-
                 if (jp.nextToken() == null) {
                     LOGGER.error("No SUPPLY object found in the stream.");
                     throw new EOFException("Unable to parse JSON: no SUPPLY object found.");
@@ -66,9 +75,7 @@ public class Supply extends AbstractResource {
             }
 
             while (jp.nextToken() != JsonToken.END_OBJECT) {
-
                 if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
-
                     switch (jp.getCurrentName()) {
                         case "name":
                             jp.nextToken();
@@ -78,7 +85,6 @@ public class Supply extends AbstractResource {
                             jp.nextToken();
                             jUnitsAvailable = jp.getIntValue();
                             break;
-
                     }
                 }
             }

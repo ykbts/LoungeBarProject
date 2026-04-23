@@ -13,8 +13,18 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * A REST resource for creating a new {@link Review}.
+ */
 public final class CreateReviewRR extends AbstractRR {
 
+    /**
+     * Creates a new REST resource for creating a {@code Review}.
+     *
+     * @param req the HTTP request.
+     * @param resp the HTTP response.
+     * @param conn the connection to the database.
+     */
     public CreateReviewRR(HttpServletRequest req, HttpServletResponse resp, Connection conn) {
         super(Actions.CREATE_REVIEW, req, resp, conn);
     }
@@ -26,15 +36,20 @@ public final class CreateReviewRR extends AbstractRR {
         Message message;
 
         try {
+            // reads the JSON object and create the resource
             Review r = Review.fromJSON(req.getInputStream());
+
+            // set Logger's resource
             LogContext.setResource(r.getCustomerID() + ", " + r.getWaiterID());
 
+            // create a new DAO for accessing the database and store the Review
             review = new CreateReviewDAO(conn, r).access().getOutputParam();
 
             if (review != null) {
 
-                LOGGER.info("Reservation successfully created");
+                LOGGER.info("Review successfully created");
                 resp.setStatus(HttpServletResponse.SC_CREATED);
+                // make the resource write itself
                 review.toJSON(resp.getOutputStream());
             }
             else {
@@ -51,7 +66,6 @@ public final class CreateReviewRR extends AbstractRR {
             message = new Message("Cannot create REVIEW: no Review JSON object found in the request.", "E4A8", e.getMessage());
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             message.toJSON(resp.getOutputStream());
-
         }
         catch (SQLException ex) {
             if ("23505".equals(ex.getSQLState())) {
@@ -69,6 +83,5 @@ public final class CreateReviewRR extends AbstractRR {
                 message.toJSON(resp.getOutputStream());
             }
         }
-
     }
 }

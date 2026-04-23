@@ -9,31 +9,58 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO class for searching supplies.
+ *
+ * <p>Filters supplies by name or stock quantity.</p>
+ *
+ * <p>Returns a list of matching {@link Supply} objects.</p>
+ */
 public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
+
     /**
-     * The SQL statement to be executed
+     * The base SQL statement to be executed.
      */
     private static final String STATEMENT = "SELECT * FROM lounge.Supply";
 
+    /**
+     * The name filter for the supply search.
+     */
     private final String name;
+
+    /**
+     * The units available filter for the supply search.
+     */
     private final int unitsAvailable;
 
+    /**
+     * Creates a new DAO for searching supplies with optional filters.
+     *
+     * @param con the database connection
+     * @param name the name (or part of it) to search for; if {@code null}, this filter is ignored
+     * @param unitsAvailable the number of units to match; if negative, this filter is ignored
+     */
     public SearchSupplyDAO(final Connection con, String name, int unitsAvailable) {
         super(con);
         this.name = name;
         this.unitsAvailable = unitsAvailable;
     }
 
+    /**
+     * Searches supplies in the database.
+     *
+     * <p>Builds filters dynamically, executes the query, and returns matching {@link Supply} objects.</p>
+     *
+     * @throws SQLException if a database error occurs
+     */
     @Override
     public final void doAccess() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        // the results of the search
-        // the results of the search
         final List<Supply> supplyList = new ArrayList<Supply>();
-        final List<String> clauses= new ArrayList<String>();
+        final List<String> clauses = new ArrayList<String>();
 
 
         if(name != null ){ clauses.add(" LOWER(lounge.Supply.name) LIKE LOWER(?) "); }
@@ -69,11 +96,10 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
                 pstmt.setString(clauseCount, "%" + name + "%");
                 clauseCount += 1;
             }
-            if(unitsAvailable >= 0 ){
+            if (unitsAvailable >= 0) {
                 pstmt.setInt(clauseCount, unitsAvailable);
-                clauseCount+=1;
+                clauseCount += 1;
             }
-
 
             rs = pstmt.executeQuery();
 
@@ -92,7 +118,6 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
             if (pstmt != null) {
                 pstmt.close();
             }
-
         }
 
         this.outputParam = supplyList;

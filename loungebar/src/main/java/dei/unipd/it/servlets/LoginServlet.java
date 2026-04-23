@@ -22,11 +22,20 @@ import dei.unipd.it.resources.LogContext;
 import dei.unipd.it.resources.User;
 import dei.unipd.it.resources.UserRole;
 
-
+/**
+ * Servlet for managing user login and registration.
+ */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login", "/signup"})
 public class LoginServlet extends AbstractDatabaseServlet {
 
-
+    /**
+     * Shows the login or signup page based on the URL.
+     *
+     * @param req the request from the user.
+     * @param res the response to the user.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String role = req.getParameter("role");
@@ -59,9 +68,14 @@ public class LoginServlet extends AbstractDatabaseServlet {
     }
 
 
-
-
-
+    /**
+     * Routes POST requests to either login or registration operations.
+     *
+     * @param req the request from the user.
+     * @param res the response to the user.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String op = req.getRequestURI();
@@ -74,6 +88,15 @@ public class LoginServlet extends AbstractDatabaseServlet {
         }
     }
 
+    /**
+     * Validates credentials and manages the user session.
+     *
+     * @param req the request from the user.
+     * @param res the response to the user.
+     * @param isValid flag to bypass validation during auto-login.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     public void loginOperations(HttpServletRequest req, HttpServletResponse res, boolean isValid) throws ServletException, IOException {
         List<User> userList=null;
         Message m = null;
@@ -209,9 +232,14 @@ public class LoginServlet extends AbstractDatabaseServlet {
         }
     }
 
-
-
-
+    /**
+     * Validates and creates a new user account in the database.
+     *
+     * @param req the request from the user.
+     * @param res the response to the user.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     public void registrationOperations(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         User u = null;

@@ -9,16 +9,43 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO class for searching reviews.
+ *
+ * <p>Filters reviews by waiter, customer, or score.</p>
+ *
+ * <p>Returns a list of matching {@link Review} objects.</p>
+ */
 public final class SearchReviewDAO extends AbstractDAO<List<Review>> {
+
     /**
-     * The SQL statement to be executed
+     * The base SQL statement to be executed.
      */
     private static final String STATEMENT = "SELECT user_waiterID, user_customerID, score, comment FROM lounge.Review";
 
+    /**
+     * The waiter identifier filter.
+     */
     private final String waiterID;
+
+    /**
+     * The customer identifier filter.
+     */
     private final String customerID;
+
+    /**
+     * The numerical score filter.
+     */
     private final Integer score;
 
+    /**
+     * Creates a new DAO for searching reviews with optional filters.
+     *
+     * @param con the database connection
+     * @param waiterID the ID of the waiter to filter by; if {@code null}, this filter is ignored
+     * @param customerID the ID of the customer to filter by; if {@code null}, this filter is ignored
+     * @param score the review score to match; if {@code null} or out of range (1-5), this filter is ignored
+     */
     public SearchReviewDAO(final Connection con, String waiterID, String customerID, Integer score) {
         super(con);
         this.waiterID = waiterID;
@@ -26,6 +53,13 @@ public final class SearchReviewDAO extends AbstractDAO<List<Review>> {
         this.score = score;
     }
 
+    /**
+     * Searches reviews in the database.
+     *
+     * <p>Executes the query, and returns matching {@link Review} objects.</p>
+     *
+     * @throws SQLException if a database error occurs
+     */
     @Override
     public final void doAccess() throws SQLException {
 
@@ -35,6 +69,7 @@ public final class SearchReviewDAO extends AbstractDAO<List<Review>> {
         final List<Review> reviews = new ArrayList<>();
         final List<String> clauses = new ArrayList<>();
 
+        // Determine which filters to apply
         if (waiterID != null) { clauses.add(" lounge.Review.user_waiterID = ? "); }
         if (customerID != null) { clauses.add(" lounge.Review.user_customerID = ? "); }
         if (score != null && score >= 1 && score <= 5) { clauses.add(" lounge.Review.score = ? "); }

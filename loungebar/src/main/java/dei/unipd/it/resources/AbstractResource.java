@@ -14,6 +14,17 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Base class for system resources with JSON serialization support.
+ *
+ * <p>Provides shared utilities for:
+ * <ul>
+ * <li>JSON factory and object mapper configuration</li>
+ * <li>Standardized date-time formatting</li>
+ * <li>Resource logging</li>
+ * </ul>
+ * </p>
+ */
 public abstract class AbstractResource implements Resource {
 
     /**
@@ -52,6 +63,12 @@ public abstract class AbstractResource implements Resource {
         LOGGER.debug("Object Mapper successfully set up.");
     }
 
+    /**
+     * Serializes the resource to the provided output stream.
+     *
+     * @param out the output stream
+     * @throws IOException if serialization fails or stream is null
+     */
     public void toJSON(final OutputStream out) throws IOException {
 
         if (out == null) {
@@ -69,5 +86,15 @@ public abstract class AbstractResource implements Resource {
 
     }
 
+    /**
+     * Performs the actual writing of JSON.
+     *
+     * Subclasses have to implement this method to provide the actual logic needed for representing the {@code
+     * Resource} to JSON.
+     *
+     * @param out the stream to which the JSON representation of the {@code Resource} has to be written.
+     *
+     * @throws Exception if something goes wrong during writing.
+     */
     protected abstract void writeJSON(final OutputStream out) throws IOException;
 }

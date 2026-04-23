@@ -1,6 +1,7 @@
 package dei.unipd.it.servlets;
 
 import dei.unipd.it.database.SearchShiftByWaiterDAO;
+import dei.unipd.it.resources.Actions;
 import dei.unipd.it.resources.Shift;
 import dei.unipd.it.resources.LogContext;
 import dei.unipd.it.resources.Message;
@@ -16,15 +17,26 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.message.StringFormattedMessage;
 
+/**
+ * Servlet for searching shifts assigned to a specific waiter
+ */
 @WebServlet(name = "SearchWaiterShiftServlet", value = "/shift/search-by-waiter")
 public final class SearchWaiterShiftServlet extends AbstractDatabaseServlet {
 
+    /**
+     * Handles the search request for waiter shifts via POST.
+     *
+     * @param req the request from the user.
+     * @param res the response to the user.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
 
         LogContext.setIPAddress(req.getRemoteAddr());
-        LogContext.setAction("SEARCH_WAITER_SHIFT");
+        LogContext.setAction(Actions.SEARCH_WAITER_SHIFT);
 
         HttpSession session = req.getSession(false);
         String waiterID = (String) session.getAttribute("user");

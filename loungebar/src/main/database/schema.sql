@@ -116,7 +116,7 @@ CREATE TABLE lounge.Reservation (
             NOT NULL
             CHECK (n_people > 0),
     user_customerID VARCHAR(20),
-    tableNumber SMALLINT,
+    tableNumber SMALLINT NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (tableNumber) REFERENCES lounge.Tables(number),
     FOREIGN KEY (user_customerID) REFERENCES lounge.User(username),
