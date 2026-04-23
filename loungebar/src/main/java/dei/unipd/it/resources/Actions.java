@@ -12,9 +12,11 @@ public final class Actions {
     public static final String SEARCH_SUPPLY = "SEARCH_SUPPLY";
     public static final String SEARCH_WAITER_REVIEWS = "SEARCH_WAITER_REVIEWS";
     public static final String CREATE_ORDER = "CREATE_ORDER";
+    public static final String SEARCH_ORDER = "SEARCH_ORDER";
     public static final String SHOW_LOGIN = "SHOW_LOGIN";
     public static final String SHOW_SIGNUP = "SHOW_SIGNUP";
     public static final String LOGOUT = "LOGOUT";
+    public static final String UPDATE_ORDER_STATUS = "UPDATE_ORDER_STATUS";
 
 
     private Actions() {

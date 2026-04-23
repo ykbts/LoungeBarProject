@@ -24,6 +24,7 @@ services:
       - ./data/db:/var/lib/postgresql
       - ./src/main/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
       - ./src/main/database/population.sql:/docker-entrypoint-initdb.d/02-data.sql
+      - ./src/main/database/triggers.sql:/docker-entrypoint-initdb.d/03-triggers.sql
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U fskcl" ]
       interval: 5s

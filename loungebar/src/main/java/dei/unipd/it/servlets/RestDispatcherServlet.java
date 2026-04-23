@@ -2,6 +2,7 @@ package dei.unipd.it.servlets;
 
 import dei.unipd.it.resources.LogContext;
 import dei.unipd.it.resources.Message;
+import dei.unipd.it.servlets.processors.OrderProcessor;
 import dei.unipd.it.servlets.processors.ReservationProcessor;
 import dei.unipd.it.servlets.processors.ResourceProcessor;
 import dei.unipd.it.servlets.processors.ReviewProcessor;
@@ -80,7 +81,8 @@ public class RestDispatcherServlet extends AbstractDatabaseServlet {
 
         return List.of(
                 new ReviewProcessor(),
-                new ReservationProcessor()
+                new ReservationProcessor(),
+                new OrderProcessor()
         );
     }
 }
