@@ -48,7 +48,7 @@ public class LogoutServlet extends AbstractDatabaseServlet {
 
         // redirect
         try {
-            resp.sendRedirect("/");
+            resp.sendRedirect(req.getContextPath() + "/");
         }
         catch (IOException e) {
             LOGGER.error("Unable to perform redirection after logout attempt.");
