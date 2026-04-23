@@ -58,8 +58,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>CreateOrderServlet</servlet-name>
-        <servlet-class>dei.unipd.it.servlets.CreateOrderServlet</servlet-class>
+        <servlet-name>SearchOrderServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.SearchOrderServlet</servlet-class>
     </servlet>
     
 
