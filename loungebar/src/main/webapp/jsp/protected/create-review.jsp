@@ -42,6 +42,9 @@
         <div id="resultBody"></div>
 	</div>
 
+<br/>
+<p><a href="<c:url value="/home"/>">Back to Home</a></p>
+
 	<script type="text/javascript" src="<c:url value="/js/review.js"/>"></script>
 
     <a href="${pageContext.request.contextPath}/home">Back to Home</a>

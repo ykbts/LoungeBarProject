@@ -34,6 +34,6 @@
         <hr/>
 
             <a href="${pageContext.request.contextPath}/jsp/create-shift-form.jsp">Create Another Shift</a>
-            <p><a href="<c:url value="/jsp/home.jsp"/>">Back to Home</a></p>
+            <p><a href="<c:url value="/home"/>">Back to Home</a></p>
     </body>
 </html>

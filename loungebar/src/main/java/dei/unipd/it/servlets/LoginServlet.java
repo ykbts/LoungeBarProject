@@ -195,7 +195,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
 
                             session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, user.getUsername());
-                            session.setAttribute("role", user.getRole().toString());
+                            session.setAttribute("role", user.getRole());
 
                             m = new Message("Login successful!");
                             LOGGER.info("User {} logged in successfully as {}", username, user.getRole());
@@ -222,7 +222,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
             }else{
                 // we move to home page
-                res.sendRedirect(req.getContextPath() + "/jsp/home.jsp");
+                res.sendRedirect(req.getContextPath() + "/home");
             }
 
 

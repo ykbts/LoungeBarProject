@@ -19,6 +19,9 @@
     <button type="submit">Create Shift</button>
 </form>
 
+<br/>
+<p><a href="<c:url value="/home"/>">Back to Home</a></p>
+
 <script>
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());

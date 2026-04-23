@@ -94,7 +94,7 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
             //  DISPATCHER
             req.setAttribute("order", o);
             req.setAttribute("message", m);
-            req.getRequestDispatcher("/jsp/create-order-result.jsp").forward(req, res);
+            req.getRequestDispatcher("/jsp/protected/create-order-result.jsp").forward(req, res);
 
         } catch (Exception ex) {
             LOGGER.error("Unable to send response for order creation.", ex);

@@ -38,7 +38,7 @@
             </div>
             <div class="card">
                 <h3>List supplies</h3>
-                <a href="<c:url value="/jsp/search-supply-form.jsp"/>">
+                <a href="<c:url value="/jsp/protected/search-supply-form.jsp"/>">
                     <button>Click</button>
                 </a>
             </div>
@@ -51,14 +51,14 @@
                 </form>
             </div>
             <div class="card"><h3>Create an order</h3>
-                <a href="<c:url value="/jsp/create-order.jsp"/>">
+                <a href="<c:url value="/jsp/protected/create-order.jsp"/>">
                     <button>Click</button>
                 </a>
             </div>
 
             <div class="card">
                 <h3>Create shift</h3>
-                <a href="<c:url value="/jsp/create-shift-form.jsp"/>">
+                <a href="<c:url value="/jsp/protected/create-shift-form.jsp"/>">
                     <button>Click</button>
                 </a>
             </div>

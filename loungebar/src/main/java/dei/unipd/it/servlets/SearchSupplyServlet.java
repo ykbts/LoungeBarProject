@@ -81,7 +81,7 @@ public final class SearchSupplyServlet extends AbstractDatabaseServlet {
             req.setAttribute("supplyList", sl);
             req.setAttribute("message", m);
 
-            req.getRequestDispatcher("/jsp/search-supply-result.jsp").forward(req, res);
+            req.getRequestDispatcher("/jsp/protected/search-supply-result.jsp").forward(req, res);
 
         } catch(Exception ex) {
             LOGGER.error(new StringFormattedMessage("Unable to send response when searching supplies."), ex);

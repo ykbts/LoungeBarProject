@@ -43,8 +43,10 @@
     <button type="submit">Open Order</button>
 </form>
 
+<br/>
+<p><a href="<c:url value="/home"/>">Back to Home</a></p>
+
 <script>
-    
     document.getElementById('dateTimeInput').value = new Date().toISOString().slice(0, 16);
 </script>
 

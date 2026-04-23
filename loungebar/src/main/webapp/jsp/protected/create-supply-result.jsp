@@ -21,13 +21,8 @@
             </ul>
         </c:if>
 
-        <c:if test='${message.error}'>
-            <h3 style="color: red;">Error!</h3>
-            <p><c:out value="${message.message}"/></p>
-        </c:if>
-
         <hr/>
-        <p><a href="<c:url value="/jsp/search-supply-form.jsp"/>">Add another supply</a></p>
-        <a href="${pageContext.request.contextPath}/home">Back to Home</a>
+        <p><a href="<c:url value="/jsp/protected/search-supply-form.jsp"/>">Add another supply</a></p>
+        <p><a href="<c:url value="/home"/>">Back to Home</a></p>
     </body>
 </html>

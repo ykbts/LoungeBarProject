@@ -63,19 +63,6 @@ public class ProtectedResourceFilter implements Filter {
         Here we could pass configuration parameters to the filter, if needed.
          */
 
-        // the JNDI lookup context
-        InitialContext cxt;
-
-        try {
-            cxt = new InitialContext();
-            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/bar");
-        } catch (NamingException e) {
-            ds = null;
-
-            LOGGER.error("Unable to acquire the connection pool to the database.", e);
-
-            throw new ServletException("Unable to acquire the connection pool to the database", e);
-        }
     }
 
     /**
@@ -106,12 +93,17 @@ public class ProtectedResourceFilter implements Filter {
 
             LOGGER.info("request URL =  %s", req.getRequestURL());
 
+            // forbid caching of restricted areas
+            res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+            res.setHeader("Pragma", "no-cache");
+            res.setDateHeader("Expires", 0);
+
             final HttpSession session = req.getSession(false);
 
             // if we do not have a session, try to authenticate the user
             if (session == null) {
 
-                LOGGER.warn("Authentication required to access resource %s with method %s.", req.getRequestURI(), req.getMethod());
+                LOGGER.warn("Authentication required to access resource {} with method {}.", req.getRequestURI(), req.getMethod());
 
                 // try to authenticate the user
                 //forwarding the request to the login page
@@ -141,10 +133,13 @@ public class ProtectedResourceFilter implements Filter {
 
             // the user is properly authenticated and in session, continue the processing
             chain.doFilter(servletRequest, servletResponse);
-        } catch (Exception e) {
+
+        }
+        catch (Exception e) {
             LOGGER.error("Unable to perform the protected resource filtering.", e);
             throw e;
-        } finally {
+        }
+        finally {
             LogContext.removeUser();
             LogContext.removeIPAddress();
             LogContext.removeAction();
