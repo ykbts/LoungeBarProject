@@ -11,7 +11,12 @@
                     <button type="button">Go to Reservations</button>
                 </a>
             </div>
-            <div class="card"><h3>Leave a review</h3><button>Click</button></div>
+            <div class="card">
+                <h3>Leave a review</h3>
+                <a href="${pageContext.request.contextPath}/jsp/create-review.jsp">
+                    <button type="button">Go to Reviews</button>
+                </a>
+            </div>
             <div class="card"><h3>Check orders</h3><button>Click</button></div>
         </div>
     </c:when>
@@ -25,7 +30,6 @@
                     <button type="submit">Click</button>
                 </form>
             </div>
-            <div class="card"><h3>List supplies</h3><button>Click</button></div>
             <div class="card"><h3>Check orders</h3><button>Click</button></div>
             <div class="card">
                 <h3>List supplies</h3>
