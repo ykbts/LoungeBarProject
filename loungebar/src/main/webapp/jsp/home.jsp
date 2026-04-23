@@ -30,7 +30,12 @@
                     <button type="submit">Click</button>
                 </form>
             </div>
-            <div class="card"><h3>Check orders</h3><button>Click</button></div>
+            
+            <div class="card"><h3>List my orders</h3>
+                <form action="${pageContext.request.contextPath}/order/search" method="post">
+                    <button type="submit">Click</button>
+                </form>
+            </div>
             <div class="card">
                 <h3>List supplies</h3>
                 <a href="<c:url value="/jsp/search-supply-form.jsp"/>">

@@ -2,6 +2,7 @@ package dei.unipd.it.database;
 
 import dei.unipd.it.resources.Orders;
 import dei.unipd.it.resources.OrderState;
+import dei.unipd.it.resources.PayMethod;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,18 +23,21 @@ public final class UpdateOrderStatusDAO extends AbstractDAO<Orders> {
     /**
      * SQL statement used to update the status of an order.
      */
-    private static final String STATEMENT =
-            "UPDATE lounge.Orders SET status = ? WHERE id = ?;";
+    private static final String STATEMENT = 
+    "UPDATE lounge.Orders SET status = ?::lounge.ordersstate, pay_method = ?::lounge.payment WHERE id = ?;";
 
     /**
      * Identifier of the order to be updated.
      */
     private final int orderID;
 
+
     /**
      * New status to assign to the order.
+     * 
      */
     private final OrderState status;
+    private final PayMethod payMethod;
 
     /**
      * Creates a new DAO for updating the status of an order.
@@ -44,7 +48,7 @@ public final class UpdateOrderStatusDAO extends AbstractDAO<Orders> {
      * @throws IllegalArgumentException if {@code orderID} is not positive
      * @throws NullPointerException if {@code status} is null
      */
-    public UpdateOrderStatusDAO(final Connection conn, final int orderID, final OrderState status) {
+    public UpdateOrderStatusDAO(final Connection conn, final int orderID, final OrderState status, final PayMethod payMethod) {
         super(conn);
 
         if (orderID <= 0) {
@@ -59,6 +63,7 @@ public final class UpdateOrderStatusDAO extends AbstractDAO<Orders> {
 
         this.orderID = orderID;
         this.status = status;
+        this.payMethod = payMethod;
     }
 
     /**
@@ -87,7 +92,8 @@ public final class UpdateOrderStatusDAO extends AbstractDAO<Orders> {
 
             // Bind parameters: new status and order ID
             ps.setString(1, status.toString());
-            ps.setInt(2, orderID);
+            ps.setString(2, payMethod.toString());
+            ps.setInt(3, orderID);
 
             // Execute update and retrieve number of affected rows
             int affectedRows = ps.executeUpdate();
@@ -103,7 +109,7 @@ public final class UpdateOrderStatusDAO extends AbstractDAO<Orders> {
             LOGGER.info("Order {} status successfully updated to {}.", orderID, status);
 
             // Return a minimal representation of the updated order
-            outputParam = new Orders(orderID, null, status, null, null, 0);
+            outputParam = new Orders(orderID, java.time.LocalDateTime.now(), status, payMethod, null, 0);
 
         } catch (SQLException e) {
             // Log and propagate the exception for higher-level handling
