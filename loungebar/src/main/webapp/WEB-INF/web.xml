@@ -22,38 +22,10 @@
         <servlet-class>dei.unipd.it.servlets.LoginServlet</servlet-class>
     </servlet>
 
-<servlet>
-    <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>dei.unipd.it.servlets.HomeServlet</servlet-class>
-</servlet>
-
-<servlet>
-    <servlet-name>CreateOrderServlet</servlet-name>
-    <servlet-class>dei.unipd.it.servlets.CreateOrderServlet</servlet-class>
-</servlet>
-
-<servlet-mapping>
-    <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/home</url-pattern>
-</servlet-mapping>
-
-<servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
-</servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/signup</url-pattern>
-    </servlet-mapping>
-
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.HomeServlet</servlet-class>
     </servlet>
-
-
-
 
     <servlet>
         <servlet-name>CreateSupplyServlet</servlet-name>
@@ -64,15 +36,31 @@
         <servlet-name>SearchSupplyServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.SearchSupplyServlet</servlet-class>
     </servlet>
-<servlet-mapping>
-        <servlet-name>CreateOrderServlet</servlet-name>
-        <url-pattern>/create-order</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>SearchWaiterShiftServlet</servlet-name>
         <servlet-class>dei.unipd.it.servlets.SearchWaiterShiftServlet</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>CreateOrderServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.CreateOrderServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SearchReviewByWaiterServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.SearchReviewByWaiterServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CreateShiftServlet</servlet-name>
+        <servlet-class>dei.unipd.it.servlets.CreateShiftServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchReviewByWaiterServlet</servlet-name>
+        <url-pattern>/review/search-by-waiter</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -100,8 +88,13 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>SearchWaiterShiftServlet</servlet-name>
-        <url-pattern>/shift/search-by-waiter</url-pattern>
+        <servlet-name>CreateOrderServlet</servlet-name>
+        <url-pattern>/order/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>CreateShiftServlet</servlet-name>
+        <url-pattern>/shift/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -115,5 +108,14 @@
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
+    -- Protection of resources
+    <filter>
+		<filter-name>ProtectedResourceFilter</filter-name>
+		<filter-class>dei.unipd.it.filter.ProtectedResourceFilter</filter-class>
+	</filter>
+
+    <!-- Filter mapping for ProtectedResourceFilter to secure specific URLs  (to define)-->
+    
 </web-app>
 

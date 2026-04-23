@@ -5,6 +5,7 @@ import dei.unipd.it.resources.Orders;
 import dei.unipd.it.resources.PayMethod;
 import dei.unipd.it.resources.Message;
 import dei.unipd.it.resources.OrderState;
+import dei.unipd.it.resources.Actions;
 import dei.unipd.it.resources.LogContext;
 
 import java.io.IOException;
@@ -16,8 +17,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
 import org.apache.logging.log4j.message.StringFormattedMessage;
+
 
 @WebServlet(name = "CreateOrderServlet", value = "/order/*")
 public final class CreateOrderServlet extends AbstractDatabaseServlet {
@@ -28,10 +29,9 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
 
         LogContext.setIPAddress(req.getRemoteAddr());
 
+        
         String pathInfo = req.getPathInfo();
-        String op = (pathInfo != null) ? pathInfo.replace("/", "") : "";
-
-        LogContext.setAction("ORDER_" + op.toUpperCase());        
+        String op = (pathInfo != null) ? pathInfo.replace("/", "") : "";     
 
         Orders o = null;
         Message m = null;
@@ -39,11 +39,12 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
     try {
         if ("create".equals(op)) {
             // Validate logged user
+            LogContext.setAction(Actions.CREATE_ORDER);
             HttpSession session = req.getSession(false);
             String waiterID = (session != null) ? (String) session.getAttribute("user") : null;
             
             if (waiterID == null) {
-        m = new Message("Session expired. Please login again.", "E401", "User not found in session.");
+                m = new Message("Session expired. Please login again.", "E401", "User not found in session.");
         }
             // Get data
             int tableID = Integer.parseInt(req.getParameter("tableID"));

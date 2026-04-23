@@ -19,7 +19,12 @@
     <%-- Waiter view --%>
     <c:when test="${role == 'WAITER'}">
         <div class="menu-grid">
-            <div class="card"><h3>Check reviews</h3><button>Click</button></div>
+            <div class="card">
+                <h3>Check reviews</h3>
+                <form action="${pageContext.request.contextPath}/review/search-by-waiter" method="post">
+                    <button type="submit">Click</button>
+                </form>
+            </div>
             <div class="card"><h3>List supplies</h3><button>Click</button></div>
             <div class="card"><h3>Check orders</h3><button>Click</button></div>
             <div class="card">
@@ -28,8 +33,7 @@
                     <button>Click</button>
                 </a>
             </div>
-<<<<<<< Updated upstream
-            <div class="card"><h3>Create an order</h3><button>Click</button></div>
+            
 
             <div class="card">
                 <h3>View your shift</h3>
@@ -37,14 +41,17 @@
                     <button type="submit">Click</button>
                 </form>
             </div>
-=======
             <div class="card"><h3>Create an order</h3>
                 <a href="<c:url value="/jsp/create-order.jsp"/>">
                     <button>Click</button>
                 </a>
-            <div class="card"><h3>Create shifts</h3><button>Click</button></div>
->>>>>>> Stashed changes
+            </div>
 
-        </div>
+            <div class="card">
+                <h3>Create shift</h3>
+                <a href="<c:url value="/jsp/create-shift-form.jsp"/>">
+                    <button>Click</button>
+                </a>
+            </div>
     </c:when>
 </c:choose>

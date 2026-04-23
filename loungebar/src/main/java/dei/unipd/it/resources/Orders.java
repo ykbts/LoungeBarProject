@@ -64,7 +64,7 @@ public class Orders extends AbstractResource {
         jg.writeStartObject();
 
         jg.writeNumberField("id", id);
-        jg.writeStringField("date-time", MAPPER.writeValueAsString(dateTime));
+        jg.writeStringField("date_time", dateTime.format(FORMATTER));
         jg.writeStringField("status", status.toString());
         jg.writeStringField("pay-method", payMethod.toString());
         jg.writeStringField("waiter", waiterID);
