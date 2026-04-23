@@ -34,4 +34,4 @@
 </c:choose>
 
 <br/>
-<p><a href="<c:url value="/jsp/home.jsp"/>">Back to Home</a></p>
+<p><a href="<c:url value="/home"/>">Back to Home</a></p>

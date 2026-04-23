@@ -47,7 +47,7 @@ public final class SearchWaiterShiftServlet extends AbstractDatabaseServlet {
         try {
             req.setAttribute("shiftList", sl);
             req.setAttribute("message", m);
-            req.getRequestDispatcher("/jsp/search-waiter-shift-result.jsp").forward(req, res);
+            req.getRequestDispatcher("/jsp/protected/search-waiter-shift-result.jsp").forward(req, res);
         } catch (Exception ex) {
             LOGGER.error("Unable to send response when searching waiter shifts.", ex);
             throw ex;

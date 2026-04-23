@@ -77,7 +77,7 @@ public final class CreateShiftServlet extends AbstractDatabaseServlet {
             req.setAttribute("shift", s);
             req.setAttribute("message", m);
 
-            req.getRequestDispatcher("/jsp/create-shift-result.jsp").forward(req, res);
+            req.getRequestDispatcher("/jsp/protected/create-shift-result.jsp").forward(req, res);
 
         } catch(Exception ex) {
             LOGGER.error("Unable to send response for shift creation.", ex);

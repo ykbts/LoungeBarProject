@@ -46,6 +46,9 @@
         <div id="resultBody"></div>
 	</div>
 
+	<br/>
+    <p><a href="<c:url value="/jsp/home"/>">Back to Home</a></p>
+
 	<script type="text/javascript" src="<c:url value="/js/reservation.js"/>"></script>
 
 	</body>

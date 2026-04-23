@@ -25,7 +25,7 @@ public class HomeServlet extends AbstractDatabaseServlet {
         }
 
         
-        req.getRequestDispatcher("/jsp/home.jsp").forward(req, res);
+        req.getRequestDispatcher("/jsp/protected/home.jsp").forward(req, res);
     }
 }
 

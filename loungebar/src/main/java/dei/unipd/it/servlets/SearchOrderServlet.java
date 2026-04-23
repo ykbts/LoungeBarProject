@@ -52,6 +52,6 @@ public final class SearchOrderServlet extends AbstractDatabaseServlet {
     // Send data to jsp
     req.setAttribute("orderList", ol);
     req.setAttribute("message", m);
-    req.getRequestDispatcher("/jsp/search-order-result.jsp").forward(req, res);
+    req.getRequestDispatcher("/jsp/protected/search-order-result.jsp").forward(req, res);
 }
 }

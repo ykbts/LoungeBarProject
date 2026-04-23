@@ -22,7 +22,7 @@
         </c:if>
 
         <hr/>
-        <p><a href="<c:url value="/jsp/search-supply-form.jsp"/>">Add another supply</a></p>
-        <p><a href="<c:url value="/index.jsp"/>">Back to Home</a></p>
+        <p><a href="<c:url value="/jsp/protected/search-supply-form.jsp"/>">Add another supply</a></p>
+        <p><a href="<c:url value="/home"/>">Back to Home</a></p>
     </body>
 </html>

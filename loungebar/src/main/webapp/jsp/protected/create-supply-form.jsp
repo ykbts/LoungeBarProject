@@ -23,6 +23,6 @@
             <button type="reset">Reset the form</button>
         </form>
 
-        <p><a href="<c:url value="/index.jsp"/>">Back to Home</a></p>
+        <p><a href="<c:url value="/home"/>">Back to Home</a></p>
     </body>
 </html>

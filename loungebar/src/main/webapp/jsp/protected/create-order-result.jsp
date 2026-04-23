@@ -35,8 +35,8 @@
     </c:if>
 
     <br>
-    <a href="${pageContext.request.contextPath}/jsp/home.jsp">Return to Home</a>
-    <a href="${pageContext.request.contextPath}/jsp/create-order.jsp">Create Another Order</a>
+    <a href="${pageContext.request.contextPath}/home">Return to Home</a>
+    <a href="${pageContext.request.contextPath}/jsp/protected/create-order.jsp">Create Another Order</a>
 
 </body>
 </html>

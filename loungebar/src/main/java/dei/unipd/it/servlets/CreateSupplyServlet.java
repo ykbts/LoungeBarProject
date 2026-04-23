@@ -79,7 +79,7 @@ public final class CreateSupplyServlet extends AbstractDatabaseServlet {
             req.setAttribute("supply", s);
             req.setAttribute("message", m);
 
-            req.getRequestDispatcher("/jsp/create-supply-result.jsp").forward(req, res);
+            req.getRequestDispatcher("/jsp/protected/create-supply-result.jsp").forward(req, res);
 
         } catch(Exception ex) {
             LOGGER.error(new StringFormattedMessage("Unable to send response for supply %s.", name), ex);

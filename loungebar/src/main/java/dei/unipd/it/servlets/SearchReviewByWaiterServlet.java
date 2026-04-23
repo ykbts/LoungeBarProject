@@ -46,7 +46,7 @@ public final class SearchReviewByWaiterServlet extends AbstractDatabaseServlet {
         try {
             req.setAttribute("reviewList", rl);
             req.setAttribute("message", m);
-            req.getRequestDispatcher("/jsp/search-waiter-review-result.jsp").forward(req, res);
+            req.getRequestDispatcher("/jsp/protected/search-waiter-review-result.jsp").forward(req, res);
         } catch (Exception ex) {
             LOGGER.error("Unable to send response when searching waiter reviews.", ex);
             throw ex;
