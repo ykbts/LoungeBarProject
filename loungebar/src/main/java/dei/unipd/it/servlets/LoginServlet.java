@@ -29,8 +29,8 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        String role = req.getParameter("role"); 
-        req.setAttribute("role", role); 
+        String role = req.getParameter("role");
+        req.setAttribute("role", role);
 
         req.setAttribute("message", null);
 
@@ -43,38 +43,38 @@ public class LoginServlet extends AbstractDatabaseServlet {
 
 
         switch (op) {
-        case "login":
-            LogContext.setAction(Actions.SHOW_LOGIN);
-            req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
-            break;
+            case "login":
+                LogContext.setAction(Actions.SHOW_LOGIN);
+                req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
+                break;
 
-        case "signup":
-            LogContext.setAction(Actions.SHOW_SIGNUP);
-            req.getRequestDispatcher("/jsp/signup.jsp").forward(req, res);
-            break;
+            case "signup":
+                LogContext.setAction(Actions.SHOW_SIGNUP);
+                req.getRequestDispatcher("/jsp/signup.jsp").forward(req, res);
+                break;
 
-        default:
-            req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
+            default:
+                req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
+        }
     }
-}
 
 
 
 
 
     @Override
-protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    String op = req.getRequestURI();
-    op = op.substring(op.lastIndexOf("/") + 1);
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String op = req.getRequestURI();
+        op = op.substring(op.lastIndexOf("/") + 1);
 
-    if ("login".equals(op)) {
-        loginOperations(req, res, false);
-    } else if ("signup".equals(op)) {
-        registrationOperations(req, res);
+        if ("login".equals(op)) {
+            loginOperations(req, res, false);
+        } else if ("signup".equals(op)) {
+            registrationOperations(req, res);
+        }
     }
-}
 
-public void loginOperations(HttpServletRequest req, HttpServletResponse res, boolean isValid) throws ServletException, IOException {
+    public void loginOperations(HttpServletRequest req, HttpServletResponse res, boolean isValid) throws ServletException, IOException {
         List<User> userList=null;
         Message m = null;
 
@@ -151,24 +151,24 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
                     // try to find the user in the database
                     password=org.apache.commons.codec.digest.DigestUtils.sha256Hex(password); //hashing the password
                     username=username.toLowerCase();
-                    User user = new SearchUserLogInDAO(getConnection(), username, password, role).access().getOutputParam();
+                    User user = new SearchUserLogInDAO(getConnection(), username, password).access().getOutputParam();
 
 
 
                     //the UserDAO will tell us if the username exists and the password
                     //matches
                     if (user == null) {
-                    m = new Message("Access denied: Invalid credentials or incorrect role for this login link, E200, Authentication failed");
-                    LOGGER.warn("Login failed: Credentials do not match for user {}", username, role);
-                }
+                        m = new Message("Invalid username or password.", "E200", "Authentication failed");
+                        LOGGER.warn("Login failed: Credentials do not match for user {}", username);
+                    }
                     else {
-                
+
                         HttpSession session = req.getSession();
-                
-                
+
+
                         session.setAttribute(ProtectedResourceFilter.USER_ATTRIBUTE, user.getUsername());
                         session.setAttribute("role", user.getRole().toString());
-                
+
                         m = new Message("Login successful!");
                         LOGGER.info("User {} logged in successfully as {}", username, user.getRole());
 
@@ -185,16 +185,16 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
             LOGGER.error("stacktrace:", e);
         }
         finally{
-           if(m.isError()){
-               // in case of error we go back to the login page
-               req.setAttribute("role", role); 
-            req.setAttribute("message", m);
+            if(m.isError()){
+                // in case of error we go back to the login page
+                req.setAttribute("role", role);
+                req.setAttribute("message", m);
 
-            req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
+                req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
             }else{
                 // we move to home page
-               res.sendRedirect(req.getContextPath() + "/jsp/home.jsp"); 
-        }   
+                res.sendRedirect(req.getContextPath() + "/jsp/home.jsp");
+            }
 
 
             LogContext.removeIPAddress();
@@ -206,106 +206,102 @@ public void loginOperations(HttpServletRequest req, HttpServletResponse res, boo
 
 
 
-public void registrationOperations(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    public void registrationOperations(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-    User u = null;
-    Message m = null;
-    
-    
-    
-     
+        User u = null;
+        Message m = null;
 
-    try {
-        
-        //get the registration parameters
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        String password_check = req.getParameter("password_check");
-        String name = req.getParameter("firstname"); 
-        String surname = req.getParameter("surname");
-        String phone = req.getParameter("phone");
-        String role = req.getParameter("role");
-        UserRole roleEnum = UserRole.fromString(role);
-        req.setAttribute("role", role);
 
-         
-        LOGGER.info(new StringFormattedMessage("New registration attempt: %s as %s", username, role));
 
-        String regex_psw = "^(?=.*[A-Z])(?=.*[0-9]).{8,}$";
 
-    if (username == null || username.equals("") || 
-        password == null || password.equals("") || 
-        role == null || role.equals("")) {
 
-        m = new Message("Some fields are empty", "E200", "Missing fields");
-        LOGGER.error(new StringFormattedMessage("Problems with fields: %s.", m.getMessage()));
-    }
-    
-    else if (!password.matches(regex_psw)) {
-        m = new Message("This password is not compliant", "E200", "Password not compliant");
-        LOGGER.error("Password validation failed for " + username);
-    }
-    
-    else if (!password.equals(password_check)) {
-        m = new Message("Passwords do not match", "E200", "Password mismatch");
-        LOGGER.error("Password mismatch for " + username);
-    }
-    
-    else if (username.length() < 3) {
-        m = new Message("Username is too short", "E200", "Username not compliant");
-        LOGGER.error("Username too short: " + username);
-    }
-    // ALL CORRECT
-    else {
         try {
-        username = username.toLowerCase();
-        password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password); // Hashing
 
-        // Check if user exists with the same username and role
-        List<User> usersList = new SearchUserDAO(getConnection(), username, null, null, null, null, role)
-                                    .access().getOutputParam();
+            //get the registration parameters
+            String username = req.getParameter("username");
+            String password = req.getParameter("password");
+            String password_check = req.getParameter("password_check");
+            String name = req.getParameter("firstname");
+            String surname = req.getParameter("surname");
+            String phone = req.getParameter("phone");
+            String role = req.getParameter("role");
+            UserRole roleEnum = UserRole.fromString(role);
+            req.setAttribute("role", role);
 
-        if (usersList.size() != 0) {
-            m = new Message("This user already exists as " + role, "E200", "User already existing");
-            LOGGER.error("Registration failed: User already exists.");
-        } 
-        else {
-            // We create it if it doesn't exist
-            User newUser = new User(username, password,name, surname, phone, roleEnum); 
-            LOGGER.info("Attempting to insert user: {} with role: {}", username, roleEnum);
-            
-            new CreateUserDAO(getConnection(), newUser).access();
-            LOGGER.info(new StringFormattedMessage("REGISTERED NEW %s: %s.", role.toUpperCase(), username));
 
-            // Autologin
-            loginOperations(req, res, true);
-            return; 
+            LOGGER.info(new StringFormattedMessage("New registration attempt: %s as %s", username, role));
+
+            String regex_psw = "^(?=.*[A-Z])(?=.*[0-9]).{8,}$";
+
+            if (username == null || username.equals("") ||
+                    password == null || password.equals("") ||
+                    role == null || role.equals("")) {
+
+                m = new Message("Some fields are empty", "E200", "Missing fields");
+                LOGGER.error(new StringFormattedMessage("Problems with fields: %s.", m.getMessage()));
+            }
+
+            else if (!password.matches(regex_psw)) {
+                m = new Message("This password is not compliant", "E200", "Password not compliant");
+                LOGGER.error("Password validation failed for " + username);
+            }
+
+            else if (!password.equals(password_check)) {
+                m = new Message("Passwords do not match", "E200", "Password mismatch");
+                LOGGER.error("Password mismatch for " + username);
+            }
+
+            else if (username.length() < 3) {
+                m = new Message("Username is too short", "E200", "Username not compliant");
+                LOGGER.error("Username too short: " + username);
+            }
+            // ALL CORRECT
+            else {
+                try {
+                    username = username.toLowerCase();
+                    password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password); // Hashing
+
+                    // Check if user exists with the same username and role
+                    List<User> usersList = new SearchUserDAO(getConnection(), username, null, null, null, null, role)
+                            .access().getOutputParam();
+
+                    if (usersList.size() != 0) {
+                        m = new Message("This user already exists as " + role, "E200", "User already existing");
+                        LOGGER.error("Registration failed: User already exists.");
+                    }
+                    else {
+                        // We create it if it doesn't exist
+                        User newUser = new User(username, password,name, surname, phone, roleEnum);
+                        LOGGER.info("Attempting to insert user: {} with role: {}", username, roleEnum);
+
+                        new CreateUserDAO(getConnection(), newUser).access();
+                        LOGGER.info(new StringFormattedMessage("REGISTERED NEW %s: %s.", role.toUpperCase(), username));
+
+                        // Autologin
+                        loginOperations(req, res, true);
+                        return;
+                    }
+
+
+
+                } catch (Exception e) {
+                    m = new Message("Error during registration", "E500", e.getMessage());
+                    LOGGER.error("Registration error", e);
+                }
+            }
+        } catch (Exception e) { // Este catch cierra el TRY principal
+            m = new Message("General error", "E500", e.getMessage());
+            LOGGER.error("Unexpected error", e);
+        } finally {
+
+            if (m != null) {
+                req.setAttribute("message", m);
+                req.setAttribute("role", req.getParameter("role"));
+                req.getRequestDispatcher("/jsp/signup.jsp").forward(req, res);
+            }
+            LogContext.removeIPAddress();
+            LogContext.removeAction();
+            LogContext.removeResource();
         }
-
-    
-        
-   } catch (Exception e) {
-        m = new Message("Error during registration", "E500", e.getMessage());
-        LOGGER.error("Registration error", e);
-    } 
-}
-} catch (Exception e) { // Este catch cierra el TRY principal
-        m = new Message("General error", "E500", e.getMessage());
-        LOGGER.error("Unexpected error", e);
- } finally {
-        
-        if (m != null) {
-            req.setAttribute("message", m);
-            req.setAttribute("role", req.getParameter("role"));
-            req.getRequestDispatcher("/jsp/signup.jsp").forward(req, res);
-        }
-        LogContext.removeIPAddress();
-        LogContext.removeAction();
-        LogContext.removeResource();
     }
 }
-}
-
-
-
-

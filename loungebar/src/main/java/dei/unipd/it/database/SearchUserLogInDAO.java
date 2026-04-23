@@ -11,18 +11,15 @@ import java.sql.SQLException;
 
 public final class SearchUserLogInDAO extends AbstractDAO<User> {
 
-    private static final String QUERY = "SELECT * FROM lounge.User WHERE username = ? AND password = ? AND role = ?::lounge.userrole";
+    private static final String STATEMENT = "SELECT * FROM lounge.User WHERE username = ? AND password = ?;";
 
     private final String username;
     private final String password;
-    private final String role;
 
-    public SearchUserLogInDAO(final Connection con, final String username, final String password, final String role) {
+    public SearchUserLogInDAO(final Connection con, final String username, final String password) {
         super(con);
         this.username = username;
         this.password = password;
-        this.role = role;
-
     }
 
     @Override
@@ -33,10 +30,9 @@ public final class SearchUserLogInDAO extends AbstractDAO<User> {
         User user = null;
 
         try {
-            pstmt = conn.prepareStatement(QUERY);
+            pstmt = conn.prepareStatement(STATEMENT);
             pstmt.setString(1, username);
             pstmt.setString(2, password);
-            pstmt.setString(3, role);
 
             rs = pstmt.executeQuery();
 
@@ -47,12 +43,12 @@ public final class SearchUserLogInDAO extends AbstractDAO<User> {
                         rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("phone"),
-                        UserRole.valueOf(rs.getString("role").toUpperCase())
+                        UserRole.valueOf(rs.getString("role"))
                 );
 
-                LOGGER.info("User {} successfully authenticated", username, role);
+                LOGGER.info("User {} successfully authenticated", username);
             } else {
-                LOGGER.warn("Authentication failed for user {} with role {}", username, role);
+                LOGGER.warn("Authentication failed for user {}", username);
             }
 
         } finally {
