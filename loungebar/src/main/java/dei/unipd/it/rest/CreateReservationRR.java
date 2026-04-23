@@ -23,7 +23,7 @@ public final class CreateReservationRR extends AbstractRR {
     @Override
     protected void doServe() throws IOException {
 
-        Reservation reservation = null;
+        Reservation reservation;
         Message message;
 
         try {
@@ -31,7 +31,7 @@ public final class CreateReservationRR extends AbstractRR {
             Reservation r = Reservation.fromJSON(req.getInputStream());
 
             // set Logger's resource
-            LogContext.setResource(Long.toString(r.getId()));
+            LogContext.setResource(Integer.toString(r.getId()));
 
             /// create a new DAO for accessing the database and store the Reservation
             reservation = new CreateReservationDAO(conn, r).access().getOutputParam();

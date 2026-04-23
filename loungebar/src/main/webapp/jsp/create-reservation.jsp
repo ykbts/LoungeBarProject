@@ -16,11 +16,11 @@
 	<div>
 		<div class="field">
 			<label for="startTime">Start Time</label>
-			<input type="datetime-local" id="startTime" placeholder="YYYY-MM-DDTHH:MM">
+			<input type="datetime-local" id="startTime">
 		</div>
 		<div class="field">
 			<label for="endTime">End Time</label>
-			<input type="datetime-local" id="endTime" placeholder="YYYY-MM-DDTHH:MM">
+			<input type="datetime-local" id="endTime">
 		</div>
 		 <div class="field">
             <label for="customerID">Client Username</label>

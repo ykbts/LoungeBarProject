@@ -89,6 +89,7 @@ async function createReservation() {
  * @param {Object} reservation - the Reservation JSON from the response body
  */
 function showSuccess(reservation) {
+
     const panel  = document.getElementById("result");
     const header = document.getElementById("resultHeader");
     const body   = document.getElementById("resultBody");

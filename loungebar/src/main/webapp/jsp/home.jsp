@@ -7,7 +7,7 @@
         <div class="menu-grid">
             <div class="card">
                 <h3>Reserve a table</h3>
-                <a href="${pageContext.request.contextPath}/jsp/reservation.jsp">
+                <a href="${pageContext.request.contextPath}/jsp/create-reservation.jsp">
                     <button type="button">Go to Reservations</button>
                 </a>
             </div>

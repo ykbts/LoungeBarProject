@@ -57,8 +57,8 @@ public class Review extends AbstractResource {
 
         jg.writeStartObject();
 
-        jg.writeStringField("waiter-id", waiterID);
-        jg.writeStringField("customer-id", customerID);
+        jg.writeStringField("waiter", waiterID);
+        jg.writeStringField("customer", customerID);
         jg.writeNumberField("score", score);
         jg.writeStringField("comment", comment);
 
@@ -92,11 +92,11 @@ public class Review extends AbstractResource {
                 if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
 
                     switch (jp.getCurrentName()) {
-                        case "waiter-id":
+                        case "waiter":
                             jp.nextToken();
                             jWaiter = jp.getText();
                             break;
-                        case "customer-id":
+                        case "customer":
                             jp.nextToken();
                             jCustomer = jp.getText();
                             break;
