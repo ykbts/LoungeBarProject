@@ -5,10 +5,10 @@ async function createReview() {
     const btn = document.getElementById("confirmReview");
 
     // ── collect & validate inputs ──────────────────────────────────────────
-    const waiter = document.getElementById("waiterID");
-    const client = document.getElementById("clientID");
-    const score = document.getElementById("score");
-    const comment = document.getElementById("comment");
+    const waiter = document.getElementById("waiterID").value;
+    const client = document.getElementById("clientID").value;
+    const score = document.getElementById("score").value ;
+    const comment = document.getElementById("comment").value;
 
     if (!waiter || !client || !score)
         showError("Fulfill mandatory fields");
@@ -23,7 +23,7 @@ async function createReview() {
         review: {
             waiter: waiter,
             customer: client,
-            score: score,
+            score: parseInt(score),
             comment: comment
         }
     }
@@ -75,7 +75,7 @@ function showSuccess(review) {
     const header = document.getElementById("resultHeader");
     const body   = document.getElementById("resultBody");
 
-    header.textContent = "Reservation confirmed";
+    header.textContent = "Review stored";
     body.innerHTML = "";
 
     // create the fields containers

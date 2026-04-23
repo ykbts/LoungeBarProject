@@ -112,7 +112,7 @@ public class Review extends AbstractResource {
                 }
             }
         } catch (IOException e) {
-            LOGGER.error("Unable to parse a WORK object from JSON.", e);
+            LOGGER.error("Unable to parse a REVIEW object from JSON.", e);
             throw e;
         }
 
