@@ -10,13 +10,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+/**
+ * DAO class for creating a new order in the database.
+ *
+ * <p>Inserts a new order with basic details:
+ * timestamp, status, payment method, waiter and table.</p>
+ *
+ * <p>Returns the created {@link Orders} object with its generated ID.</p>
+ */
 public class CreateOrderDAO extends AbstractDAO<Orders> {
 
-    /** SQL statement to be executed */
+    /**
+     * SQL statement used to insert a new order and return the created record.
+     */
     private static final String STATEMENT = "INSERT INTO lounge.Orders (date_time, status, pay_method, user_waiterID, tableID) " +
-    "VALUES (?, ?::lounge.ordersstate, ?::lounge.payment, ?, ?) RETURNING *";
+            "VALUES (?, ?::lounge.ordersstate, ?::lounge.payment, ?, ?) RETURNING *";
+
+    /**
+     * The order data to be persisted.
+     */
     private final Orders orders;
 
+    /**
+     * Creates a new DAO for inserting a specific order.
+     *
+     * @param connection the database connection
+     * @param orders the order object containing the data to be stored
+     * @throws NullPointerException if {@code orders} is null
+     */
     public CreateOrderDAO (final Connection connection, final Orders orders) {
         super(connection);
 
@@ -27,7 +48,14 @@ public class CreateOrderDAO extends AbstractDAO<Orders> {
         this.orders = orders;
     }
 
-    /** prepare and execute the query */
+    /**
+     * Creates a new order in the database.
+     *
+     * <p>Sets order data, executes the insert, and returns the saved {@link Orders}.</p>
+     *
+     * @throws SQLException if a database error occurs
+     */
+    @Override
     protected final void doAccess() throws SQLException {
 
         ResultSet rs;

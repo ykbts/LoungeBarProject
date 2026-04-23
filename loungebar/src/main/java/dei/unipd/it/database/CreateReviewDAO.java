@@ -7,11 +7,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * DAO class for creating a review.
+ *
+ * <p>Saves waiter ID, customer ID, score and comment.</p>
+ *
+ * <p>Returns the created {@link Review}.</p>
+ */
 public class CreateReviewDAO extends AbstractDAO<Review> {
 
+    /**
+     * SQL statement used to insert a new review and return the created record.
+     */
     private static final String STATEMENT = "INSERT INTO lounge.Review (user_waiterID, user_customerID, score, comment) VALUES (?, ?, ?, ?) RETURNING *";
+
+    /**
+     * The review data to be persisted.
+     */
     private final Review review;
 
+    /**
+     * Creates a new DAO for inserting a specific review.
+     *
+     * @param connection the database connection
+     * @param review the review object containing the data to be stored
+     * @throws NullPointerException if {@code review} is null
+     */
     public CreateReviewDAO (final Connection connection, final Review review) {
         super(connection);
 
@@ -22,7 +43,14 @@ public class CreateReviewDAO extends AbstractDAO<Review> {
         this.review = review;
     }
 
-    /** prepare and execute the query */
+    /**
+     * Creates a review in the database.
+     *
+     * <p>Sets review data, executes the insert, and returns the saved {@link Review}.</p>
+     *
+     * @throws SQLException if a database error occurs
+     */
+    @Override
     protected final void doAccess() throws SQLException {
 
         ResultSet rs;

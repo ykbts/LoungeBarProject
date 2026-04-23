@@ -8,20 +8,52 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
+/**
+ * DAO class for user authentication.
+ *
+ * <p>Checks username and password.</p>
+ *
+ * <p>Returns {@link User} if valid, otherwise null.</p>
+ */
 public final class SearchUserLogInDAO extends AbstractDAO<User> {
 
+    /**
+     * SQL statement used to find a user with matching username and password.
+     */
     private static final String STATEMENT = "SELECT * FROM lounge.User WHERE username = ? AND password = ?;";
 
+    /**
+     * The username provided for authentication.
+     */
     private final String username;
+
+    /**
+     * The password provided for authentication.
+     */
     private final String password;
 
+    /**
+     * Creates a new DAO for user authentication.
+     *
+     * @param con the database connection
+     * @param username the username to verify
+     * @param password the password to verify
+     */
     public SearchUserLogInDAO(final Connection con, final String username, final String password) {
         super(con);
         this.username = username;
         this.password = password;
     }
 
+    /**
+     * Authenticates a user in the database.
+     *
+     * <p>Checks if username and password match an existing record.</p>
+     *
+     * <p>Returns a {@link User} if authentication is successful, otherwise null.</p>
+     *
+     * @throws SQLException if a database error occurs
+     */
     @Override
     public final void doAccess() throws SQLException {
 

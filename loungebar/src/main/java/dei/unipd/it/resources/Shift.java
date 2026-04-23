@@ -11,12 +11,20 @@ import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Shift extends AbstractResource{
+/**
+ * Represents a work shift for the lounge bar staff.
+ */
+public class Shift extends AbstractResource {
 
     private final int id;
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
 
+    /**
+     * @param id unique shift identifier
+     * @param startTime start of the work period
+     * @param endTime end of the work period
+     */
     public Shift(int id, LocalDateTime startTime, LocalDateTime endTime) {
         this.id = id;
         this.startTime = startTime;
@@ -47,28 +55,28 @@ public class Shift extends AbstractResource{
 
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
-
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
         jg.writeStartObject();
-
         jg.writeFieldName("shift");
-
         jg.writeStartObject();
-
         jg.writeNumberField("id", id);
         jg.writeStringField("start-time", MAPPER.writeValueAsString(startTime));
         jg.writeStringField("end-time", MAPPER.writeValueAsString(endTime));
-
         jg.writeEndObject();
-
         jg.writeEndObject();
 
         jg.flush();
     }
 
-    public static Shift fromJSON (InputStream in) throws IOException {
-
+    /**
+     * Parses a Shift from a JSON input stream.
+     *
+     * @param in the input stream
+     * @return a new Shift instance
+     * @throws IOException if parsing fails
+     */
+    public static Shift fromJSON(InputStream in) throws IOException {
         int jId = -1;
         LocalDateTime jStartTime = null;
         LocalDateTime jEndTime = null;
@@ -85,9 +93,7 @@ public class Shift extends AbstractResource{
             }
 
             while (jp.nextToken() != JsonToken.END_OBJECT) {
-
                 if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
-
                     switch (jp.getCurrentName()) {
                         case "id":
                             jp.nextToken();

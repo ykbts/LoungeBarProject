@@ -1,5 +1,8 @@
 package dei.unipd.it.resources;
 
+/**
+ * Contains constants for the actions performed by the application.
+ */
 public final class Actions {
 
     public static final String LIST_RESERVATIONS = "LIST_RESERVATIONS";

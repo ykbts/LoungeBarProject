@@ -5,12 +5,6 @@
 
 <form action="${pageContext.request.contextPath}/shift/create" method="POST">
 
-    <div class="form-group">
-        <label>Admin ID:</label>
-        <input type="text" name="adminID"
-               value="${not empty sessionScope.user ? sessionScope.user : 'No active session'}"
-               readonly>
-    </div>
 
     <div class="form-group">
         <label>Start Date and Time:</label>

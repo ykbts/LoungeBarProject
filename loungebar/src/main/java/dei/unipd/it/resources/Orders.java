@@ -10,6 +10,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a customer order in the lounge bar.
+ */
 public class Orders extends AbstractResource {
 
     private final int id;
@@ -19,6 +22,14 @@ public class Orders extends AbstractResource {
     private final String waiterID;
     private final int tableID;
 
+    /**
+     * @param id unique order identifier
+     * @param dateTime timestamp of the order
+     * @param status current {@link OrderState}
+     * @param payMethod chosen {@link PayMethod}
+     * @param waiterID ID of the waiter handling the order
+     * @param tableID ID of the assigned table
+     */
     public Orders(int id, LocalDateTime dateTime, OrderState status, PayMethod payMethod, String waiterID, int tableID) {
         this.id = id;
         this.dateTime = dateTime;
@@ -54,31 +65,31 @@ public class Orders extends AbstractResource {
 
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
-
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
         jg.writeStartObject();
-
         jg.writeFieldName("order");
-
         jg.writeStartObject();
-
         jg.writeNumberField("id", id);
         jg.writeStringField("date_time", dateTime.format(FORMATTER));
         jg.writeStringField("status", status.toString());
         jg.writeStringField("pay-method", payMethod.toString());
         jg.writeStringField("waiter", waiterID);
         jg.writeNumberField("table", tableID);
-
         jg.writeEndObject();
-
         jg.writeEndObject();
 
         jg.flush();
     }
 
+    /**
+     * Creates an Orders object from a JSON input stream.
+     *
+     * @param in the input stream
+     * @return a new Orders instance
+     * @throws IOException if parsing fails
+     */
     public static Orders fromJSON(InputStream in) throws IOException {
-
         int jId = -1;
         LocalDateTime jDateTime = null;
         OrderState jStatus = null;
@@ -87,25 +98,16 @@ public class Orders extends AbstractResource {
         int jTable = -1;
 
         try {
-            // create parser
             final JsonParser jp = JSON_FACTORY.createParser(in);
 
-            // advance to next element until we are to the start of the desired element
-            //  or the current element is not a token element
             while (jp.getCurrentToken() != JsonToken.FIELD_NAME || !"order".equals(jp.getCurrentName())) {
-
-                // no more elements
                 if (jp.nextToken() == null) {
-                    LOGGER.error("No ORDER object found in the stream.");
                     throw new EOFException("Unable to parse JSON: no ORDER object found.");
                 }
             }
 
-            // once found our object
             while (jp.nextToken() != JsonToken.END_OBJECT) {
-
                 if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
-
                     switch (jp.getCurrentName()) {
                         case "id":
                             jp.nextToken();

@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Represents a service review provided by a customer for a specific waiter.
+ */
 public class Review extends AbstractResource {
 
     private final String waiterID;
@@ -16,6 +19,12 @@ public class Review extends AbstractResource {
     private final int score;
     private final String comment;
 
+    /**
+     * @param waiterID ID of the waiter being reviewed
+     * @param customerID ID of the customer providing feedback
+     * @param score numerical rating (typically 1-5)
+     * @param comment optional text feedback
+     */
     public Review(String waiterID, String customerID, int score, String comment) {
         this.waiterID = waiterID;
         this.customerID = customerID;
@@ -23,6 +32,11 @@ public class Review extends AbstractResource {
         this.comment = comment;
     }
 
+    /**
+     * @param waiterID ID of the waiter being reviewed
+     * @param customerID ID of the customer providing feedback
+     * @param score numerical rating
+     */
     public Review(String waiterID, String customerID, int score) {
         this.waiterID = waiterID;
         this.customerID = customerID;
@@ -69,6 +83,13 @@ public class Review extends AbstractResource {
         jg.flush();
     }
 
+    /**
+     * Parses a Review from a JSON input stream.
+     *
+     * @param in the input stream
+     * @return a new Review instance
+     * @throws IOException if parsing fails
+     */
     public static Review fromJSON(InputStream in) throws IOException {
 
         String jWaiter = null;

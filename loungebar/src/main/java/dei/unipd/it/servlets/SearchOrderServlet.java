@@ -17,10 +17,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
-
+/**
+ * Servlet for searching orders.
+ * * <p>It retrieves a list of orders associated with the currently logged in
+ * waiter.</p>
+ */
 @WebServlet(name = "SearchOrderServlet", value = "/order/search")
 public final class SearchOrderServlet extends AbstractDatabaseServlet {
 
+    /**
+     * Handles searching for orders via POST.
+     * * @param req the request from the user.
+     * @param res the response to the user.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {

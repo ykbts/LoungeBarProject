@@ -10,6 +10,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a table reservation in the lounge bar.
+ */
 public class Reservation extends AbstractResource {
 
     private final int id;
@@ -19,7 +22,14 @@ public class Reservation extends AbstractResource {
     private final String customer;
     private final int table;
 
-
+    /**
+     * @param id unique reservation identifier
+     * @param startTime start of the booking
+     * @param endTime end of the booking
+     * @param people number of guests
+     * @param customer customer identifier
+     * @param table assigned table number
+     */
     public Reservation(int id, LocalDateTime startTime, LocalDateTime endTime, int people, String customer, int table) {
         this.id = id;
         this.startTime = startTime;
@@ -49,46 +59,39 @@ public class Reservation extends AbstractResource {
     }
 
     @Override
-    protected void writeJSON (OutputStream out) throws IOException {
-
+    protected void writeJSON(OutputStream out) throws IOException {
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
 
         jg.writeStartObject();
-
         jg.writeFieldName("reservation");
-
         jg.writeStartObject();
-
         jg.writeNumberField("id", id);
         jg.writeStringField("startTime", startTime.format(FORMATTER));
         jg.writeStringField("endTime", endTime.format(FORMATTER));
         jg.writeNumberField("people", people);
         jg.writeStringField("customer", customer);
         jg.writeNumberField("table", table);
-
         jg.writeEndObject();
-
         jg.writeEndObject();
 
         jg.flush();
     }
 
-    public static Reservation fromJSON (InputStream in) throws IOException {
-
-        // fields read from JSON
-        int jId = -1;
-        LocalDateTime jStartTime = null;
-        LocalDateTime jEndTime = null;
-        int jPeople = -1;
+    /**
+     * Parses a Reservation from a JSON input stream.
+     *
+     * @param in the input stream
+     * @return a new Reservation instance
+     * @throws IOException if parsing fails
+     */
+    public static Reservation fromJSON(InputStream in) throws IOException {
+        int jId = -1, jPeople = -1, jTable = -1;
+        LocalDateTime jStartTime = null, jEndTime = null;
         String jCustomer = null;
-        int jTable = -1;
 
         try {
-            // create parser
             final JsonParser jp = JSON_FACTORY.createParser(in);
 
-            // advance to next element until we are to the start of the desired element
-            //  or the current element is not a token element
             while (jp.getCurrentToken() != JsonToken.FIELD_NAME || !"reservation".equals(jp.getCurrentName())) {
 
                 // no more elements
@@ -98,11 +101,8 @@ public class Reservation extends AbstractResource {
                 }
             }
 
-            // once found our object
             while (jp.nextToken() != JsonToken.END_OBJECT) {
-
                 if (jp.getCurrentToken() == JsonToken.FIELD_NAME) {
-
                     switch (jp.getCurrentName()) {
                         case "id":
                             jp.nextToken();

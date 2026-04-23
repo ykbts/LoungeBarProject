@@ -14,7 +14,19 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * A REST resource for updating the status and payment method of an {@link Orders}.
+ *
+ */
 public final class UpdateOrderStatusRR extends AbstractRR {
+
+    /**
+     * Creates a new REST resource for updating order status.
+     *
+     * @param req the HTTP request.
+     * @param resp the HTTP response.
+     * @param conn the connection to the database.
+     */
     public UpdateOrderStatusRR(final HttpServletRequest req, final HttpServletResponse resp, Connection conn) {
         // Use action of update order status
         super(Actions.UPDATE_ORDER_STATUS, req, resp, conn);

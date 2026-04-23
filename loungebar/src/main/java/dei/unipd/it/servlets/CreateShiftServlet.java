@@ -1,6 +1,7 @@
 package dei.unipd.it.servlets;
 
 import dei.unipd.it.database.CreateShiftDAO;
+import dei.unipd.it.resources.Actions;
 import dei.unipd.it.resources.Shift;
 import dei.unipd.it.resources.Message;
 import dei.unipd.it.resources.LogContext;
@@ -15,9 +16,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.message.StringFormattedMessage;
 
+/**
+ * Servlet for creating a new work shift.
+ * * <p>It reads shift times from the request, saves the shift via DAO,
+ * and forwards the result to a JSP page.</p>
+ */
 @WebServlet(name = "CreateShiftServlet", value = "/shift/*")
 public final class CreateShiftServlet extends AbstractDatabaseServlet {
 
+    /**
+     * Handles the creation of a shift via POST.
+     * * @param req the request from the user.
+     * @param res the response to the user.
+     * @throws ServletException if a servlet error occurs.
+     * @throws IOException if an input or output error occurs.
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
@@ -27,7 +40,7 @@ public final class CreateShiftServlet extends AbstractDatabaseServlet {
         String pathInfo = req.getPathInfo();
         String op = (pathInfo != null) ? pathInfo.replace("/", "") : "";
 
-        LogContext.setAction("SHIFT_" + op.toUpperCase());
+        LogContext.setAction(Actions.CREATE_SHIFT);
 
         Shift s = null;
         Message m = null;
@@ -46,7 +59,6 @@ public final class CreateShiftServlet extends AbstractDatabaseServlet {
 
                 s = new Shift(-1, start, end);
 
-                // Виклик DAO
                 s = new CreateShiftDAO(getConnection(), s).access().getOutputParam();
 
                 m = new Message(String.format("Shift %d successfully created.", s.getId()));
