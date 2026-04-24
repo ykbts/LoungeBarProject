@@ -21,6 +21,7 @@ public final class Actions {
     public static final String LOGOUT = "LOGOUT";
     public static final String UPDATE_ORDER_STATUS = "UPDATE_ORDER_STATUS";
     public static final String SEARCH_MY_ORDER = "SEARCH_MY_ORDER";
+    public static final String LIST_REVIEW = "LIST_REVIEW";
 
 
     private Actions() {

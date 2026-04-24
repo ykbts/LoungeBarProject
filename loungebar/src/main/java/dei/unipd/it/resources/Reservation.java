@@ -19,7 +19,7 @@ public class Reservation extends AbstractResource {
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
     private final int people;
-    private final String customer;
+    private String customer;
     private final int table;
 
     /**
@@ -56,6 +56,9 @@ public class Reservation extends AbstractResource {
     }
     public int getTable() {
         return table;
+    }
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     @Override

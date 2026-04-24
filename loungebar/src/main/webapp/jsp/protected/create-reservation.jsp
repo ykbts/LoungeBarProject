@@ -13,33 +13,34 @@
 	<h1>Reservations</h1>
 	<br>
 
-	<div>
-		<div class="field">
-			<label for="startTime">Start Time</label>
-			<input type="datetime-local" id="startTime">
-		</div>
-		<div class="field">
-			<label for="endTime">End Time</label>
-			<input type="datetime-local" id="endTime">
-		</div>
-		 <div class="field">
-            <label for="customerID">Client Username</label>
-            <input type="text" id="customerID">
-        </div>
-		<div class="field">
-			<label for="tableNumber">Table Number</label>
-			<input type="number" id="tableNumber" min="1">
-		</div>
-		<div class="field">
-			<label for="numberOfPeople">Guests</label>
-			<input type="number" id="numberOfPeople" min="1">
-		</div>
-		
-		<button type="button" id="confirmReservation" onclick="createReservation()">
-    	Confirm Reservation
-		</button>
-		
-	</div>
+    <div>
+       <div class="field">
+          <label for="startTime">Start Time</label>
+          <input type="datetime-local" id="startTime">
+       </div>
+       <div class="field">
+          <label for="endTime">End Time</label>
+          <input type="datetime-local" id="endTime">
+       </div>
+       <div class="field">
+          <label for="clientID">Customer username:</label>
+          <input type="text" id="clientID" name="customerUsername"
+                 value="<%= (session.getAttribute("user") != null) ? session.getAttribute("user") : "ERROR: There is no session" %>"
+                 readonly>
+       </div>
+       <div class="field">
+          <label for="tableNumber">Table Number</label>
+          <input type="number" id="tableNumber" min="1">
+       </div>
+       <div class="field">
+          <label for="numberOfPeople">Guests</label>
+          <input type="number" id="numberOfPeople" min="1">
+       </div>
+
+       <button type="button" id="confirmReservation" onclick="createReservation()">
+           Confirm Reservation
+       </button>
+    </div>
 
 	<div id="result" style="margin: 2em;">
 		<div id="resultHeader"></div>
@@ -47,7 +48,7 @@
 	</div>
 
 	<br/>
-    <p><a href="<c:url value="/jsp/home"/>">Back to Home</a></p>
+    <p><a href="<c:url value="/home"/>">Back to Home</a></p>
 
 	<script type="text/javascript" src="<c:url value="/js/reservation.js"/>"></script>
 

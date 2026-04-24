@@ -15,7 +15,7 @@ import java.io.OutputStream;
 public class Review extends AbstractResource {
 
     private final String waiterID;
-    private final String customerID;
+    private String customerID;
     private final int score;
     private final String comment;
 
@@ -58,6 +58,9 @@ public class Review extends AbstractResource {
 
     public String getComment() {
         return comment;
+    }
+    public void setCustomer(String customerID) {
+        this.customerID = customerID;
     }
 
     @Override

@@ -2,6 +2,7 @@ package dei.unipd.it.servlets.processors;
 
 import dei.unipd.it.rest.CreateReviewRR;
 import dei.unipd.it.rest.ListReviewRR;
+import dei.unipd.it.rest.ListWaitersRR;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -52,6 +53,12 @@ public final class ReviewProcessor extends AbstractProcessor {
                 case "POST" -> new CreateReviewRR(req, resp, conn).serve();
                 default     -> methodNotAllowed(resp, method, "/review");
 
+            }
+        }
+        else if (subPath.equals("/waiters")) {
+            switch (method) {
+                case "GET" -> new ListWaitersRR(req, resp, conn).serve();
+                default    -> methodNotAllowed(resp, method, "/review/waiters");
             }
         }
 

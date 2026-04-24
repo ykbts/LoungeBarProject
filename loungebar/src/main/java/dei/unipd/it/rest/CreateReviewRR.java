@@ -7,6 +7,7 @@ import dei.unipd.it.resources.Message;
 import dei.unipd.it.resources.Review;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -36,9 +37,18 @@ public final class CreateReviewRR extends AbstractRR {
         Message message;
 
         try {
+            HttpSession session = req.getSession(false);
+            String clientId = (session != null) ? (String) session.getAttribute("user") : null;
+
+            if (clientId == null) {
+                message = new Message("Session expired. Please login again.", "E401", "User not found in session.");
+                resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                message.toJSON(resp.getOutputStream());
+                return;
+            }
             // reads the JSON object and create the resource
             Review r = Review.fromJSON(req.getInputStream());
-
+            r.setCustomer(clientId);
             // set Logger's resource
             LogContext.setResource(r.getCustomerID() + ", " + r.getWaiterID());
 
@@ -68,19 +78,42 @@ public final class CreateReviewRR extends AbstractRR {
             message.toJSON(resp.getOutputStream());
         }
         catch (SQLException ex) {
-            if ("23505".equals(ex.getSQLState())) {
-                LOGGER.warn("Cannot create the REVIEW: it already exists.");
+            String sqlState = ex.getSQLState();
+            String msg = ex.getMessage();
 
-                message = new Message("Cannot create the REVIEW: it already exists.", "E5A2", ex.getMessage());
-                resp.setStatus(HttpServletResponse.SC_CONFLICT);
-                message.toJSON(resp.getOutputStream());
+            String friendlyMessage;
+            int statusCode = HttpServletResponse.SC_BAD_REQUEST;
+
+            if ("23505".equals(sqlState)) {
+                friendlyMessage = "You have already submitted a review for this waiter";
+                statusCode = HttpServletResponse.SC_CONFLICT;
+            }
+            else if ("23503".equals(sqlState)) {
+                if (msg.contains("user_waiterID")) {
+                    friendlyMessage = "Selected waiter does not exist";
+                } else if (msg.contains("user_customerID")) {
+                    friendlyMessage = "Customer does not exist";
+                } else {
+                    friendlyMessage = "Referenced user not found";
+                }
+            }
+            else if ("23514".equals(sqlState)) {
+                friendlyMessage = "Score must be between 1 and 5";
             }
             else {
-                LOGGER.error("Cannot create the REVIEW: unexpected database error.", ex);
+                friendlyMessage = "Unexpected database error";
+                statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+            }
 
-                message = new Message("Cannot create the REVIEW: unexpected database error.", "E5A1", ex.getMessage());
-                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            LOGGER.error("SQL Error: %s - %s", sqlState, msg);
+            try {
+                resp.reset();
+                resp.setContentType("application/json; charset=utf-8");
+                resp.setStatus(statusCode);
+                message = new Message(friendlyMessage, "E5A1", msg);
                 message.toJSON(resp.getOutputStream());
+            } catch (Exception ioe) {
+                LOGGER.error("Failed to write error response: %s", ioe.getMessage(), ioe);
             }
         }
     }

@@ -7,7 +7,7 @@ async function createReservation() {
     // ── collect & validate inputs ──────────────────────────────────────────
     const startTime    = document.getElementById("startTime").value;
     const endTime      = document.getElementById("endTime").value;
-    const customerName = document.getElementById("customerID").value.trim();
+    const customerName = document.getElementById("clientID").value.trim();
     const tableNumber  = document.getElementById("tableNumber").value;
     const numberOfPeople = document.getElementById("numberOfPeople").value;
 

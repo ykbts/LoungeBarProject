@@ -11,25 +11,32 @@
 
   <body>
 	<h1>Reviews</h1>
-	<br/>
+	<br>
 
-	<div>
-		<div class="field">
-			<label for="waiterID">Waiter</label>
-			<input type="text" id="waiterID">
-		</div>
-		<div class="field">
-			<label for="clientID">Customer</label>
-			<input type="text" id="clientID">
-		</div>
-		<div class="field">
-			<label for="score">Experience evaluation</label>
-			<input type="number" id="score" min="1" max="5">
-		</div>
-		<div class="field">
-			<label for="comment">Comment</label>
-			<input type="text" id="comment">
-		</div>
+    <div>
+        <div class="field">
+            <label for="waiterID">Waiter</label>
+            <select id="waiterID">
+                <option value="">-- Select a waiter --</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="clientID">Customer username:</label>
+            <input type="text" id="clientID" name="customerUsername"
+                   value="<%= (session.getAttribute("user") != null) ? session.getAttribute("user") : "ERROR: There is no session" %>"
+                   readonly>
+        </div>
+
+        <div class="field">
+            <label for="score">Experience evaluation</label>
+            <input type="number" id="score" min="1" max="5">
+        </div>
+
+        <div class="field">
+            <label for="comment">Comment</label>
+            <input type="text" id="comment">
+        </div>
 
 		<button type="button" id="confirmReview" onclick="createReview()">
     	    Send
@@ -42,10 +49,13 @@
         <div id="resultBody"></div>
 	</div>
 
-	<br/>
-	<p><a href="<c:url value="/home"/>">Back to Home</a></p>
+<br/>
+<p><a href="<c:url value="/home"/>">Back to Home</a></p>
 
-	<script type="text/javascript" src="<c:url value="/js/review.js"/>"></script>
+    <script>
+        const contextPath = "<%= request.getContextPath() %>";
+    </script>
+    <script type="text/javascript" src="<c:url value="/js/review.js"/>"></script>
 
-	</body>
+  </body>
 </html>
