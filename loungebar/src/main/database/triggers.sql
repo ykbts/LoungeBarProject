@@ -109,7 +109,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER trg_check_table_pending
+CREATE OR REPLACE TRIGGER check_table_availability
 BEFORE INSERT ON lounge.Orders
 FOR EACH ROW
-EXECUTE FUNCTION lounge.check_table_pending();
+EXECUTE FUNCTION lounge.check_table_availability();
