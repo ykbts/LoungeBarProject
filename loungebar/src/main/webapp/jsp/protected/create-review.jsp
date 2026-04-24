@@ -11,7 +11,7 @@
 
   <body>
 	<h1>Reviews</h1>
-	<br>
+	<br/>
 
 	<div>
 		<div class="field">
@@ -42,11 +42,10 @@
         <div id="resultBody"></div>
 	</div>
 
-<br/>
-<p><a href="<c:url value="/home"/>">Back to Home</a></p>
+	<br/>
+	<p><a href="<c:url value="/home"/>">Back to Home</a></p>
 
 	<script type="text/javascript" src="<c:url value="/js/review.js"/>"></script>
 
-    <a href="${pageContext.request.contextPath}/home">Back to Home</a>
 	</body>
 </html>
