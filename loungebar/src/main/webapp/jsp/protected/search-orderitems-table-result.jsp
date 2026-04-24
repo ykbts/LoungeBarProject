@@ -29,7 +29,7 @@
             <div class="details">
                 <h3>Order Details:</h3>
                 <ul id="result">
-                    <c:forEach var="order" items="${orderItemList}"></c:forEach>
+                    <c:forEach var="order" items="${orderItemList}">
                         <li>
                             <span>${order.drinkName}</span>
                             <span>${order.quantity}</span>

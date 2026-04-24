@@ -60,7 +60,7 @@ public class SearchOrderItemByTableServlet extends AbstractDatabaseServlet {
             req.getRequestDispatcher("/jsp/protected/search-orderitems-table-result.jsp").forward(req, resp);
         }
         catch (Exception e) {
-            LOGGER.error("Unable to send response when searching ORDER_ITEMS.");
+            LOGGER.error("Unable to send response when searching ORDER_ITEMS.", e);
         }
         finally {
             LogContext.removeIPAddress();

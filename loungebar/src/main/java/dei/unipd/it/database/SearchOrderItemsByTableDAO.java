@@ -13,8 +13,8 @@ public final class SearchOrderItemsByTableDAO extends AbstractDAO<List<OrderItem
 
     private final static String STATEMENT = "SELECT oi.orderID, oi.drink_name, oi.quantity " +
             "FROM lounge.OrderItem oi " +
-            "JOIN lounge.Orders or ON or.id = oi.orderID " +
-            "WHERE or.tableID = ? AND or.status = 'PENDING';";
+            "JOIN lounge.Orders o ON o.id = oi.orderID " +
+            "WHERE o.tableID = ? AND o.status = 'PENDING';";
 
     private final int table;
 

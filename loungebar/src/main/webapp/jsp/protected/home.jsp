@@ -19,7 +19,7 @@
             </div>
             <div class="card">
                 <h3>Check orders</h3>
-                <a href="${pageContext.request.contextPath}/jsp/protected/.jsp">
+                <a href="${pageContext.request.contextPath}/order/myOrder">
                     <button type="button">Click</button>
                 </a>
             </div>
