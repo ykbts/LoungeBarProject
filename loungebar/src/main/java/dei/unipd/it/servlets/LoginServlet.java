@@ -312,7 +312,7 @@ public class LoginServlet extends AbstractDatabaseServlet {
                         LOGGER.info(new StringFormattedMessage("REGISTERED NEW %s: %s.", role.toUpperCase(), username));
 
                         // Autologin
-                        loginOperations(req, res, true);
+                        res.sendRedirect(req.getContextPath() + "/login?role=" + role);
                         return;
                     }
 
