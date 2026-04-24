@@ -77,10 +77,18 @@ public final class CreateSupplyServlet extends AbstractDatabaseServlet {
 
             LOGGER.error("Invalid input parameters for supply creation.", ex);
         } catch (SQLException ex) {
-            if ("23505".equals(ex.getSQLState())) {
+            String sqlState = ex.getSQLState();
+
+            if ("23505".equals(sqlState)) {
                 m = new Message(String.format("Cannot create the supply: supply %s already exists.", name),
                         "E300", ex.getMessage());
                 LOGGER.error(new StringFormattedMessage("Supply %s already exists.", name), ex);
+
+            } else if ("23514".equals(sqlState)) {
+                m = new Message(String.format("Cannot create the supply: invalid value for units. It must be 0 or more."),
+                        "E101", ex.getMessage());
+                LOGGER.error(new StringFormattedMessage("Check constraint violation for supply %s: %s", name, ex.getMessage()));
+
             } else {
                 m = new Message("Unexpected database error while creating the supply.",
                         "E200", ex.getMessage());

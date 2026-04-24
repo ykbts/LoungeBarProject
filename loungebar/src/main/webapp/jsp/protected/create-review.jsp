@@ -47,5 +47,6 @@
 
 	<script type="text/javascript" src="<c:url value="/js/review.js"/>"></script>
 
+    <a href="${pageContext.request.contextPath}/home">Back to Home</a>
 	</body>
 </html>
