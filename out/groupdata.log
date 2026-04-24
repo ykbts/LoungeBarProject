@@ -1,0 +1,153 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.30)  23 APR 2026 13:17
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.te
+x
+
+(C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+2: LaTeX Error: Environment longtable undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 \begin{longtable}
+                     {|p{.3\columnwidth}|p{.3\columnwidth} |p{.3\columnwidth}|}
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+2: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 \begin{longtable}{|
+                       p{.3\columnwidth}|p{.3\columnwidth} |p{.3\columnwidth}|}
+
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no | in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 3 in font nullfont!
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+2: Missing number, treated as zero.
+<to be read again> 
+                   }
+l.2 \begin{longtable}{|p{.3\columnwidth}
+                                        |p{.3\columnwidth} |p{.3\columnwidth}|}
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+2: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   }
+l.2 \begin{longtable}{|p{.3\columnwidth}
+                                        |p{.3\columnwidth} |p{.3\columnwidth}|}
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Missing character: There is no | in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 3 in font nullfont!
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+2: Missing number, treated as zero.
+<to be read again> 
+                   }
+l.2 ...table}{|p{.3\columnwidth}|p{.3\columnwidth}
+                                                   |p{.3\columnwidth}|}
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+2: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   }
+l.2 ...table}{|p{.3\columnwidth}|p{.3\columnwidth}
+                                                   |p{.3\columnwidth}|}
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Missing character: There is no | in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 3 in font nullfont!
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+2: Missing number, treated as zero.
+<to be read again> 
+                   }
+l.2 ...width}|p{.3\columnwidth} |p{.3\columnwidth}
+                                                  |}
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+2: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   }
+l.2 ...width}|p{.3\columnwidth} |p{.3\columnwidth}
+                                                  |}
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+Missing character: There is no | in font nullfont!
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+3: Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.3 \hline
+          
+I expect to see \noalign only after the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+4: Undefined control sequence.
+<recently read> \makecell 
+                          
+l.4  \makecell
+              {\textbf{Group Acronym}} & \multicolumn{2}{c|}{\makecell{BAR}}...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+C:/Users/Katya/IdeaProjects/LoungeBarWebApp/wa2526-bar/homework1/groupdata.tex:
+4: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.4  \makecell{\textbf{Group Acronym}
+                   
