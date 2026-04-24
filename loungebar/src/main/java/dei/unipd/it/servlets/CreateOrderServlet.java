@@ -66,12 +66,15 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
 
             // Create order
             o = new Orders(-1, dateTime, status, payMethod, waiterID, tableID);
-            
-            
+
+
             o = new CreateOrderDAO(getConnection(), o).access().getOutputParam();
 
             m = new Message(String.format("Order #%d created for table %d.", o.getId(), tableID));
             LOGGER.info("Order successfully created for user {}", waiterID);
+
+            List<Drink> menu = new SearchDrinkDAO(getConnection(), null, 0, null).access().getOutputParam();
+            req.setAttribute("menu", menu);
 
 
         } else {

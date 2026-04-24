@@ -40,7 +40,7 @@ public final class SearchDrinkDAO extends AbstractDAO<List<Drink>> {
 
 
         if(name != null){ clauses.add(" lounge.Drink.name = ? "); }
-        if(price >=0){ clauses.add(" lounge.Drink.price = ? "); }
+        if(price > 0){ clauses.add(" lounge.Drink.price = ? "); }
         if(is_Alcoholic != null ){ clauses.add(" lounge.Drink.is_alcoholic = ? "); }
 
         StringBuilder sb = new StringBuilder();
@@ -74,9 +74,10 @@ public final class SearchDrinkDAO extends AbstractDAO<List<Drink>> {
                 pstmt.setString(clauseCount, name);
                 clauseCount += 1;
             }
-            if(price >=0) {
+            if(price > 0) {
                 pstmt.setObject(clauseCount, price);
                 clauseCount+=1;
+
             }
             if(is_Alcoholic != null){
                 pstmt.setBoolean(clauseCount, is_Alcoholic);

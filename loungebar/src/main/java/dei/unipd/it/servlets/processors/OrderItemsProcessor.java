@@ -1,5 +1,6 @@
 package dei.unipd.it.servlets.processors;
 
+import dei.unipd.it.rest.AddItemsRR;
 import dei.unipd.it.rest.CreateReservationRR;
 import dei.unipd.it.rest.ListReservationRR;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ public final class OrderItemsProcessor extends AbstractProcessor{
             ///     /orderItems
 
             switch (method) {
-                case "POST" -> new CreateReservationRR(req, resp, conn).serve();
+                case "POST" -> new AddItemsRR(req, resp, conn).serve();
                 default     -> methodNotAllowed(resp, method, "/orderItems");
 
             }
