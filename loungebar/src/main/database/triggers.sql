@@ -23,6 +23,8 @@ CREATE TRIGGER trg_check_reservation_overlap
     FOR EACH ROW
 EXECUTE FUNCTION lounge.check_reservation_overlap();
 
+
+
 --Checking of the table's capacity
 CREATE OR REPLACE FUNCTION lounge.check_table_capacity()
     RETURNS TRIGGER AS $$
@@ -46,6 +48,8 @@ CREATE TRIGGER trg_check_table_capacity
     BEFORE INSERT OR UPDATE ON lounge.Reservation
     FOR EACH ROW
 EXECUTE FUNCTION lounge.check_table_capacity();
+
+
 
 --Supply management
 CREATE OR REPLACE FUNCTION lounge.check_and_update_supply()
@@ -73,6 +77,8 @@ CREATE TRIGGER trg_check_and_update_supply
     BEFORE INSERT ON lounge.OrderItem
     FOR EACH ROW EXECUTE FUNCTION lounge.check_and_update_supply();
 
+
+
 --Automatic table availability check
 CREATE OR REPLACE FUNCTION lounge.sync_table_status()
     RETURNS TRIGGER AS $$
@@ -89,3 +95,21 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trg_sync_table_status
     AFTER INSERT OR UPDATE OF status ON lounge.Orders
     FOR EACH ROW EXECUTE FUNCTION lounge.sync_table_status();
+
+
+
+-- Check table availability before storing an order
+CREATE OR REPLACE FUNCTION lounge.check_table_availability()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT (SELECT is_available FROM lounge.Tables WHERE number = NEW.tableID) THEN
+        RAISE EXCEPTION 'Table % is not available.', NEW.tableID;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE TRIGGER trg_check_table_pending
+BEFORE INSERT ON lounge.Orders
+FOR EACH ROW
+EXECUTE FUNCTION lounge.check_table_pending();

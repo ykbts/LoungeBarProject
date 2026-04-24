@@ -12,19 +12,19 @@ public final class SearchTableDAO extends AbstractDAO<List<Tables>> {
 	
 	private static final String STATEMENT = "SELECT * FROM lounge.Tables";
 	private final int number;
-    private final int capacity;
-    private final boolean isAvaliable;
+    private final Integer capacity;
+    private final Boolean isAvailable;
 
 
-	public SearchTableDAO(final Connection con, int number, int capacity, boolean isAvaliable) {
+	public SearchTableDAO(final Connection con, int number, Integer capacity, Boolean isAvailable) {
 		super(con);
 		this.number = number;
         this.capacity = capacity;
-        this.isAvaliable = isAvaliable;
+        this.isAvailable = isAvailable;
 	}
 
 	@Override
-	public final void doAccess() throws SQLException {
+	public void doAccess() throws SQLException {
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -35,7 +35,7 @@ public final class SearchTableDAO extends AbstractDAO<List<Tables>> {
 
 		if(number>=0){ clauses.add(" lounge.Tables.number = ? "); }
 		if(capacity>=0){ clauses.add(" lounge.Tables.capacity = ? "); }
-		if(isAvaliable){ clauses.add(" lounge.Tables.is_available = ? "); }
+		if(isAvailable){ clauses.add(" lounge.Tables.is_available = ? "); }
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(STATEMENT);
@@ -76,8 +76,8 @@ public final class SearchTableDAO extends AbstractDAO<List<Tables>> {
 				pstmt.setInt(clauseCount, capacity);
 				clauseCount += 1;
 			}
-			if(isAvaliable){
-				pstmt.setBoolean(clauseCount, isAvaliable);
+			if(isAvailable){
+				pstmt.setBoolean(clauseCount, isAvailable);
 				clauseCount += 1;
 			}
 			

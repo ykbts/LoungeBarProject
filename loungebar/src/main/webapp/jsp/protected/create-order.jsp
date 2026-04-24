@@ -22,16 +22,12 @@
 
             <div class="form-group">
                 <label>Table Number:</label>
-                <input type="number" name="tableID" placeholder="Ej: 5" required>
+                <input type="number" name="tableID" id="tableInput" placeholder="Ej: 5">
             </div>
 
-            <div class="form-group">
-                <label>Status:</label>
-                <select name="status">
-                    <option value="PENDING">PENDING</option>
-                    <option value="PREPARING">PREPARING</option>
-                </select>
-            </div>
+            <input type="hidden" name="dateTime" id="dateTimeInput">
+
+            <input type="hidden" name="status" id="statusInput" value="PAID">
 
             <input type="hidden" name="payMethod" value="NONE">
 
@@ -40,7 +36,22 @@
 
         <br/>
 
-        <p><a href="<c:url value="/home"/>">Back to Home</a></p>
+        <p>
+            <a href="<c:url value="/home"/>">Back to Home</a>
+        </p>
+
+        <script>
+            const tableIDInput = document.getElementById('tableInput');
+            const statusInput = document.getElementById('statusInput');
+
+            tableIDInput.addEventListener('input', function() {
+                statusInput.value = this.value.trim() !== '' ? 'PENDING' : 'PAID';
+            });    
+            
+            document.getElementById('dateTimeInput').value = new Date().toISOString().slice(0, 16);
+
+        </script>
+
     </body>
 </html>
 
