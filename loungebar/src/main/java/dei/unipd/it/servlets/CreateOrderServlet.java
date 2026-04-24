@@ -28,7 +28,7 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
 
     /**
      * Handles the creation of a new order via POST.
-     * * @param req the request from the user.
+     * @param req the request from the user.
      * @param res the response to the user.
      * @throws ServletException if a servlet error occurs.
      * @throws IOException if an input or output error occurs.
@@ -55,7 +55,7 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
             
             if (waiterID == null) {
                 m = new Message("Session expired. Please login again.", "E401", "User not found in session.");
-        }
+            }
             // Get data
             int tableID = Integer.parseInt(req.getParameter("tableID"));
             String dateParam = req.getParameter("dateTime");

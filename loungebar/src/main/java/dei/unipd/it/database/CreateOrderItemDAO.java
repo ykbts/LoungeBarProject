@@ -65,7 +65,7 @@ public class CreateOrderItemDAO extends AbstractDAO<OrderItem> {
 
             if (rs.next()) {
                 oi = new OrderItem(rs.getString("drink_name"),
-                        rs.getLong("orderID"),
+                        rs.getInt("orderID"),
                         rs.getInt("quantity"));
 
                 LOGGER.info("Order item {} successfully stored for order {}.", oi.getDrinkName(), oi.getOrderID());

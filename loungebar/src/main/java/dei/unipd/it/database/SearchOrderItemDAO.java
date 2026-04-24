@@ -16,11 +16,11 @@ public final class SearchOrderItemDAO extends AbstractDAO<List<OrderItem>> {
     private static final String STATEMENT = "SELECT * FROM lounge.OrderItem";
 
     private final String drinkName;
-    private final long orderID;
+    private final int orderID;
     private final int quantity;
 
 
-    public SearchOrderItemDAO(final Connection con, String drinkName, long orderID, int quantity) {
+    public SearchOrderItemDAO(final Connection con, String drinkName, int orderID, int quantity) {
         super(con);
         this.drinkName = drinkName;
         this.orderID = orderID;
@@ -28,7 +28,7 @@ public final class SearchOrderItemDAO extends AbstractDAO<List<OrderItem>> {
     }
 
     @Override
-    public final void doAccess() throws SQLException {
+    public void doAccess() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -86,7 +86,7 @@ public final class SearchOrderItemDAO extends AbstractDAO<List<OrderItem>> {
             while (rs.next()) {
                 orderItems.add(new OrderItem(
                         rs.getString("drink_name"),
-                        rs.getLong("orderID"),
+                        rs.getInt("orderID"),
                         rs.getInt("quantity")
                 ));
             }

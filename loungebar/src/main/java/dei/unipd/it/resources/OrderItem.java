@@ -11,7 +11,7 @@ public class OrderItem {
     private final String drinkName;
 
     /** The unique identifier of the parent order. */
-    private final long orderID;
+    private final int orderID;
 
     /** The number of units ordered. */
     private final int quantity;
@@ -21,7 +21,7 @@ public class OrderItem {
      * @param orderID  the ID of the associated order
      * @param quantity the quantity of the drink
      */
-    public OrderItem(String drinkName, long orderID, int quantity) {
+    public OrderItem(String drinkName, int orderID, int quantity) {
         this.drinkName = drinkName;
         this.orderID = orderID;
         this.quantity = quantity;
@@ -31,7 +31,7 @@ public class OrderItem {
         return drinkName;
     }
 
-    public long getOrderID() {
+    public int getOrderID() {
         return orderID;
     }
 

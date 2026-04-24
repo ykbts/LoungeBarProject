@@ -7,17 +7,22 @@
         <div class="menu-grid">
             <div class="card">
                 <h3>Reserve a table</h3>
-                <a href="${pageContext.request.contextPath}/jsp/create-reservation.jsp">
+                <a href="${pageContext.request.contextPath}/jsp/protected/create-reservation.jsp">
                     <button type="button">Go to Reservations</button>
                 </a>
             </div>
             <div class="card">
                 <h3>Leave a review</h3>
-                <a href="${pageContext.request.contextPath}/jsp/create-review.jsp">
+                <a href="${pageContext.request.contextPath}/jsp/protected/create-review.jsp">
                     <button type="button">Go to Reviews</button>
                 </a>
             </div>
-            <div class="card"><h3>Check orders</h3><button>Click</button></div>
+            <div class="card">
+                <h3>Check orders</h3>
+                <a href="${pageContext.request.contextPath}/jsp/protected/.jsp">
+                    <button type="button">Click</button>
+                </a>
+            </div>
         </div>
     </c:when>
 

@@ -33,7 +33,7 @@
 
         <hr/>
 
-            <a href="${pageContext.request.contextPath}/jsp/create-shift-form.jsp">Create Another Shift</a>
+            <a href="${pageContext.request.contextPath}/jsp/protected/create-shift-form.jsp">Create Another Shift</a>
             <p><a href="<c:url value="/home"/>">Back to Home</a></p>
     </body>
 </html>
