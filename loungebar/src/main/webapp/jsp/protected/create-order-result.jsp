@@ -32,11 +32,18 @@
                 <li><strong>Date:</strong> ${order.dateTime}</li>
             </ul>
         </div>
+
+        <br>
+        
+        <form action="<c:url value='/order/add-items'/>" method="GET">
+            <input type="hidden" name="orderID" value="${order.id}">
+            <button type="submit">Add some items </button>
+        </form>
     </c:if>
 
     <br>
     <a href="${pageContext.request.contextPath}/home">Back to Home</a>
     <a href="${pageContext.request.contextPath}/jsp/protected/create-order.jsp">Create Another Order</a>
 
-</body>
+    </body>
 </html>

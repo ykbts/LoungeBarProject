@@ -1,16 +1,14 @@
 package dei.unipd.it.servlets;
 
 import dei.unipd.it.database.CreateOrderDAO;
-import dei.unipd.it.resources.Orders;
-import dei.unipd.it.resources.PayMethod;
-import dei.unipd.it.resources.Message;
-import dei.unipd.it.resources.OrderState;
-import dei.unipd.it.resources.Actions;
-import dei.unipd.it.resources.LogContext;
+import dei.unipd.it.database.SearchDrinkDAO;
+import dei.unipd.it.resources.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -66,7 +64,7 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
 
             LogContext.setResource("Table_" + tableID);
 
-            // Create object
+            // Create order
             o = new Orders(-1, dateTime, status, payMethod, waiterID, tableID);
             
             
@@ -74,6 +72,7 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
 
             m = new Message(String.format("Order #%d created for table %d.", o.getId(), tableID));
             LOGGER.info("Order successfully created for user {}", waiterID);
+
 
         } else {
             res.setStatus(HttpServletResponse.SC_NOT_FOUND);
