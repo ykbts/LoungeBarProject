@@ -1,5 +1,5 @@
 
-const ENDPOINT = "/loungebar/rest/reservation"; // adjust to your servlet mapping
+const ENDPOINT = "/loungebar/rest/reservation";
 
 async function createReservation() {
     const btn = document.getElementById("confirmReservation");
