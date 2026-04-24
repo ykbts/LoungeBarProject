@@ -70,21 +70,55 @@ public final class CreateReservationRR extends AbstractRR {
             message.toJSON(resp.getOutputStream());
         }
         catch (SQLException ex) {
+        String sqlState = ex.getSQLState();
+        String msg = ex.getMessage();
 
-            if ("23505".equals(ex.getSQLState())) {
-                LOGGER.warn("Cannot create the RESERVATION: it already exists.");
+        String friendlyMessage;
+        int statusCode = HttpServletResponse.SC_BAD_REQUEST;
 
-                message = new Message("Cannot create the reservation: it already exists.", "E5A2", ex.getMessage());
-                resp.setStatus(HttpServletResponse.SC_CONFLICT);
-                message.toJSON(resp.getOutputStream());
-            }
-            else {
-                LOGGER.error("Cannot create the RESERVATION: unexpected database error.", ex);
-
-                message = new Message("Cannot create the reservation: unexpected database error.", "E5A1", ex.getMessage());
-                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                message.toJSON(resp.getOutputStream());
+        if ("23514".equals(sqlState)) {
+            if (msg.contains("reservation_duration_check")) {
+                friendlyMessage = "Reservation must be between 1 and 4 hours";
+            } else if (msg.contains("n_people")) {
+                friendlyMessage = "Number of people must be greater than 0";
+            } else {
+                friendlyMessage = "Invalid reservation data (constraint violation)";
             }
         }
+        else if ("23503".equals(sqlState)) {
+            if (msg.contains("user_customerID")) {
+                friendlyMessage = "Customer does not exist";
+            } else if (msg.contains("tableNumber")) {
+                friendlyMessage = "Selected table does not exist";
+            } else {
+                friendlyMessage = "Referenced data not found";
+            }
+        }
+        else if ("23505".equals(sqlState)) {
+            friendlyMessage = "This reservation already exists";
+            statusCode = HttpServletResponse.SC_CONFLICT;
+        }
+        else if (msg.contains("already reserved")) {
+            friendlyMessage = "This table is already reserved for the selected time";
+        }
+        else if (msg.contains("capacity exceeded")) {
+            friendlyMessage = "Too many people for this table";
+        }
+        else {
+            friendlyMessage = "Unexpected database error";
+            statusCode = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+        }
+
+            LOGGER.error("SQL Error: %s - %s", sqlState, msg);
+            try {
+                resp.reset();
+                resp.setContentType("application/json; charset=utf-8");
+                resp.setStatus(statusCode);
+                message = new Message(friendlyMessage, "E5A1", msg);
+                message.toJSON(resp.getOutputStream());
+            } catch (Exception ioe) {
+                LOGGER.error("Failed to write error response: %s", ioe.getMessage(), ioe);
+            }
     }
+}
 }

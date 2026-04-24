@@ -59,18 +59,25 @@ async function createReservation() {
 
         console.log("Performing the HTTP GET request.");
 
-        const data = await response.json();
+        const text = await response.text();
+        console.log("STATUS:", response.status);
+        console.log("RAW RESPONSE:", text);
 
-        if (response.ok) {
-            // HTTP 201 Created — render reservation details
-            showSuccess(data.reservation);
-        } else {
-            // server returned an error Message object
-            const detail = data["error-details"]
-                ? `${data.message} (${data["error-details"]})`
-                : data.message;
-            showError(detail || "Unexpected error from server.");
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            console.error("JSON parse failed:", e);
+            showError(`Server error (${response.status})`);
+            return;
         }
+
+    if (response.ok) {
+        showSuccess(data.reservation);
+    }  else {
+          const msg = data.message;
+          showError(msg.message || "Unexpected error from server.");
+      }
 
     } catch (err) {
         console.error("Fetch error: ", err);
@@ -189,6 +196,8 @@ function showError(message) {
  * Escapes HTML special characters to prevent XSS.
  */
 function escapeHtml(str) {
+    if (str == null) return "";
+    str = String(str);
     return str
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")

@@ -106,7 +106,7 @@ public abstract class AbstractRR implements RestResource {
             doServe();
         }
         catch (Throwable t) {
-            LOGGER.error("Unable to serve the REST request.", t);
+            LOGGER.error("Unable to serve the REST request: %s", t.getMessage(), t);
 
             final Message m = new Message(String.format("Unable to serve the REST request: %s.", action), "E5A1", t.getMessage());
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

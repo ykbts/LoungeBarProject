@@ -18,6 +18,10 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE TRIGGER trg_check_reservation_overlap
+    BEFORE INSERT OR UPDATE ON lounge.Reservation
+    FOR EACH ROW
+EXECUTE FUNCTION lounge.check_reservation_overlap();
 
 --Checking of the table's capacity
 CREATE OR REPLACE FUNCTION lounge.check_table_capacity()
