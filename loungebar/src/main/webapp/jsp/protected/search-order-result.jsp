@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>My Orders</title>
+    <title>Orders of the Bar</title>
 </head>
 <body style="padding: 30px;"> 
-    <h2 style="margin-bottom: 25px;">Orders assigned to you:</h2>
+    <h2 style="margin-bottom: 25px;">List of Orders</h2>
 
     <c:if test="${not empty orderList}">
         <table border="1" cellpadding="12" cellspacing="0" style="width: 100%; max-width: 800px;">

@@ -36,7 +36,7 @@
                 </form>
             </div>
             
-            <div class="card"><h3>List my orders</h3>
+            <div class="card"><h3>List orders</h3>
                 <form action="${pageContext.request.contextPath}/order/search" method="post">
                     <button type="submit">Click</button>
                 </form>
