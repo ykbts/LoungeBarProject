@@ -6,7 +6,7 @@
 CREATE SCHEMA lounge;
 
 -- Enumeration for PAYMENT METHOD
-CREATE TYPE lounge.Payment AS ENUM ('CASH', 'BANCOMAT', 'DEBIT CARD');
+CREATE TYPE lounge.Payment AS ENUM ('CASH', 'BANCOMAT', 'DEBIT_CARD');
 
 -- Enumeration for STATE of the Order
 CREATE TYPE lounge.OrdersState AS ENUM ('PENDING', 'PAID', 'CANCELED');

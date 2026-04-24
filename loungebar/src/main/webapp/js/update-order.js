@@ -1,5 +1,3 @@
-
-
 async function changeStatus(orderId) {
 
     const methodSelect = document.getElementById('pay-method-' + orderId);
@@ -29,6 +27,7 @@ async function changeStatus(orderId) {
         if (response.ok) {
             document.getElementById('status-cell-' + orderId).textContent = 'PAID';
             document.getElementById('action-cell-' + orderId).innerHTML = ' Paid with ' + selectedMethod;
+            document.getElementById('pay-method-cell-' + orderId).innerHTML = selectedMethod;
         } else {
             const data = await response.json();
             alert("Error: " + data.message);

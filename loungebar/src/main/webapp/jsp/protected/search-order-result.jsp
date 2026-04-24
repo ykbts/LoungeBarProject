@@ -12,8 +12,10 @@
                 <tr style="background-color: #eeeeee;">
                     <th>ID</th>
                     <th>Date</th>
+                    <th>Waiter Name</th>
                     <th>Status</th>
                     <th>Table</th>
+                    <th>Pay Method</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -22,14 +24,16 @@
                     <tr>
                         <td>${order.id}</td>
                         <td>${order.dateTime}</td>
+                        <td>${order.waiterID}</td>
                         <td id="status-cell-${order.id}">${order.status}</td>
                         <td>${order.tableID}</td>
+                        <td id="pay-method-cell-${order.id}">${order.payMethod}</td>
                         <td id="action-cell-${order.id}">
                         <c:if test="${order.status == 'PENDING'}">
                             <select id="pay-method-${order.id}" style="margin-bottom: 5px;">
                                 <option value="CASH">Cash</option>
                                 <option value="BANCOMAT">Bancomat</option>
-                                <option value="DEBIT CARD">Debit Card</option>
+                                <option value="DEBIT_CARD">Debit Card</option>
                             </select>
                             <br/>
                             <button type="button" 

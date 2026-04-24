@@ -49,7 +49,7 @@ public final class SearchOrderServlet extends AbstractDatabaseServlet {
             m = new Message("You must be logged in to see your orders.", "E401", "");
         } else {
             // Call DAO with the waiter ID to get the orders of that waiter
-            ol = new SearchOrderDAO(getConnection(), -1, null, null, null, waiterID, -1)
+            ol = new SearchOrderDAO(getConnection(), -1, null, null, null, null, -1)
                     .access().getOutputParam();
 
             m = new Message("Orders successfully retrieved.");

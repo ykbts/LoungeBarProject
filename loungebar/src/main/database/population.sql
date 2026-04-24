@@ -86,7 +86,7 @@ INSERT INTO lounge."user" (username, password, name, surname, phone, role) VALUE
 -- ##########################################################
 INSERT INTO lounge.Orders (date_time, status, pay_method, user_waiterID, tableID) VALUES
 ('2026-04-12 12:00:00', 'PAID', 'CASH', 'ecaterina_i', 1),
-('2026-04-12 12:15:00', 'PAID', 'DEBIT CARD', 'claudia_f', 2),
+('2026-04-12 12:15:00', 'PAID', 'DEBIT_CARD', 'claudia_f', 2),
 ('2026-04-12 12:30:00', 'PENDING', NULL, 'fulvio_b', 3),
 ('2026-04-12 13:00:00', 'PAID', 'BANCOMAT', 'ecaterina_i', 5);
 
