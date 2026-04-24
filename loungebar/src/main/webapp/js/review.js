@@ -11,7 +11,10 @@ async function createReview() {
     const comment = document.getElementById("comment").value;
 
     if (!waiter || !client || !score)
+    {
         showError("Fulfill mandatory fields");
+        return;
+        }
 
     console.log(waiter);
     console.log(client);
@@ -59,7 +62,7 @@ async function createReview() {
             return;
         }
             if (response.ok) {
-                showSuccess(data.reservation);
+                showSuccess(data.review);
             }  else {
                   const msg = data.message;
                   showError(msg.message || "Unexpected error from server.");
