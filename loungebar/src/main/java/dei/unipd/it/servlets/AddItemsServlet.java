@@ -34,6 +34,7 @@ public final class AddItemsServlet extends AbstractDatabaseServlet {
             menu = new SearchDrinkDAO(getConnection(), null, 0, null).access().getOutputParam();
 
             LOGGER.info("Drinks successfully listed.");
+            m = new Message("Drinks successfully listed.");
         }
         catch (SQLException ex) {
 

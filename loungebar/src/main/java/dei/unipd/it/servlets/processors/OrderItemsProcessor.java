@@ -1,8 +1,6 @@
 package dei.unipd.it.servlets.processors;
 
 import dei.unipd.it.rest.AddItemsRR;
-import dei.unipd.it.rest.CreateReservationRR;
-import dei.unipd.it.rest.ListReservationRR;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -11,7 +9,7 @@ import java.sql.Connection;
 
 public final class OrderItemsProcessor extends AbstractProcessor{
 
-    private final static String SEGMENT = "orderItems";
+    private final static String SEGMENT = "items";
 
 
     @Override
@@ -37,13 +35,17 @@ public final class OrderItemsProcessor extends AbstractProcessor{
         final String method = req.getMethod();
 
         if (subPath.isBlank() || subPath.equals("/")) {
-            ///     /orderItems
+            ///     /items
 
             switch (method) {
                 case "POST" -> new AddItemsRR(req, resp, conn).serve();
-                default     -> methodNotAllowed(resp, method, "/orderItems");
+                default     -> methodNotAllowed(resp, method, "/items");
 
             }
+        }
+        else {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            LOGGER.warn("Unknown subpath for OrderItemProcessor: %s", subPath);
         }
 
     }

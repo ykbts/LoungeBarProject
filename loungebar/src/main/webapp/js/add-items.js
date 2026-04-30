@@ -1,16 +1,21 @@
-const ENDPOINT = "/loungebar/rest/orderItems";
+
+const ENDPOINT = "/loungebar/rest/items";
 
 async function addItem() {
 
         const form = document.getElementById('addItemForm');
         
-        const payload = new URLSearchParams({
-            drinkName: form.querySelector('[name="productID"]').value,
-            orderID:   form.querySelector('[name="orderID"]').value,
-            quantity:  form.querySelector('[name="quantity"]').value
+        const payload = ({
+            orderItem: {
+                drinkName: form.querySelector('[name="productID"]').value,
+                orderID:   parseInt(form.querySelector('[name="orderID"]').value),
+                quantity:  parseInt(form.querySelector('[name="quantity"]').value)
+            }
         });
 
         try {
+            console.log(JSON.stringify(payload));
+
             const response = await fetch(ENDPOINT, {
                 method: 'POST',
                 headers: {
@@ -21,11 +26,16 @@ async function addItem() {
             });
 
             if (!response.ok) {
+                const text = await response.text();
+                console.log('Body raw: ', text)
                 alert('Error adding item.');
                 return;
             }
 
-            const item = await response.json();
+            const data = await response.json();
+
+            const item = data.orderItem;
+            console.log(item);
 
             const li = document.createElement('li');
             li.textContent = `${item.drinkName} x ${item.quantity} `;
@@ -33,7 +43,6 @@ async function addItem() {
 
         } catch (err) {
             console.error("Fetch error: ", err);
-        showError("Network error: could not reach the server.");
         }
 
     }

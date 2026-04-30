@@ -61,13 +61,13 @@ async function createReview() {
             showError(`Server error (${response.status})`);
             return;
         }
-            if (response.ok) {
-                showSuccess(data.review);
-            }  else {
-                  const msg = data.message;
-                  showError(msg.message || "Unexpected error from server.");
-              }
 
+        if (response.ok) {
+            showSuccess(data.review);
+        } else {
+              const msg = data.message;
+              showError(msg.message || "Unexpected error from server.");
+        }
 
     } catch (err) {
         console.error("Fetch error: ", err);

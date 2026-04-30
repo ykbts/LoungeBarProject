@@ -2,10 +2,7 @@ package dei.unipd.it.servlets;
 
 import dei.unipd.it.resources.LogContext;
 import dei.unipd.it.resources.Message;
-import dei.unipd.it.servlets.processors.OrderProcessor;
-import dei.unipd.it.servlets.processors.ReservationProcessor;
-import dei.unipd.it.servlets.processors.ResourceProcessor;
-import dei.unipd.it.servlets.processors.ReviewProcessor;
+import dei.unipd.it.servlets.processors.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -39,6 +36,8 @@ public class RestDispatcherServlet extends AbstractDatabaseServlet {
 
             // iterate over the registered processors
             for (ResourceProcessor processor : processors) {
+                LOGGER.info("%s called.", processor);
+
                 if (processor.process(req, resp, getConnection()))
                     return;
             }
@@ -82,7 +81,8 @@ public class RestDispatcherServlet extends AbstractDatabaseServlet {
         return List.of(
                 new ReviewProcessor(),
                 new ReservationProcessor(),
-                new OrderProcessor()
+                new OrderProcessor(),
+                new OrderItemsProcessor()
         );
     }
 }

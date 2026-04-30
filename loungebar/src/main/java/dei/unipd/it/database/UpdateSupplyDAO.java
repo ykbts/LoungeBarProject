@@ -10,7 +10,7 @@ public final class UpdateSupplyDAO extends AbstractDAO<Supply> {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "UPDATE lounge.Supply SET units_available = ? WHERE name = ?;";
+    private static final String STATEMENT = "UPDATE lounge.Supply SET units_available = units_available + ? WHERE name = ?;";
 
     private final Supply supply;
 

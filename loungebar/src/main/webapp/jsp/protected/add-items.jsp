@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
@@ -27,14 +27,16 @@
         <div>
             <form id="addItemForm">
                 
-                <input type="hidden" name="orderID" value="${order.id}">
+                <input type="hidden" name="orderID" value="${param.orderID}">
 
                 <label>Product:</label>
-                <select name="productID">
-                    <c:forEach var="product" items="${menu}">
-                        <option value="${product.name}">${product.name} - €${product.price}</option>
-                    </c:forEach>
-                </select>
+                <label>
+                    <select name="productID">
+                        <c:forEach var="product" items="${menu}">
+                            <option value="${product.name}">${product.name} - €${product.price}</option>
+                        </c:forEach>
+                    </select>
+                </label>
 
                 <label>Quantity:</label>
                 <input type="number" name="quantity" value="1" min="1">
@@ -51,7 +53,7 @@
             </ul>
         </div>
 
-    
+
         <script type="text/javascript" src="<c:url value='/js/add-items.js'/>"></script>
     </body>
 </html>
