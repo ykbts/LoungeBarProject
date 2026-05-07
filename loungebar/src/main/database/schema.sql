@@ -14,6 +14,9 @@ CREATE TYPE lounge.OrdersState AS ENUM ('PENDING', 'PAID', 'CANCELED');
 -- Enumeration for Role of the User
 CREATE TYPE lounge.UserRole AS ENUM ('WAITER', 'CUSTOMER', 'ADMIN');
 
+-- Enumeration for Type of the Supply
+CREATE TYPE lounge.SupplyType AS ENUM ('CAN', 'BOTTLE_0_7L', 'BOTTLE_1L');
+
 -- ##########################################################
 --      tables creation
 -- ##########################################################
@@ -25,6 +28,7 @@ CREATE TABLE lounge.Supply (
             DEFAULT 0
             NOT NULL
             CHECK (units_available >= 0),
+    type lounge.SupplyType NOT NULL,
     PRIMARY KEY (name)
 );
 

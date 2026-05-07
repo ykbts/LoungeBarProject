@@ -1,6 +1,7 @@
 package dei.unipd.it.database;
 
 import dei.unipd.it.resources.Supply;
+import dei.unipd.it.resources.SupplyType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,16 +35,22 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
     private final int unitsAvailable;
 
     /**
+     * The type filter for the supply search.
+     */
+    private final SupplyType type;
+
+    /**
      * Creates a new DAO for searching supplies with optional filters.
      *
      * @param con the database connection
      * @param name the name (or part of it) to search for; if {@code null}, this filter is ignored
      * @param unitsAvailable the number of units to match; if negative, this filter is ignored
      */
-    public SearchSupplyDAO(final Connection con, String name, int unitsAvailable) {
+    public SearchSupplyDAO(final Connection con, String name, final int unitsAvailable, final  SupplyType type) {
         super(con);
         this.name = name;
         this.unitsAvailable = unitsAvailable;
+        this.type = type;
     }
 
     /**
@@ -54,7 +61,7 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
      * @throws SQLException if a database error occurs
      */
     @Override
-    public final void doAccess() throws SQLException {
+    public void doAccess() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -64,7 +71,8 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
 
 
         if(name != null ){ clauses.add(" LOWER(lounge.Supply.name) LIKE LOWER(?) "); }
-        if(unitsAvailable >= 0 ){ clauses.add(" lounge.Supply.units_available = ? "); }
+        if(unitsAvailable >= 0 ){ clauses.add(" lounge.Supply.units_available >= ? "); }
+        if(type != null){ clauses.add(" lounge.Supply.type = ? "); }
 
         StringBuilder sb = new StringBuilder();
         sb.append(STATEMENT);
@@ -100,13 +108,20 @@ public final class SearchSupplyDAO extends AbstractDAO<List<Supply>> {
                 pstmt.setInt(clauseCount, unitsAvailable);
                 clauseCount += 1;
             }
+            if (type != null) {
+                pstmt.setString(clauseCount, type.toString());
+                clauseCount += 1;
+            }
 
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 supplyList.add(new Supply(
                         rs.getString("name"),
-                        rs.getInt("units_available")));
+                        rs.getInt("units_available"),
+                        SupplyType.valueOf(rs.getString("type"))
+                    )
+                );
             }
 
             LOGGER.info("Supply(s) successfully listed.");

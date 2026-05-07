@@ -16,14 +16,17 @@ public class Supply extends AbstractResource {
 
     private final String name;
     private final int unitsAvailable;
+    private final SupplyType type;
 
     /**
      * @param name the unique name of the supply
      * @param unitsAvailable the current quantity in stock
+     * @param type      the type of supply
      */
-    public Supply(final String name, final int unitsAvailable) {
+    public Supply(final String name, final int unitsAvailable, final SupplyType type) {
         this.name = name;
         this.unitsAvailable = unitsAvailable;
+        this.type = type;
     }
 
     public final String getName() {
@@ -33,6 +36,8 @@ public class Supply extends AbstractResource {
     public final int getUnitsAvailable() {
         return unitsAvailable;
     }
+
+    public final SupplyType getType() { return type; }
 
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
@@ -45,6 +50,7 @@ public class Supply extends AbstractResource {
 
         jg.writeStringField("name", name);
         jg.writeNumberField("units-available", unitsAvailable);
+        jg.writeStringField("type", type.toString());
 
         jg.writeEndObject();
         jg.writeEndObject();
@@ -63,6 +69,7 @@ public class Supply extends AbstractResource {
 
         String jName = null;
         int jUnitsAvailable = -1;
+        SupplyType jType = null;
 
         try {
             final JsonParser jp = JSON_FACTORY.createParser(in);
@@ -85,6 +92,10 @@ public class Supply extends AbstractResource {
                             jp.nextToken();
                             jUnitsAvailable = jp.getIntValue();
                             break;
+                        case "type":
+                            jp.nextToken();
+                            jType = SupplyType.valueOf(jp.getText());
+                            break;
                     }
                 }
             }
@@ -93,6 +104,6 @@ public class Supply extends AbstractResource {
             throw e;
         }
 
-        return new Supply(jName, jUnitsAvailable);
+        return new Supply(jName, jUnitsAvailable, jType);
     }
 }

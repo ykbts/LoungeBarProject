@@ -1,6 +1,7 @@
 package dei.unipd.it.database;
 
 import dei.unipd.it.resources.Supply;
+import dei.unipd.it.resources.SupplyType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,12 +49,13 @@ public final class DeleteSupplyDAO extends AbstractDAO<Supply> {
             if (rs.next()) {
                 deletedSupply = new Supply(
                         rs.getString("name"),
-                        rs.getInt("units_available")
+                        rs.getInt("units_available"),
+                        SupplyType.valueOf(rs.getString("type"))
                 );
 
                 LOGGER.info("Supply {} successfully deleted.", deletedSupply.getName());
             } else {
-                LOGGER.warn("Nothing was deleted", supply.getName());
+                LOGGER.warn("Nothing was deleted. Attempted: {}", supply.getName());
             }
 
         } finally {

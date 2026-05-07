@@ -1,6 +1,7 @@
 # IntelliJ Idea
 *.iml
-.idea/ 
+.idea/
+out/
 
 # Java
 *.class

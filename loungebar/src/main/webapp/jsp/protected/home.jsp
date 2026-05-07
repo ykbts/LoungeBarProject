@@ -43,7 +43,7 @@
             </div>
             <div class="card">
                 <h3>List supplies</h3>
-                <a href="<c:url value="/jsp/protected/search-supply-form.jsp"/>">
+                <a href="<c:url value="/supply/search"/>">
                     <button>Click</button>
                 </a>
             </div>

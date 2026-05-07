@@ -1,10 +1,7 @@
 package dei.unipd.it.servlets;
 
 import dei.unipd.it.database.SearchSupplyDAO;
-import dei.unipd.it.resources.Actions;
-import dei.unipd.it.resources.Supply;
-import dei.unipd.it.resources.LogContext;
-import dei.unipd.it.resources.Message;
+import dei.unipd.it.resources.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,6 +18,14 @@ import org.apache.logging.log4j.message.StringFormattedMessage;
  */
 @WebServlet(name = "SearchSupplyServlet", value = "/supply/search")
 public final class SearchSupplyServlet extends AbstractDatabaseServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        req.setAttribute("supplyTypes", SupplyType.values());
+        req.getRequestDispatcher("/jsp/protected/search-supply-form.jsp")
+                .forward(req, resp);
+    }
 
     /**
      * Handles the supply search via POST.
@@ -39,6 +44,7 @@ public final class SearchSupplyServlet extends AbstractDatabaseServlet {
 
         String name = null;
         int unitsAvailable = -1;
+        SupplyType type = null;
 
         List<Supply> sl = null;
         Message m = null;
@@ -59,7 +65,12 @@ public final class SearchSupplyServlet extends AbstractDatabaseServlet {
                 }
             }
 
-            sl = new SearchSupplyDAO(getConnection(), name, unitsAvailable).access().getOutputParam();
+            String typeParam = req.getParameter("type");
+            if (typeParam != null && !typeParam.trim().isEmpty()) {
+                type = SupplyType.valueOf(typeParam);
+            }
+
+            sl = new SearchSupplyDAO(getConnection(), name, unitsAvailable, type).access().getOutputParam();
 
             m = new Message("Supplies successfully searched");
 

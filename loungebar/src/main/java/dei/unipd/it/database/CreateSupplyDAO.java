@@ -1,6 +1,7 @@
 package dei.unipd.it.database;
 
 import dei.unipd.it.resources.Supply;
+import dei.unipd.it.resources.SupplyType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class CreateSupplyDAO extends AbstractDAO<Supply> {
     /**
      * SQL statement used to insert a new supply and return the created record.
      */
-    private static final String STATEMENT = "INSERT INTO lounge.Supply (name, units_available) VALUES (?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.Supply (name, units_available, type) VALUES (?, ?, ?) RETURNING *";
 
     /**
      * The supply data to be persisted.
@@ -59,13 +60,15 @@ public class CreateSupplyDAO extends AbstractDAO<Supply> {
 
             preparedStatement.setString(1, supply.getName());
             preparedStatement.setInt(2, supply.getUnitsAvailable());
+            preparedStatement.setString(3, supply.getType().toString());
 
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 u = new Supply(
                         rs.getString("name"),
-                        rs.getInt("units_available")
+                        rs.getInt("units_available"),
+                        SupplyType.valueOf(rs.getString("type"))
                 );
 
                 LOGGER.info("Supply {} successfully stored.", u.getName());

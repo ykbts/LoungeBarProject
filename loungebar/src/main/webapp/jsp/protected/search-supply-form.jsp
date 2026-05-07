@@ -31,12 +31,23 @@
         <hr/>
 
         <h2>Create New Supply</h2>
+
         <form method="POST" action="<c:url value="/supply/create"/>">
             <label for="nameID">Supply Name:</label>
             <input id="nameID" name="name" type="text" required/><br/>
 
             <label for="unitsID">Units Available:</label>
-            <input id="unitsID" name="units" type="text" required/><br/><br/>
+            <input id="unitsID" name="units" type="text" required/><br/>
+
+            <label for="typeID">Type</label>
+            <select id="typeID" name="type">
+                <option value="">Select a type</option>
+                <c:forEach var="type" items="${supplyTypes}">
+                    <option value="${type}">${type}</option>
+                </c:forEach>
+            </select><br/>
+
+            <br/>
 
             <button type="submit">Submit</button>
             <button type="reset">Reset the form</button>

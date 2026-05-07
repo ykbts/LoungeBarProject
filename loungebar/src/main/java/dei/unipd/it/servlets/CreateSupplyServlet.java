@@ -1,10 +1,7 @@
 package dei.unipd.it.servlets;
 
 import dei.unipd.it.database.CreateSupplyDAO;
-import dei.unipd.it.resources.Actions;
-import dei.unipd.it.resources.Supply;
-import dei.unipd.it.resources.Message;
-import dei.unipd.it.resources.LogContext;
+import dei.unipd.it.resources.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -42,28 +39,46 @@ public final class CreateSupplyServlet extends AbstractDatabaseServlet {
         LogContext.setAction(Actions.CREATE_SUPPLY);
 
         String name = null;
-        int unitsAvailable = -1;
+        int unitsInput = -1;
+        SupplyType type = null;
 
         Supply s = null;
         Message m = null;
 
         try {
             if ("create".equals(op)) {
+
+                // getting parameters from form + validation
+
                 name = req.getParameter("name");
+                if (name == null || name.isBlank())
+                    throw new IllegalArgumentException("New SUPPLY cannot have empty name.");
 
                 String unitsParam = req.getParameter("units");
                 if (unitsParam != null) {
-                    unitsAvailable = Integer.parseInt(unitsParam);
+                    unitsInput = Integer.parseInt(unitsParam);
+                }
+
+                String typeParam = req.getParameter("type");
+                if (typeParam != null && !typeParam.trim().isEmpty()) {
+                    type = SupplyType.valueOf(typeParam);
                 }
 
                 LogContext.setResource(name);
 
-                s = new Supply(name, unitsAvailable);
+                // unit conversion service
 
-                new CreateSupplyDAO(getConnection(), s).access();
+                int storedUnits = -1;
+                if (type != null)
+                    storedUnits = type.toStoredUnits(unitsInput);
 
-                m = new Message(String.format("Supply %s successfully created.", name));
-                LOGGER.info("Supply %s successfully created in the database.", name);
+
+                s = new Supply(name, storedUnits, type);
+
+                s = new CreateSupplyDAO(getConnection(), s).access().getOutputParam();
+
+                m = new Message(String.format("Supply %s successfully created.", s.getName()));
+                LOGGER.info("Supply %s successfully created in the database.", s.getName());
 
             } else {
                 m = new Message("Operation not supported.", "E404", String.format("The operation %s is invalid.", op));
@@ -85,7 +100,7 @@ public final class CreateSupplyServlet extends AbstractDatabaseServlet {
                 LOGGER.error(new StringFormattedMessage("Supply %s already exists.", name), ex);
 
             } else if ("23514".equals(sqlState)) {
-                m = new Message(String.format("Cannot create the supply: invalid value for units. It must be 0 or more."),
+                m = new Message(String.format("Cannot create the supply %s: invalid value for units. It must be 0 or more.", name),
                         "E101", ex.getMessage());
                 LOGGER.error(new StringFormattedMessage("Check constraint violation for supply %s: %s", name, ex.getMessage()));
 
