@@ -15,7 +15,7 @@ CREATE TYPE lounge.OrdersState AS ENUM ('PENDING', 'PAID', 'CANCELED');
 CREATE TYPE lounge.UserRole AS ENUM ('WAITER', 'CUSTOMER', 'ADMIN');
 
 -- Enumeration for Type of the Supply
-CREATE TYPE lounge.SupplyType AS ENUM ('CAN', 'BOTTLE_0_7L', 'BOTTLE_1L');
+CREATE TYPE lounge.SupplyType AS ENUM ('DISCRETE', 'BOTTLE_0_7L', 'BOTTLE_1L');
 
 -- ##########################################################
 --      tables creation

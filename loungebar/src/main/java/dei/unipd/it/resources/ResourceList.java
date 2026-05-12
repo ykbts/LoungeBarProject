@@ -20,7 +20,7 @@ public final class ResourceList<T extends Resource> extends AbstractResource {
     /**
      * Creates a list of {@code AbstractResource}s.
      *
-     * @param list the list of {@code AbstractResource}s.
+     * @param list the list of {@code AbstractResource}.
      */
     public ResourceList(final Iterable<T> list) {
 
@@ -32,6 +32,13 @@ public final class ResourceList<T extends Resource> extends AbstractResource {
         this.list = list;
     }
 
+    /**
+     * Write in the response's OutputStream the list of resources in JSON.
+     *
+     * @param out the stream to which the JSON representation of the {@code Resource} has to be written.
+     *
+     * @throws IOException if something's wrong in the output stream.
+     */
     @Override
     protected void writeJSON(OutputStream out) throws IOException {
 
@@ -39,7 +46,7 @@ public final class ResourceList<T extends Resource> extends AbstractResource {
 
         jg.writeStartObject();
 
-        jg.writeFieldName("resource-list");
+        jg.writeFieldName("resourceList");
 
         jg.writeStartArray();
 

@@ -21,7 +21,7 @@
             </div>
 
             <div class="form-group">
-                <label>Table Number:</label>
+                <label for="tableInput">Table Number:</label>
                 <input type="number" name="tableID" id="tableInput" placeholder="Ej: 5">
             </div>
 
@@ -34,11 +34,21 @@
             <button type="submit">Open Order</button>
         </form>
 
+        <div id="message">
+
+        </div>
+
+        <div id="tablesList">
+
+        </div>
+
         <br/>
 
         <p>
             <a href="<c:url value="/home"/>">Back to Home</a>
         </p>
+
+        <script type="text/javascript" src="<c:url value="/js/tables.js"/>"></script>
 
         <script>
             const tableIDInput = document.getElementById('tableInput');
@@ -47,7 +57,7 @@
             tableIDInput.addEventListener('input', function() {
                 statusInput.value = this.value.trim() !== '' ? 'PENDING' : 'PAID';
             });    
-            
+
             document.getElementById('dateTimeInput').value = new Date().toISOString().slice(0, 16);
 
         </script>

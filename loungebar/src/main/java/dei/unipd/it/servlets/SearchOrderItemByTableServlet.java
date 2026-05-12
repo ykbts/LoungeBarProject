@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "SearchOrderItemByTableServlet", value = "/order/myOrder")
-public class SearchOrderItemByTableServlet extends AbstractDatabaseServlet {
+public final class SearchOrderItemByTableServlet extends AbstractDatabaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

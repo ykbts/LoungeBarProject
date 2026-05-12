@@ -2,7 +2,7 @@ package dei.unipd.it.resources;
 
 public enum SupplyType {
 
-    CAN(0),             // discrete units -> no conversion; set to 0 for behavior identification
+    DISCRETE(0),             // discrete units -> no conversion; set to 0 for behavior identification
     BOTTLE_0_7L(700),    // 700 ml
     BOTTLE_1L(1000);      // 1000 ml
 

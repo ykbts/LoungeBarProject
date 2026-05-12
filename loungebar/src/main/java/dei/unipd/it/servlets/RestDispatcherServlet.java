@@ -82,7 +82,8 @@ public class RestDispatcherServlet extends AbstractDatabaseServlet {
                 new ReviewProcessor(),
                 new ReservationProcessor(),
                 new OrderProcessor(),
-                new OrderItemsProcessor()
+                new OrderItemsProcessor(),
+                new TablesProcessor()
         );
     }
 }

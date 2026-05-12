@@ -34,8 +34,8 @@ public final class SearchTableDAO extends AbstractDAO<List<Tables>> {
 
 
 		if(number>=0){ clauses.add(" lounge.Tables.number = ? "); }
-		if(capacity>=0){ clauses.add(" lounge.Tables.capacity = ? "); }
-		if(isAvailable){ clauses.add(" lounge.Tables.is_available = ? "); }
+		if(capacity != null){ clauses.add(" lounge.Tables.capacity = ? "); }
+		if(isAvailable != null){ clauses.add(" lounge.Tables.is_available = ? "); }
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(STATEMENT);
@@ -72,11 +72,11 @@ public final class SearchTableDAO extends AbstractDAO<List<Tables>> {
 				pstmt.setInt(clauseCount, number);
 				clauseCount += 1;
 			}
-			if(capacity>=0){
+			if(capacity != null){
 				pstmt.setInt(clauseCount, capacity);
 				clauseCount += 1;
 			}
-			if(isAvailable){
+			if(isAvailable != null){
 				pstmt.setBoolean(clauseCount, isAvailable);
 				clauseCount += 1;
 			}

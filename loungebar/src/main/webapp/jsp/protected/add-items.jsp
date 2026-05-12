@@ -53,6 +53,9 @@
             </ul>
         </div>
 
+        <div>
+            <a href="<c:url value="/home"/>">Back to Home</a>
+        </div>
 
         <script type="text/javascript" src="<c:url value='/js/add-items.js'/>"></script>
     </body>
