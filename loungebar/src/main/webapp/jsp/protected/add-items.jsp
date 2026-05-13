@@ -2,12 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>Order Creation Result</title>
-        <style>
-            .success { color: #155724; background: #d4edda; padding: 15px; border: 1px solid #c3e6cb; }
-            .error { color: #721c24; background: #f8d7da; padding: 15px; border: 1px solid #f5c6cb; }
-            .details { margin-top: 20px; font-family: monospace; background: #eee; padding: 10px; }
-        </style>
+
+        <!-- Fonts -->
+         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap">
+        <!-- Style -->
+        <link rel="stylesheet" href="../../css/base.css">
+        <link rel="stylesheet" href="../../css/add-items.css">
     </head>
     <body>
 
@@ -29,17 +33,16 @@
                 
                 <input type="hidden" name="orderID" value="${param.orderID}">
 
-                <label>Product:</label>
-                <label>
-                    <select name="productID">
-                        <c:forEach var="product" items="${menu}">
-                            <option value="${product.name}">${product.name} - €${product.price}</option>
-                        </c:forEach>
-                    </select>
-                </label>
+                <label for="productList">Product:</label>
+                <select class="inputs" id="productList" name="productID">
+                    <c:forEach var="product" items="${menu}">
+                        <option value="${product.name}">${product.name} &ensp €${product.price}</option>
+                    </c:forEach>
+                </select>
+            
 
                 <label>Quantity:</label>
-                <input type="number" name="quantity" value="1" min="1">
+                <input class="inputs" type="number" id="quantity" name="quantity" value="1" min="1">
 
                 <button type="button" onclick="addItem()">Add to Order</button>
 

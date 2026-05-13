@@ -1,0 +1,211 @@
+* {
+    box-sizing: border-box;
+    margin: 5px;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-top: 10px;
+}
+
+h2 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin: 30px 0 10px;
+}
+
+h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 10px 5px;
+}
+
+
+#addItemForm {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 28px;
+    align-items: end;
+    max-width: 640px;
+}
+
+#addItemForm label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.inputs {
+    width: 100%;
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    /* transition: border-color var(--transition); */
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+}
+
+.inputs:hover {
+  outline: none;
+  border-color: var(--gold);
+}
+
+button {
+    width: 50%;
+    grid-column: 1 / -1;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition), transform 0.12s ease;
+    justify-self: center;
+}
+
+button:hover {
+    background: var(--gold-dim);
+}
+button:active {
+    transform: scale(0.97);
+}
+
+ /* remove that shitty arrow
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { display: none; } */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { opacity: 0.3; }
+
+
+#itemList {
+    list-style: none;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    animation: slideIn 0.28s ease;
+}
+
+.item-name {
+    color: var(--text);
+}
+
+a {
+  display: inline-block;
+  margin-top: 40px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color var(--transition);
+}
+
+a::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to left, var(--gold), transparent);
+    margin-top: 10px;
+}
+
+a:hover {
+  color: var(--gold-light);
+}
+
+
+/*  Animations   */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+
+/*  Responsivness   */
+@media (max-width: 520px) {
+
+    #addItemForm {
+        grid-template-columns: 1fr;
+    }
+    
+    button {
+        width: auto;
+        grid-column: 1;
+        justify-self: stretch;
+        text-align: center;
+    }
+}
