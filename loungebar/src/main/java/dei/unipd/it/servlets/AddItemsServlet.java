@@ -1,10 +1,8 @@
 package dei.unipd.it.servlets;
 
 import dei.unipd.it.database.SearchDrinkDAO;
-import dei.unipd.it.resources.Actions;
-import dei.unipd.it.resources.Drink;
-import dei.unipd.it.resources.LogContext;
-import dei.unipd.it.resources.Message;
+import dei.unipd.it.database.SearchOrderItemDAO;
+import dei.unipd.it.resources.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,15 +24,21 @@ public final class AddItemsServlet extends AbstractDatabaseServlet {
         LogContext.setAction(Actions.LIST_DRINKS);
 
         List<Drink> menu = null;
+        List<OrderItem> order = null;
         Message m = null;
 
         try {
 
             // create the menù
             menu = new SearchDrinkDAO(getConnection(), null, 0, null).access().getOutputParam();
-
             LOGGER.info("Drinks successfully listed.");
-            m = new Message("Drinks successfully listed.");
+
+            // list all the client order items
+            int id = Integer.parseInt(req.getParameter("orderID"));
+            order = new SearchOrderItemDAO(getConnection(), null, id, -1).access().getOutputParam();
+            LOGGER.info("Order successfully listed.");
+
+            m = new Message("Drinks and Order successfully listed.");
         }
         catch (SQLException ex) {
 
@@ -44,6 +48,7 @@ public final class AddItemsServlet extends AbstractDatabaseServlet {
 
         try {
             req.setAttribute("menu", menu);
+            req.setAttribute("order", order);
             req.setAttribute("message", m);
 
             req.getRequestDispatcher("/jsp/protected/add-items.jsp").forward(req, resp);

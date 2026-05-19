@@ -40,8 +40,8 @@ public final class SearchOrderItemDAO extends AbstractDAO<List<OrderItem>> {
 
 
         if (drinkName != null && !drinkName.isEmpty()) { clauses.add(" lounge.OrderItem.drink_name = ? ");}
-        if (orderID >= 0) { clauses.add(" lounge.OrderItem.orderID = ? ");}
-        if (quantity >= 0) { clauses.add(" lounge.OrderItem.quantity = ? ");}
+        if (orderID > 0) { clauses.add(" lounge.OrderItem.orderID = ? ");}
+        if (quantity > 0) { clauses.add(" lounge.OrderItem.quantity = ? ");}
 
         StringBuilder sb = new StringBuilder();
         sb.append(STATEMENT);
@@ -74,10 +74,10 @@ public final class SearchOrderItemDAO extends AbstractDAO<List<OrderItem>> {
             if (drinkName != null && !drinkName.isEmpty()) {
                 pstmt.setString(clauseCount++, drinkName);
             }
-            if (orderID >= 0) {
+            if (orderID > 0) {
                 pstmt.setLong(clauseCount++, orderID);
             }
-            if (quantity >= 0) {
+            if (quantity > 0) {
                 pstmt.setInt(clauseCount++, quantity);
             }
 

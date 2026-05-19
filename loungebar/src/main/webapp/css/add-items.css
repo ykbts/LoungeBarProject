@@ -53,6 +53,9 @@ h3 {
     margin: 10px 5px;
 }
 
+#itemsContainer {
+    align-items: center;
+}
 
 #addItemForm {
     background: var(--surface);

@@ -22,7 +22,11 @@
             <tbody>
                 <c:forEach var="order" items="${orderList}">
                     <tr>
-                        <td>${order.id}</td>
+                        <td>
+                            <a href="<c:url value='/order/add-items'/>?orderID=${order.id}">
+                                    ${order.id}
+                            </a>
+                        </td>
                         <td>${order.dateTime}</td>
                         <td>${order.waiterID}</td>
                         <td id="status-cell-${order.id}">${order.status}</td>

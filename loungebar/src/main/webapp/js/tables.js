@@ -1,5 +1,7 @@
 // automatic call at loaded web page
-document.addEventListener("DOMContentLoaded", listTables);const ENDPOINT = "/loungebar/rest/tables";
+document.addEventListener("DOMContentLoaded", listTables);
+
+const ENDPOINT = "/loungebar/rest/tables";
 
 function listTables() {
     try {
