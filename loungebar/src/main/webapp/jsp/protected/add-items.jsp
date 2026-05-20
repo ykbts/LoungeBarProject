@@ -10,8 +10,8 @@
         <!-- Fonts -->
          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap">
         <!-- Style -->
-        <link rel="stylesheet" href="../css/base.css">
-        <link rel="stylesheet" href="../css/add-items.css">
+        <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
+        <link rel="stylesheet" href="<c:url value='/css/add-items.css'/>">
     </head>
     <body>
 
@@ -44,13 +44,13 @@
                 <label for="quantity">Quantity:</label>
                 <input class="inputs" type="number" id="quantity" name="quantity" value="1" min="1">
 
-                <button type="button" onclick="addItem()">Add to Order</button>
+                <button type="button" onclick="addItem()">Confirm Order</button>
 
             </form>
         </div>
         
         <div id="itemsContainer">
-            <h3>Items added:</h3>
+            <h3>Order Summary:</h3>
             <ul id="itemList">
                 <c:forEach var="item" items="${order}">
                     <li> ${item.drinkName} x ${item.quantity} </li>

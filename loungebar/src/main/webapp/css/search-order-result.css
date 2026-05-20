@@ -1,0 +1,30 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 25px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 800px;
+}
+
+
+th, td {
+    border: 1px solid;
+    padding: 12px;
+}
+
+tr {
+    border: 1px solid;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
