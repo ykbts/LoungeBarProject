@@ -7,7 +7,7 @@
 
         <title>Order Creation Result</title>
 
-        <!-- Fonts -->
+        <!-- Font -->
          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap">
         <!-- Style -->
         <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
