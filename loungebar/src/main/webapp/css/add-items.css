@@ -1,18 +1,13 @@
 
-
 body {
     font-weight: 300;
-    padding: 48px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
-    font-weight: 300;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    color: var(--gold-light);
-    text-transform: uppercase;
-    margin-bottom: 36px;
-    position: relative;
-    display: inline-block;
+    margin: 1rem;
 }
 
 h1::after {
@@ -20,103 +15,119 @@ h1::after {
     display: block;
     height: 1px;
     width: 100%;
-    background: linear-gradient(to right, var(--gold), transparent);
+    background: linear-gradient(to right, var(--navy-700), transparent);
     margin-top: 10px;
 }
 
 h2 {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 1.5rem;
-    color: var(--gold);
-    text-transform: uppercase;
+    color: var(--navy-600);
     margin: 30px 0 10px;
 }
 
 h3 {
     font-family: 'DM Sans', sans-serif;
     font-weight: 500;
-    font-size: 0.75rem;
+    font-size: 1rem;
+    text-align: center;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    margin: 10px 5px;
+    color: var(--navy-600);
+    margin: 1rem;
 }
 
-#itemsContainer {
+form {
+    background: var(--white);
+    border: 1px solid var(--navy-100);
+    border-top: 4px solid var(--navy-600);
+    border-radius: 15px;
+    box-shadow: 0 4px 24px rgba(10, 22, 40, .14);
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px 30px;
+    align-items: end;
+    width: 45%;
+}
+
+ label {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy-700);
+}
+
+.items-container {
     align-items: center;
 }
 
-#addItemForm {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px 28px;
-    align-items: end;
-    max-width: 640px;
-}
-
-#addItemForm label {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-}
 
 .inputs {
     width: 100%;
-    background: var(--surface-alt);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 10px 14px;
+    background: var(--off-white);
+    color: var(--navy-600);
+    border: 2px solid var(--navy-100);
+    border-radius: 6px;
+    padding: 10px 15px;
     font-family: 'DM Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 300;
-    /* transition: border-color var(--transition); */
-}
-
-select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    cursor: pointer;
+    text-align: center;
+    transition: border-color var(--transition);
 }
 
 .inputs:hover {
   outline: none;
-  border-color: var(--gold);
+  border-color: var(--navy-400);
 }
+
+
+select {
+    appearance: none;
+    cursor: pointer;
+}
+
 
 button {
     width: 50%;
-    grid-column: 1 / -1;
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
+    margin-top: 1rem;
+    padding: 12px 28px;
+    border: 1px solid var(--navy-700);
+    border-radius: 6px;
+    color: var(--navy-400);
     font-family: 'DM Sans', sans-serif;
     font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.16em;
+    box-shadow: 0 2px 8px  rgba(10, 22, 40, 0.541);
+    grid-column: 1 / -1;
     text-transform: uppercase;
-    padding: 12px 28px;
-    border-radius: var(--radius);
     cursor: pointer;
-    transition: background var(--transition), color var(--transition), transform 0.2s ease;
     justify-self: center;
 }
 
-button:hover {
-    background: var(--gold-dim);
+.btn {
+    padding: 0.5rem 2rem;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--white);
+    background: var(--navy-600);
+    border: none;
 }
+
+.btn:hover {
+    background: var(--navy-400);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(10, 22, 40, 0.39);
+    transition: var(--transition);
+}
+
 button:active {
-    transform: scale(0.97);
+    transform: scale(0.95);
 }
 
  /* remove that shitty arrow
@@ -126,60 +137,52 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button { opacity: 0.3; }
 
 
-#itemList {
+.item-list {
+    padding: 0;
     list-style: none;
     max-width: 640px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    color: var(--white);
 }
 
 li {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px 18px;
+    background: var(--navy-400);
+    border-radius: 6px;
+    padding: .8rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.9rem;
-    animation: slideIn 0.28s ease;
+    animation: slideIn var(--transition);
 }
 
 .item-name {
-    color: var(--text);
+    color: var(--navy-600);
 }
 
 a {
-  display: inline-block;
-  margin-top: 40px;
-  color: var(--text);
-  text-decoration: none;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: color var(--transition);
-}
-
-a::after {
-    content: '';
-    display: block;
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to left, var(--gold), transparent);
-    margin-top: 10px;
+    position: fixed;
+    top: 2%;
+    right: 5%;
+    margin-top: 40px;
+    padding: 0 1rem;
+    border-radius: 15px;
+    color: var(--navy-700);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color var(--transition), background-color var(--transition);
 }
 
 a:hover {
-  color: var(--gold-light);
+  color: var(--navy-400);
+  background-color: var(--navy-100);
 }
 
 
-/*  Animations   */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
 
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(-10px); }
@@ -188,9 +191,9 @@ a:hover {
 
 
 /*  Responsivness   */
-@media (max-width: 520px) {
+@media (max-width: 840px) {
 
-    #addItemForm {
+    form {
         grid-template-columns: 1fr;
     }
     

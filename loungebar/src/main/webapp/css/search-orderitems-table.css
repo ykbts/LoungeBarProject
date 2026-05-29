@@ -1,20 +1,4 @@
 
-:root {
-    --navy-900: #0a1628;
-    --navy-800: #0d2045;
-    --navy-700: #112a5c;
-    --navy-600: #1a3a72;
-    --navy-400: #2e5fa3;
-    --navy-200: #7fa4d2;
-    --navy-100: #c8daf0;
-
-    --white:    #ffffff;
-    --off-white:#f8f9fc;
-
-    --transition: .4s ease;
-}
-
-
 *,
 *::before,
 *::after {
@@ -24,23 +8,11 @@
 
 .page-wrapper {
     max-width: 80%;
-    margin: 3rem auto;
-    padding: 0 2rem 3rem;
+    margin: 2rem auto;
+    padding: 0 2rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-
-/* da metti alcune cose in base.css */
-h1 {
-    font-family: 'EB Garamond', Georgia, serif;;
-    font-size: clamp(2.2rem, 5vw, 2.8rem);
-    font-weight: 600;
-    color: var(--navy-800);
-    margin-bottom: .25rem;
-    display: inline-block;
-    position: relative;
 }
 
 
@@ -99,6 +71,7 @@ input {
     font-size: .97rem;
     color: var(--navy-900);
     outline: none;
+    text-align: center;
 }
 
 .form-control {
@@ -150,7 +123,7 @@ button:active {
 
 
 
-@media (max-width: 450px) {
+@media (max-width: 550px) {
     input {
         max-width: 100%;
     }

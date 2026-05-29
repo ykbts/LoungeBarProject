@@ -58,9 +58,9 @@ public final class SearchTableDAO extends AbstractDAO<List<Tables>> {
 				}
 			}
 		}
+
+		sb.append(" ORDER BY number");
 		sb.append(";");
-
-
 
 
 		try {
