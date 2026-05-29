@@ -17,7 +17,7 @@
         <hr/>
 
         <div class="${not empty orderItemList ? 'success' : 'error'}">
-        <strong>${message.message}</strong>
+        <strong>${not empty orderItemList ? message.message : "No order pending for this table."}</strong>
         <c:if test="${not empty message.errorCode}">
             <p>Error Code: ${message.errorCode}</p>
             <p>Technical Details: ${message.errorDetails}</p>

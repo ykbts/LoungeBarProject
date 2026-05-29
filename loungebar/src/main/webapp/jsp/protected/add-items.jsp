@@ -8,10 +8,12 @@
         <title>Order Creation Result</title>
 
         <!-- Font -->
-         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap">
         <!-- Style -->
         <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
         <link rel="stylesheet" href="<c:url value='/css/add-items.css'/>">
+        <!-- <link rel="stylesheet" href="../../css/base.css"> -->
+        <!-- <link rel="stylesheet" href="../../css/add-items.css"> -->
     </head>
     <body>
 

@@ -57,5 +57,7 @@ public final class SearchOrderItemsByTableDAO extends AbstractDAO<List<OrderItem
             if (ps != null) ps.close();
             if (rs != null) rs.close();
         }
+
+        outputParam = orderItems;
     }
 }

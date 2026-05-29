@@ -11,8 +11,8 @@
 <%--    <link rel="stylesheet" href="<c:url value="/css/search-order-result.css"/>">--%>
     <link rel="stylesheet" href="../../css/search-order-result.css">
 </head>
-<body style="padding: 30px;"> 
 
+<body> 
     <div class="title">
         <h1>List of Orders</h1>
     </div>

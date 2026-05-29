@@ -1,5 +1,4 @@
 
-
 :root {
     --navy-900: #0a1628;
     --navy-800: #0d2045;
@@ -8,13 +7,9 @@
     --navy-400: #2e5fa3;
     --navy-200: #7fa4d2;
     --navy-100: #c8daf0;
-    --navy-050: #eef4fb;
 
     --white:    #ffffff;
     --off-white:#f8f9fc;
-    --grey-200: #e2e8f0;
-    --grey-400: #94a3b8;
-    --grey-600: #475569;
 
     --transition: .4s ease;
 }
@@ -26,16 +21,6 @@
     box-sizing: border-box;
 }
 
-
-body {
-    font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
-    font-size: 16px;
-    background-color: var(--off-white);
-    color: var(--navy-900);
-    line-height: 1.7;
-    min-height: 100vh;
-    
-}
 
 .page-wrapper {
     max-width: 80%;

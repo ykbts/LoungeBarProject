@@ -1,22 +1,11 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 5px;
-    padding: 0;
-}
+
 
 body {
-    background-color: var(--background);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
     font-weight: 300;
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
     padding: 48px 24px 80px;
 }
 
 h1 {
-    font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
     font-size: clamp(2rem, 5vw, 3.2rem);
     color: var(--gold-light);
@@ -119,7 +108,7 @@ button {
     padding: 12px 28px;
     border-radius: var(--radius);
     cursor: pointer;
-    transition: background var(--transition), color var(--transition), transform 0.12s ease;
+    transition: background var(--transition), color var(--transition), transform 0.2s ease;
     justify-self: center;
 }
 

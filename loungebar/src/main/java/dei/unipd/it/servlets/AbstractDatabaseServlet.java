@@ -20,7 +20,7 @@ public class AbstractDatabaseServlet extends HttpServlet {
 	/**
 	 * A LOGGER available for all the subclasses.
 	 */
-	protected static final Logger LOGGER = LogManager.getLogger(AbstractDatabaseServlet.class, StringFormatterMessageFactory.INSTANCE);
+	protected /*static*/ final Logger LOGGER = LogManager.getLogger(/*AbstractDatabaseServlet.class*/getClass()/*, StringFormatterMessageFactory.INSTANCE*/);
 
 	/**
 	 * The connection pool to the database.

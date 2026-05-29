@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <h1>Welcome to LoungeBar</h1>
 
 <c:choose>
@@ -21,6 +22,11 @@
                 <h3>Check orders</h3>
                 <a href="${pageContext.request.contextPath}/order/myOrder">
                     <button type="button">Click</button>
+                </a>
+            </div>
+            <div>
+                <a href="<c:url value="/logout"/>">
+                    <button>Logout</button>
                 </a>
             </div>
         </div>
@@ -55,7 +61,8 @@
                     <button type="submit">Click</button>
                 </form>
             </div>
-            <div class="card"><h3>Create an order</h3>
+            <div class="card">
+                <h3>Create an order</h3>
                 <a href="<c:url value="/jsp/protected/create-order.jsp"/>">
                     <button>Click</button>
                 </a>
