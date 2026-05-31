@@ -114,6 +114,7 @@ public final class CreateSupplyServlet extends AbstractDatabaseServlet {
         try {
             req.setAttribute("supply", s);
             req.setAttribute("message", m);
+            req.setAttribute("supplyTypes", SupplyType.values());
 
             req.getRequestDispatcher("/jsp/protected/create-supply-result.jsp").forward(req, res);
 
