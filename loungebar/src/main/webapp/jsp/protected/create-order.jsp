@@ -5,48 +5,57 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LoungeBar - Create Order Form</title>
+
+        <!-- Style -->
+        <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
+        <link rel="stylesheet" href="<c:url value='/css/components.css'/>">
+        <link rel="stylesheet" href="<c:url value='/css/create-order.css'/>">
     </head>
 
     <body>
-        <h1>Create Order Form</h1>
-        <hr/>
+        <div class="page-wrapper">
+            <h1>Create An Order</h1>
+            <p class="page-subtitle">Open a new order for a table</p>
 
-        <form method="POST" action="<c:url value="/order/create"/>">
-            
-            <div class="form-group">
-                <label>Waiter ID:</label>
-                <input type="text" name="waiterID" 
-                    value="<%= (session.getAttribute("user") != null) ? session.getAttribute("user") : "ERROR: There is no session" %>" readonly>
+            <div class="order-layout">
+
+                <form class="form-panel" method="POST" action="<c:url value="/order/create"/>">
+
+                    <div class="form-group">
+                        <label>Waiter ID:</label>
+                        <input type="text" name="waiterID"
+                            value="<%= (session.getAttribute("user") != null) ? session.getAttribute("user") : "ERROR: There is no session" %>" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tableInput">Table Number:</label>
+                        <input type="number" name="tableID" id="tableInput" placeholder="Ej: 5">
+                    </div>
+
+                    <input type="hidden" name="dateTime" id="dateTimeInput">
+
+                    <input type="hidden" name="status" id="statusInput" value="PAID">
+
+                    <input type="hidden" name="payMethod" value="NONE">
+
+                    <hr class="form-divider">
+
+                    <button type="submit">Open Order</button>
+
+                    <div id="message"></div>
+                </form>
+
+                <aside class="tables-panel">
+                    <h2 class="tables-title">Tables</h2>
+                    <div id="tablesList"></div>
+                </aside>
+
             </div>
 
-            <div class="form-group">
-                <label for="tableInput">Table Number:</label>
-                <input type="number" name="tableID" id="tableInput" placeholder="Ej: 5">
-            </div>
-
-            <input type="hidden" name="dateTime" id="dateTimeInput">
-
-            <input type="hidden" name="status" id="statusInput" value="PAID">
-
-            <input type="hidden" name="payMethod" value="NONE">
-
-            <button type="submit">Open Order</button>
-        </form>
-
-        <div id="message">
-
+            <p><a href="<c:url value="/home"/>">&larr; Back to Home</a></p>
         </div>
-
-        <div id="tablesList">
-
-        </div>
-
-        <br/>
-
-        <p>
-            <a href="<c:url value="/home"/>">Back to Home</a>
-        </p>
 
         <script type="text/javascript" src="<c:url value="/js/tables.js"/>"></script>
 
