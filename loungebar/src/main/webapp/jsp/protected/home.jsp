@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoungeBar</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
 </head>
 
@@ -33,9 +34,11 @@
                     </div>
                     <h3>Reserve a table</h3>
                     <p class="card-desc">Book a spot for your next visit to LoungeBar</p>
-                    <a href="${pageContext.request.contextPath}/jsp/protected/create-reservation.jsp">
-                        <button type="button">Book now</button>
-                    </a>
+                    <div class="card-footer">
+                        <a href="${pageContext.request.contextPath}/jsp/protected/create-reservation.jsp">
+                            <button type="button">Book now</button>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -46,9 +49,11 @@
                     </div>
                     <h3>Leave a review</h3>
                     <p class="card-desc">Share your experience and help us improve our service</p>
-                    <a href="${pageContext.request.contextPath}/jsp/protected/create-review.jsp">
-                        <button type="button">Write a review</button>
-                    </a>
+                    <div class="card-footer">
+                        <a href="${pageContext.request.contextPath}/jsp/protected/create-review.jsp">
+                            <button type="button">Write a review</button>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -60,9 +65,11 @@
                     </div>
                     <h3>My orders</h3>
                     <p class="card-desc">Track your current and past orders at the bar</p>
-                    <a href="${pageContext.request.contextPath}/order/myOrder">
-                        <button type="button">View orders</button>
-                    </a>
+                    <div class="card-footer">
+                        <a href="${pageContext.request.contextPath}/order/myOrder">
+                            <button type="button">View orders</button>
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -84,9 +91,11 @@
                     </div>
                     <h3>Check reviews</h3>
                     <p class="card-desc">See feedback left by customers about your service</p>
-                    <form action="${pageContext.request.contextPath}/review/search-by-waiter" method="post">
-                        <button type="submit">View reviews</button>
-                    </form>
+                    <div class="card-footer">
+                        <form action="${pageContext.request.contextPath}/review/search-by-waiter" method="post">
+                            <button type="submit">View reviews</button>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -98,9 +107,11 @@
                     </div>
                     <h3>List orders</h3>
                     <p class="card-desc">Browse and manage all active and past orders</p>
-                    <form action="${pageContext.request.contextPath}/order/search" method="post">
-                        <button type="submit">View orders</button>
-                    </form>
+                    <div class="card-footer">
+                        <form action="${pageContext.request.contextPath}/order/search" method="post">
+                            <button type="submit">View orders</button>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -111,9 +122,11 @@
                     </div>
                     <h3>List supplies</h3>
                     <p class="card-desc">Track available stock and inventory items</p>
-                    <a href="<c:url value='/supply/search'/>">
-                        <button type="button">View supplies</button>
-                    </a>
+                    <div class="card-footer">
+                        <a href="<c:url value='/supply/search'/>">
+                            <button type="button">View supplies</button>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -124,9 +137,11 @@
                     </div>
                     <h3>View your shift</h3>
                     <p class="card-desc">Check your upcoming and current schedule</p>
-                    <form action="${pageContext.request.contextPath}/shift/search-by-waiter" method="post">
-                        <button type="submit">View shift</button>
-                    </form>
+                    <div class="card-footer">
+                        <form action="${pageContext.request.contextPath}/shift/search-by-waiter" method="post">
+                            <button type="submit">View shift</button>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -138,9 +153,11 @@
                     </div>
                     <h3>Create an order</h3>
                     <p class="card-desc">Start a new order for a table</p>
-                    <a href="<c:url value='/jsp/protected/create-order.jsp'/>">
-                        <button type="button">New order</button>
-                    </a>
+                    <div class="card-footer">
+                        <a href="<c:url value='/jsp/protected/create-order.jsp'/>">
+                            <button type="button">New order</button>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="card">
@@ -151,9 +168,11 @@
                     </div>
                     <h3>Create shift</h3>
                     <p class="card-desc">Schedule a new shift for yourself</p>
-                    <a href="<c:url value='/jsp/protected/create-shift-form.jsp'/>">
-                        <button type="button">New shift</button>
-                    </a>
+                    <div class="card-footer">
+                        <a href="<c:url value='/jsp/protected/create-shift-form.jsp'/>">
+                            <button type="button">New shift</button>
+                        </a>
+                    </div>
                 </div>
 
             </div>

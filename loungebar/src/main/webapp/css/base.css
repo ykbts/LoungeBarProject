@@ -40,7 +40,6 @@
 }
 
 body {
-    padding: 2rem;
     font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
     background-color: var(--off-white);
     color: var(--navy-900);

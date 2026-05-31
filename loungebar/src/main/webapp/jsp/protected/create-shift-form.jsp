@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoungeBar</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/create-shift-form.css">
 </head>
 <body>
 
-<div class="page-wrapper">
-    <h2>Create New Shift</h2>
+<div class="page-wrapper page-wrapper--narrow">
+    <h1>Create New Shift</h1>
     <p class="page-subtitle">Schedule a new work shift</p>
 
     <form action="${pageContext.request.contextPath}/shift/create" method="POST">
