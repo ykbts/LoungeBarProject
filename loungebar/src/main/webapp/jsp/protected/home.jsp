@@ -17,7 +17,7 @@
     <c:choose>
 
         <%-- Customer view --%>
-        <c:when test="${role == 'CUSTOMER'}">
+        <c:when test="${role == 'CUSTOMER'}"></br>
             <p class="dashboard-subtitle">Customer dashboard</p>
             <div class="menu-grid">
 
@@ -72,7 +72,7 @@
         </c:when>
 
         <%-- Waiter view --%>
-        <c:when test="${role == 'WAITER'}">
+        <c:when test="${role == 'WAITER'}"></br>
             <p class="dashboard-subtitle">Waiter dashboard</p>
             <div class="menu-grid">
 
