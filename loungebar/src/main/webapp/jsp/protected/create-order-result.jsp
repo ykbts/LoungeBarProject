@@ -2,14 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Creation Result</title>
-    <style>
-        .success { color: #155724; background: #d4edda; padding: 15px; border: 1px solid #c3e6cb; }
-        .error { color: #721c24; background: #f8d7da; padding: 15px; border: 1px solid #f5c6cb; }
-        .details { margin-top: 20px; font-family: monospace; background: #eee; padding: 10px; }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/create-order-result.css">
 </head>
 <body>
+<div class="page-wrapper page-wrapper--narrow">
 
     <h1>Order Creation Status</h1>
 
@@ -22,7 +23,7 @@
     </div>
 
     <c:if test="${not empty order}">
-        <div class="details">
+        <div class="order-details">
             <h3>Order Details:</h3>
             <ul>
                 <li><strong>Order ID:</strong> ${order.id}</li>
@@ -34,7 +35,7 @@
         </div>
 
         <br>
-        
+
         <form action="<c:url value='/order/add-items'/>" method="GET">
             <input type="hidden" name="orderID" value="${order.id}">
             <button type="submit">Add some items </button>
@@ -45,5 +46,6 @@
     <a href="${pageContext.request.contextPath}/home">Back to Home</a>
     <a href="${pageContext.request.contextPath}/jsp/protected/create-order.jsp">Create Another Order</a>
 
-    </body>
+</div>
+</body>
 </html>
