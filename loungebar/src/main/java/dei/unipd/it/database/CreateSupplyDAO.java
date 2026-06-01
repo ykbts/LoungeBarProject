@@ -60,7 +60,7 @@ public class CreateSupplyDAO extends AbstractDAO<Supply> {
 
             preparedStatement.setString(1, supply.getName());
             preparedStatement.setInt(2, supply.getUnitsAvailable());
-            preparedStatement.setString(3, supply.getType().toString());
+            preparedStatement.setObject(3, supply.getType().name(), java.sql.Types.OTHER);
 
             rs = preparedStatement.executeQuery();
 

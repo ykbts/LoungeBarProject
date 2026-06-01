@@ -86,6 +86,7 @@ public final class CreateOrderServlet extends AbstractDatabaseServlet {
         // Capture everything
         LOGGER.error("Order creation failed", ex);
 
+        o = null;
         m = new Message("Cannot create order", "E500", ex.getMessage());
 //        res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 //        res.setContentType(JSON_UTF_8_MEDIA_TYPE);

@@ -2,7 +2,9 @@
 <html>
 <head>
     <title>Lounge Bar - Welcome</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/components.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
     <div class="container">

@@ -1,0 +1,110 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--navy-600);
+    margin-bottom: 2rem;
+}
+
+.roles-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 5%;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.role-card {
+    flex: 1;
+    min-width: 0;
+    background: var(--white);
+    border: 1px solid var(--navy-100);
+    border-top: 4px solid var(--navy-600);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(10, 22, 40, 0.14);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.role-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--navy-400);
+    border-top-color: var(--navy-400);
+    box-shadow: 0 8px 30px rgba(10, 22, 40, 0.2);
+}
+
+.role-card h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--navy-800);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.role-card a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+.role-card button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.role-card a:nth-of-type(1) button {
+    color: var(--white);
+    background: linear-gradient(135deg, var(--navy-700), var(--navy-600));
+    border: none;
+    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.35);
+}
+
+.role-card a:nth-of-type(1) button:hover {
+    background: linear-gradient(135deg, var(--navy-600), var(--navy-400));
+    box-shadow: 0 4px 14px rgba(10, 22, 40, 0.3);
+}
+
+.role-card a:nth-of-type(2) button {
+    color: var(--navy-700);
+    background: transparent;
+    border: 1px solid var(--navy-200);
+    margin-top: 0.5rem;
+}
+
+.role-card a:nth-of-type(2) button:hover {
+    background: var(--navy-100);
+    border-color: var(--navy-400);
+    color: var(--navy-800);
+}
+
+.role-card button:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 48rem) {
+    .roles-container {
+        flex-direction: column !important;
+        gap: 1.5rem;
+    }
+}

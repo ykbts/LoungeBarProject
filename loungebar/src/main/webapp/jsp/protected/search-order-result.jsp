@@ -6,12 +6,11 @@
 
         <title>Orders of the Bar</title>
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <%--    <link rel="stylesheet" href="<c:url value='/css/base.css'/>">--%>
-    <%--    <link rel="stylesheet" href="<c:url value="/css/search-order-result.css"/>">--%>
-        <link rel="stylesheet" href="../../css/base.css">
-        <link rel="stylesheet" href="../../css/search-order-result.css">
-    </head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<%--    <link rel="stylesheet" href="<c:url value='/css/base.css'/>">--%>
+<%--    <link rel="stylesheet" href="<c:url value="/css/search-order-result.css"/>">--%>
+    <link rel="stylesheet" href="<c:url value='/css/search-order-result.css'/>">
+</head>
 
     <body>
         <div class="title">

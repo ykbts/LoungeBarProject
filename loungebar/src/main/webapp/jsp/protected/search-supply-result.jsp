@@ -3,21 +3,25 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>LoungeBar - Supply List</title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>LoungeBar - Supply List</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/search-supply-result.css">
+</head>
+<body>
+<div class="page-wrapper">
 
-    <body>
-        <h1>Supply Inventory</h1>
-        <hr/>
+    <div class="table-centered">
 
-        
+        <c:if test="${not empty supplyList && !message.error}">
+            <h2 class="page-heading">Supply Inventory</h2>
+            <p class="page-subtitle">${supplyList.size()} items found</p>
 
-        <c:if test='${not empty supplyList && !message.error}'>
-            <table border="1" cellpadding="5">
+            <table class="supply-table">
                 <thead>
-                    <tr style="background-color: #eee;">
+                    <tr>
                         <th>Name</th>
                         <th>Units Available</th>
                     </tr>
@@ -25,21 +29,26 @@
                 <tbody>
                     <c:forEach var="supply" items="${supplyList}">
                         <tr>
-                            <td><b><c:out value="${supply.name}"/></b></td>
+                            <td><c:out value="${supply.name}"/></td>
                             <td><c:out value="${supply.unitsAvailable}"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <p>Total items found: ${supplyList.size()}</p>
         </c:if>
 
-        <c:if test='${empty supplyList && !message.error}'>
-            <p>The inventory is empty or no supplies match your filters.</p>
+        <c:if test="${empty supplyList && !message.error}">
+            <h2 class="page-heading">Supply Inventory</h2>
+            <p class="page-subtitle">The inventory is empty or no supplies match your filters.</p>
         </c:if>
 
-        <hr/>
-        <p><a href="<c:url value="/jsp/protected/search-supply-form.jsp"/>">Back to Search/List</a></p>
-        <p><a href="<c:url value="/home"/>">Back to Home</a></p>
-    </body>
+    <div class="table-links">
+        <a href="<c:url value="/supply/search"/>">← Back to Search</a>
+        <a href="<c:url value="/home"/>">← Back to Home</a>
+    </div>
+
+
+    </div>
+</div>
+</body>
 </html>

@@ -58,7 +58,7 @@ function renderTables(tables) {
         item.innerHTML = `
             <span><strong>Table:</strong> ${table.number}     </span>
             <span><strong>Capacity:</strong> ${table.capacity}    </span>
-            <span><strong>Available:</strong> ${table["is-available"]}     </span>
+            <span><strong>Available:</strong> ${table["is-available"] ? "Available" : "Not Available"}     </span>
         `;
 
         container.appendChild(item);
