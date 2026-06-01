@@ -6,23 +6,27 @@
     <head>
         <meta charset="utf-8">
         <title>LoungeBar - Create Supply Form</title>
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/components.css">
+        <link rel="stylesheet" type="text/css" href="css/create-supply-form.css">
     </head>
 
     <body>
-        <h1>Create Supply Form</h1>
-        <hr/>
+        <a href="<c:url value="/home"/>" class="fixed-home-btn">Home</a>
 
-        <form method="POST" action="<c:url value="/supply/create"/>">
-            <label for="nameID">Supply Name:</label>
-            <input id="nameID" name="name" type="text" required/><br/>
+        <div class="container">
+            <h1>Create Supply Form</h1>
 
-            <label for="unitsID">Units Available:</label>
-            <input id="unitsID" name="units" type="text" required/><br/><br/>
+            <form method="POST" action="<c:url value="/supply/create"/>">
+                <label for="nameID">Supply Name:</label>
+                <input id="nameID" name="name" type="text" required/>
 
-            <button type="submit">Submit</button><br/>
-            <button type="reset">Reset the form</button>
-        </form>
+                <label for="unitsID" style="margin-top: 1.2rem;">Units Available:</label>
+                <input id="unitsID" name="units" type="text" required/>
 
-        <p><a href="<c:url value="/home"/>">Back to Home</a></p>
+                <button type="submit">Submit</button>
+                <button type="reset">Reset the form</button>
+            </form>
+        </div>
     </body>
 </html>
