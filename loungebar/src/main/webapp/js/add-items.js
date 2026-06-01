@@ -38,7 +38,7 @@ async function addItem() {
         console.log(item);
 
         const li = document.createElement('li');
-        li.textContent = `${item.drinkName} x ${item.quantity} `;
+        li.textContent = `${item.drinkName} &nbsp &nbsp &nbsp x ${item.quantity} `;
         document.getElementById('itemList').appendChild(li);
 
     } catch (err) {
