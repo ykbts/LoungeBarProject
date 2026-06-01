@@ -1,23 +1,13 @@
-
+/* 
 body {
     font-weight: 300;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 
-h1 {
-    margin: 1rem;
-}
 
-h1::after {
-    content: '';
-    display: block;
-    height: 1px;
-    width: 100%;
-    background: linear-gradient(to right, var(--navy-700), transparent);
-    margin-top: 10px;
-}
+
 
 h2 {
     font-weight: 500;
@@ -42,13 +32,13 @@ form {
     border: 1px solid var(--navy-100);
     border-top: 4px solid var(--navy-600);
     border-radius: 15px;
-    box-shadow: 0 4px 24px rgba(10, 22, 40, .14);
     padding: 2.5rem;
+    margin-top: 1.2rem;
+    box-shadow: 0 4px 24px rgba(10, 22, 40, .14);
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 20px 30px;
     align-items: end;
-    width: 45%;
 }
 
  label {
@@ -93,30 +83,37 @@ select {
 
 
 button {
-    width: 50%;
+    width: auto;
     margin-top: 1rem;
-    padding: 12px 28px;
     border: 1px solid var(--navy-700);
     border-radius: 6px;
-    color: var(--navy-400);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 500;
     letter-spacing: 0.16em;
     box-shadow: 0 2px 8px  rgba(10, 22, 40, 0.541);
     grid-column: 1 / -1;
     text-transform: uppercase;
     cursor: pointer;
-    justify-self: center;
 }
 
 .btn {
-    padding: 0.5rem 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
     font-weight: 500;
-    font-size: 1rem;
+    letter-spacing: 1px;
     color: var(--white);
-    background: var(--navy-600);
+    background: linear-gradient(135deg, var(--navy-700), var(--navy-600));
     border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.35);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+        background var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
 }
 
 .btn:hover {
@@ -143,6 +140,7 @@ input[type="number"]::-webkit-outer-spin-button { opacity: 0.3; }
     max-width: 640px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     color: var(--white);
 }
 
