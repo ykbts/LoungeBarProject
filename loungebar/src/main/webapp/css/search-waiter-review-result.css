@@ -1,0 +1,73 @@
+h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 600;
+    color: var(--navy-800);
+    margin-bottom: 1.2rem;
+}
+
+/* Scroll wrapper */
+.table-wrap {
+    overflow-x: auto;
+}
+
+/* Reviews table */
+table {
+    width: 100%;
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(10, 22, 40, 0.14);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th,
+td {
+    padding: 12px 16px;
+    border: 1px solid var(--navy-100);
+    vertical-align: top;
+}
+
+/* Header */
+thead th {
+    background: linear-gradient(135deg, var(--navy-700), var(--navy-600));
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-color: var(--navy-600);
+}
+
+/* Rows */
+tbody tr {
+    transition: background var(--transition);
+}
+
+tbody tr:nth-child(even) {
+    background: var(--off-white);
+}
+
+tbody tr:hover {
+    background: #eef3fb;
+}
+
+/* Score */
+td strong {
+    color: var(--navy-800);
+    font-weight: 600;
+}
+
+/* Comment */
+td:last-child {
+    color: var(--navy-700);
+}
+
+@media (max-width: 768px) {
+    th,
+    td {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+}
