@@ -1,8 +1,10 @@
 package dei.unipd.it.servlets;
 
 import dei.unipd.it.database.CreateShiftDAO;
+import dei.unipd.it.database.CreateWorkDAO;
 import dei.unipd.it.resources.Actions;
 import dei.unipd.it.resources.Shift;
+import dei.unipd.it.resources.Work;
 import dei.unipd.it.resources.Message;
 import dei.unipd.it.resources.LogContext;
 
@@ -14,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.message.StringFormattedMessage;
 
 /**
@@ -60,6 +63,14 @@ public final class CreateShiftServlet extends AbstractDatabaseServlet {
                 s = new Shift(-1, start, end);
 
                 s = new CreateShiftDAO(getConnection(), s).access().getOutputParam();
+
+                
+                HttpSession session = req.getSession(false);
+                String waiterID = (session != null) ? (String) session.getAttribute("user") : null;
+                if (waiterID == null) {
+                    throw new IllegalArgumentException("No waiter found in session.");
+                }
+                new CreateWorkDAO(getConnection(), new Work(waiterID, s.getId())).access();
 
                 m = new Message(String.format("Shift %d successfully created.", s.getId()));
                 LogContext.setResource(String.valueOf(s.getId()));
