@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoungeBar - Supply List</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
@@ -45,11 +46,8 @@
             <p class="page-subtitle">The inventory is empty or no supplies match your filters.</p>
         </c:if>
 
-    <div class="table-links">
-        <a href="<c:url value="/supply/search"/>">← Back to Search</a>
-        <a href="<c:url value="/home"/>">← Back to Home</a>
-    </div>
-
+    <p><a href="<c:url value="/supply/search"/>">Back to Search</a></p>
+    <p><a href="<c:url value="/home"/>">Back to Home</a></p>
 
     </div>
 </div>

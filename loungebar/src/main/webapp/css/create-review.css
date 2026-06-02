@@ -131,3 +131,7 @@ label {
         transform: translateY(0);
     }
 }
+
+body {
+    padding-top: 3.5rem;
+}

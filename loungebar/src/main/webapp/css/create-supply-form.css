@@ -117,3 +117,7 @@ button[type="submit"]:hover {
         align-self: center;
     }
 }
+
+body {
+    padding-top: 3.5rem;
+}

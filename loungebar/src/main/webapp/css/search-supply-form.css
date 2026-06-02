@@ -72,3 +72,7 @@ select.form-control:focus {
 .list-all-subtitle {
     font-size: 0.8rem;
 }
+
+body {
+    padding-top: 3.5rem;
+}

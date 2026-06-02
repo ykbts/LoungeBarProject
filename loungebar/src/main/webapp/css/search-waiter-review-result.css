@@ -71,3 +71,6 @@ td:last-child {
         font-size: 0.85rem;
     }
 }
+body {
+    padding-top: 3.5rem;
+}

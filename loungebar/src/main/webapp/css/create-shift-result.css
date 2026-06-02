@@ -53,3 +53,7 @@
     font-family: 'Source Code Pro', monospace;
     letter-spacing: 0.05em;
 }
+
+body {
+    padding-top: 3.5rem;
+}

@@ -142,3 +142,6 @@
     .page-wrapper > form,
     .form-panel { padding: 1.5rem; }
 }
+body {
+    padding-top: 3.5rem;
+}

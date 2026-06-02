@@ -404,3 +404,36 @@ p a:hover {
         width: 100%;
     }
 }
+
+/* Home button */
+a[href$="/home"] {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--navy-200);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.15);
+
+    max-width: calc(100vw - 2rem);
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 480px) {
+    a[href$="/home"] {
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.4rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    body {
+        padding-top: 3rem;
+    }
+}
