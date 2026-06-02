@@ -98,13 +98,13 @@ function showSuccess(review) {
 
     // create labels
     const l_waiter = document.createElement("label");
-    l_waiter.textContent = "Waiter";
+    l_waiter.textContent = "Waiter: ";
     const l_client = document.createElement("label");
-    l_client.textContent = "Client";
+    l_client.textContent = "Client: ";
     const l_score = document.createElement("label");
-    l_score.textContent = "Score";
+    l_score.textContent = "Score: ";
     const l_comment = document.createElement("label");
-    l_comment.textContent = "Comment";
+    l_comment.textContent = "Comment: ";
 
 
     // append to parent div
@@ -155,20 +155,20 @@ async function loadWaiters() {
 
 
 const labels = document.querySelectorAll('#stars label');
+const inputs = document.querySelectorAll('#stars input[type="radio"]');
+
 
 function updateStars(selected) {
 
     const score = document.getElementById('score');
-
     labels.forEach((label, i) => {
         label.classList.toggle('active', i < selected);
     });
     score.value = selected > 0 ? selected : '';
 }
 
-labels.forEach((label, i) => {
 
-    const inputs = document.querySelectorAll('#stars input[type="radio"]');
+labels.forEach((label, i) => {
 
     label.addEventListener('mouseover', () => updateStars(i + 1));
 

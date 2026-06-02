@@ -7,15 +7,13 @@
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Reviews Page</title>
+        <title>Create Reviews</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         <link rel="stylesheet" href="<c:url value="../../css/base.css"/>">
         <link rel="stylesheet" href="<c:url value="../../css/components.css"/>">
         <link rel="stylesheet" href="<c:url value="../../css/create-review.css"/>">
-        <link rel="stylesheet" href="../../css/base.css"/>">
-        <link rel="stylesheet" href="../../css/components.css"/>">
-        <link rel="stylesheet" href="../../css/create-review.css"/>">
+
     </head>
 
   <body>
