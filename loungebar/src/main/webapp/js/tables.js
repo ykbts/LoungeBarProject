@@ -52,8 +52,9 @@ function renderTables(tables) {
     tables.forEach(resource => {
 
         const item = document.createElement("div");
-        item.classList.add("table-item");
         const table = resource.table;
+        item.classList.add("table-item");
+        item.classList.add(table["is-available"] ? "available" : "unavailable");
 
         item.innerHTML = `
             <span><strong>Table:</strong> ${table.number}     </span>

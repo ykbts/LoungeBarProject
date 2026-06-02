@@ -118,6 +118,15 @@
     margin-right: 0.3rem;
 }
 
+/* Availability */
+.table-item.available {
+    border-left-color: #1a7a4a;
+}
+
+.table-item.unavailable {
+    border-left-color: #c0392b;
+}
+
 @media (max-width: 992px) {
     .order-layout { grid-template-columns: 1fr; }
 
