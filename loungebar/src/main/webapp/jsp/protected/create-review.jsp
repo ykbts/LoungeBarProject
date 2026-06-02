@@ -43,12 +43,24 @@
 
             <div class="form-group">
                 <label for="score">Experience evaluation</label>
-                <input type="number" id="score" min="1" max="5">
+                <div class="star-rating" id="stars" role="radiogroup">
+                    <input type="radio" name="rating" id="s1" value="1">
+                    <label for="s1">★</label>
+                    <input type="radio" name="rating" id="s2" value="2">
+                    <label for="s2">★</label>
+                    <input type="radio" name="rating" id="s3" value="3">
+                    <label for="s3">★</label>
+                    <input type="radio" name="rating" id="s4" value="4">
+                    <label for="s4">★</label>
+                    <input type="radio" name="rating" id="s5" value="5">
+                    <label for="s5">★</label>
+                </div>
+                <input type="hidden" id="score" min="1" max="5">
             </div>
 
             <div class="form-group">
                 <label for="comment">Comment</label>
-                <input type="text" id="comment">
+                <textarea id="comment"></textarea>
             </div>
 
             <button class="btn-primary" type="button" id="confirmReview" onclick="createReview()">
