@@ -24,8 +24,8 @@
                 <form class="form-panel" method="POST" action="<c:url value="/order/create"/>">
 
                     <div class="form-group">
-                        <label>Waiter ID:</label>
-                        <input type="text" name="waiterID"
+                        <label for="waiterInput">Waiter ID:</label>
+                        <input type="text" name="waiterID" id="waiterInput"
                             value="<%= (session.getAttribute("user") != null) ? session.getAttribute("user") : "ERROR: There is no session" %>" readonly>
                     </div>
 
@@ -53,9 +53,9 @@
                 </aside>
 
             </div>
-
+            </div>
             <p><a href="<c:url value="/home"/>">Back to Home</a></p>
-        </div>
+        
 
         <script type="text/javascript" src="<c:url value="/js/tables.js"/>"></script>
 
