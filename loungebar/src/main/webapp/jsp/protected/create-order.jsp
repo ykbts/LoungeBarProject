@@ -8,7 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LoungeBar - Create Order Form</title>
 
-        <!-- Style -->
         <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
         <link rel="stylesheet" href="<c:url value='/css/components.css'/>">
         <link rel="stylesheet" href="<c:url value='/css/create-order.css'/>">
@@ -55,7 +54,7 @@
             </div>
             </div>
             <p><a href="<c:url value="/home"/>">Back to Home</a></p>
-        
+
 
         <script type="text/javascript" src="<c:url value="/js/tables.js"/>"></script>
 

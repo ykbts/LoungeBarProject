@@ -7,9 +7,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LoungeBar - Create Supply Form</title>
-        <link rel="stylesheet" type="text/css" href="css/base.css">
-        <link rel="stylesheet" type="text/css" href="css/components.css">
-        <link rel="stylesheet" type="text/css" href="css/create-supply-form.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/create-supply-form.css">
+
     </head>
 
     <body>
