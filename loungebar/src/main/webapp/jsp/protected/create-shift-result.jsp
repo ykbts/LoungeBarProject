@@ -78,9 +78,7 @@
                     <a href="${pageContext.request.contextPath}/jsp/protected/create-shift-form.jsp" class="btn-primary">
                         Try Again
                     </a>
-                    <a href="<c:url value="/home"/>" class="btn-secondary">
-                        Back to Home
-                    </a>
+                    <p><a href="<c:url value="/home"/>">Back to Home</a></p>
                 </div>
             </div>
         </c:otherwise>

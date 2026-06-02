@@ -54,7 +54,7 @@
 
             </div>
 
-            <p><a href="<c:url value="/home"/>">&larr; Back to Home</a></p>
+            <p><a href="<c:url value="/home"/>">Back to Home</a></p>
         </div>
 
         <script type="text/javascript" src="<c:url value="/js/tables.js"/>"></script>
