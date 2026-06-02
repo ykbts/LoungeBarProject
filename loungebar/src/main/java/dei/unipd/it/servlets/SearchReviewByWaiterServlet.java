@@ -48,7 +48,7 @@ public final class SearchReviewByWaiterServlet extends AbstractDatabaseServlet {
                     .access().getOutputParam();
 
             m = new Message("Reviews successfully searched");
-            LOGGER.info("Reviews successfully searched for waiter: %s", waiterID);
+            LOGGER.info("Reviews successfully searched for waiter: {}", waiterID);
 
         } catch (SQLException ex) {
             m = new Message("Cannot search for reviews: unexpected error while accessing the database",

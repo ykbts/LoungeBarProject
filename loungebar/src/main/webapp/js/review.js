@@ -16,10 +16,6 @@ async function createReview() {
         return;
         }
 
-    console.log(waiter);
-    console.log(client);
-    console.log(score);
-    console.log(comment);
 
     // ── build payload ──────────────────────────────────────────────────────
     const payload = {
@@ -81,13 +77,13 @@ async function createReview() {
 }
 
 function showSuccess(review) {
-
-    const panel  = document.getElementById("result");
+    const panel = document.getElementById("result");
     const header = document.getElementById("resultHeader");
     const body   = document.getElementById("resultBody");
 
-    header.textContent = "Review stored";
+    header.textContent = "Review stored!";
     body.innerHTML = "";
+    panel.classList.add("visible");
 
     // create the fields containers
     const waiter = document.createElement("div");
@@ -101,16 +97,23 @@ function showSuccess(review) {
     score.textContent = review.score;
     comment.textContent = review.comment;
 
+    // create labels
+    const l_waiter = document.createElement("label");
+    l_waiter.textContent = "Waiter";
+    const l_client = document.createElement("label");
+    l_client.textContent = "Client";
+    const l_score = document.createElement("label");
+    l_score.textContent = "Score";
+    const l_comment = document.createElement("label");
+    l_comment.textContent = "Comment";
+
 
     // append to parent div
-    body.append(waiter, client, score, comment);
+    body.append(l_waiter, waiter, l_client, client, l_score, score, l_comment, comment);
 
-    panel.className = "success";
-    panel.style.display = "block";
 }
 
 function showError(message) {
-    const panel  = document.getElementById("result");
     const header = document.getElementById("resultHeader");
     const body   = document.getElementById("resultBody");
 
@@ -121,8 +124,6 @@ function showError(message) {
     msg.textContent = message;
     body.appendChild(msg);
 
-    panel.className = "error";
-    panel.style.display = "block";
 }
 
 async function loadWaiters() {

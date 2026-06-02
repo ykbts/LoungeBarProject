@@ -48,7 +48,7 @@ public final class SearchWaiterShiftServlet extends AbstractDatabaseServlet {
             sl = new SearchShiftByWaiterDAO(getConnection(), waiterID)
                     .access().getOutputParam();
             m = new Message("Shifts successfully searched");
-            LOGGER.info("Shifts successfully searched for waiter: %s", waiterID);
+            LOGGER.info("Shifts successfully searched for waiter: {}", waiterID);
 
         } catch (SQLException ex) {
             m = new Message("Cannot search for shifts: unexpected error while accessing the database",

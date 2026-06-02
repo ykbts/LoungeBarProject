@@ -61,7 +61,7 @@ public abstract class AbstractDAO<T> implements DataAccessObject<T> {
     /**
      * A LOGGER available for all the subclasses.
      */
-    protected static final Logger LOGGER = LogManager.getLogger(AbstractDAO.class, StringFormatterMessageFactory.INSTANCE);
+    protected /*static*/ final Logger LOGGER = LogManager.getLogger(/*AbstractDAO.class*/getClass()/*, StringFormatterMessageFactory.INSTANCE*/);
 
     /**
      * The connection to be used to access the database.
