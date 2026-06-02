@@ -95,16 +95,6 @@
     }
 }
 
-/* Home button */
-a[href$="/home"] {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1000;
-    margin: 0;
-    padding: 0.5rem 1rem;
-    background: var(--white);
-    border: 1px solid var(--navy-200);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.15);
+body {
+    padding-top: 3.5rem;
 }

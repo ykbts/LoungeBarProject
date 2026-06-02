@@ -4,6 +4,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LoungeBar - Client Order</title>
         <style>
             .success { color: #155724; background: #d4edda; padding: 15px; border: 1px solid #c3e6cb; }
