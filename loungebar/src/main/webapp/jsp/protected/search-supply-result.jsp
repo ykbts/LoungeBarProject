@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/search-supply-result.css">
 </head>
 <body>
+
+<a href="<c:url value="/home"/>" class="fixed-home-btn">Home</a>
+
 <div class="page-wrapper">
 
     <div class="table-centered">
