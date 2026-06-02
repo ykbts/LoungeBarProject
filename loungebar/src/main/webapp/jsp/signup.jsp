@@ -3,7 +3,9 @@
 <html>
 <head>
     <title>Sign-up - ${role}</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/components.css">
+    <link rel="stylesheet" type="text/css" href="css/signup.css">
 </head>
 <body>
     <div class="container">
