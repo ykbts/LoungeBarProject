@@ -4,7 +4,7 @@ const ENDPOINT = "/loungebar/rest/reservation";
 async function createReservation() {
     const btn = document.getElementById("confirmReservation");
 
-    // ── collect & validate inputs ──────────────────────────────────────────
+    // collect and validate inputs 
     const startTime    = document.getElementById("startTime").value;
     const endTime      = document.getElementById("endTime").value;
     const customerName = document.getElementById("clientID").value.trim();
@@ -27,7 +27,7 @@ async function createReservation() {
     console.log(tableNumber);
     console.log(numberOfPeople);
 
-    // ── build payload ──────────────────────────────────────────────────────
+    // build payload 
     const dataToSend = {
         startTime: startTime,
         endTime:   endTime,
@@ -88,31 +88,18 @@ async function createReservation() {
     }
 }
 
-// ── render helpers ─────────────────────────────────────────────────────────
+// render helpers
 
-/**
- * Renders the reservation details returned by the server.
- * The "id" field is intentionally excluded from the display.
- * @param {Object} reservation - the Reservation JSON from the response body
- */
 function showSuccess(reservation) {
 
     const panel  = document.getElementById("result");
     const header = document.getElementById("resultHeader");
     const body   = document.getElementById("resultBody");
 
-    // fields to display and their labels (id is excluded)
-    // const fields = [
-    //     { key: "id",   label: "Id"      },
-    //     { key: "customer",   label: "Customer"      },
-    //     { key: "table",    label: "Table"         },
-    //     { key: "people", label: "Guests"        },
-    //     { key: "startTime",      label: "Start Time"    },
-    //     { key: "endTime",        label: "End Time"      },
-    // ];
 
-    header.textContent = "Reservation confirmed";
+    header.textContent = "Reservation confirmed!";
     body.innerHTML = "";
+    panel.classList.add("visible");
 
     // create the fields containers
     const id = document.createElement("div");
@@ -130,41 +117,35 @@ function showSuccess(reservation) {
     customer.textContent = reservation.customer;
     table.textContent = reservation.table;
 
+    // create labels
+    const l_id = document.createElement("label");
+    l_id.textContent = "ID: ";
+    const l_start = document.createElement("label");
+    l_start.textContent = "Start Time: ";
+    const l_end = document.createElement("label");
+    l_end.textContent = "End Time: ";
+    const l_people = document.createElement("label");
+    l_people.textContent = "Number of people: ";
+    const l_table = document.createElement("label");
+    l_table.textContent = "Table Number: ";
+    const l_customer = document.createElement("label");
+    l_customer.textContent = "Table: ";
+
     // append to parent div
-    body.append(id, start, end, people, customer, table);
+    body.append(l_id, id, l_customer, customer, l_table, table, l_start, start, l_end, end, l_people, people);
 
-    // fields.forEach(({ key, label }) => {
-    //     const value = reservation[key];
-    //     if (value === undefined || value === null) return;
-    //
-    //     const row = document.createElement("div");
-    //     row.className = "result-row";
-    //     row.innerHTML = `
-    //         <span class="result-key">${label}</span>
-    //         <span class="result-value">${formatValue(key, value)}</span>
-    //     `;
-    //     body.appendChild(row);
-    // });
-
-    panel.className = "success";
-    panel.style.display = "block";
 }
 
-/**
- * Renders an error message panel.
- * @param {string} message
- */
+
 function showError(message) {
 
     const panel  = document.getElementById("result");
     const header = document.getElementById("resultHeader");
     const body   = document.getElementById("resultBody");
 
-    header.textContent = "Error";
+    header.textContent = "Error!";
     body.innerHTML = `<p class="error-msg">${escapeHtml(message)}</p>`;
 
-    panel.className = "error";
-    panel.style.display = "block";
 
     // const div = document.getElementById("result");
     // if (div) {
