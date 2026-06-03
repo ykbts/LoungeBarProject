@@ -53,7 +53,9 @@
 
             </div>
             </div>
-            <p><a href="<c:url value="/home"/>">Back to Home</a></p>
+            <p>
+                <a class="back-link" href="<c:url value="/home"/>">Back to Home</a>
+            </p>
 
 
         <script type="text/javascript" src="<c:url value="/js/tables.js"/>"></script>

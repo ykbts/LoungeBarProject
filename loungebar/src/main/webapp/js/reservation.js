@@ -97,9 +97,9 @@ function showSuccess(reservation) {
     const body   = document.getElementById("resultBody");
 
 
+    panel.classList.add("success", "visible");
     header.textContent = "Reservation confirmed!";
     body.innerHTML = "";
-    panel.classList.add("visible");
 
     // create the fields containers
     const id = document.createElement("div");
@@ -111,7 +111,7 @@ function showSuccess(reservation) {
 
     // assign the values
     id.textContent = reservation.id;
-    start.textContent = formatDateTime(reservation.startTime);
+    start.textContent = reservation.startTime;
     end.textContent = reservation.endTime;
     people.textContent = reservation.people;
     customer.textContent = reservation.customer;
@@ -143,6 +143,7 @@ function showError(message) {
     const header = document.getElementById("resultHeader");
     const body   = document.getElementById("resultBody");
 
+    panel.classList.add("error", "visible");
     header.textContent = "Error!";
     body.innerHTML = `<p class="error-msg">${escapeHtml(message)}</p>`;
 
@@ -186,9 +187,9 @@ function escapeHtml(str) {
         .replace(/"/g, "&quot;");
 }
 
-function formatDateTime(str) {
-    if (!str) return "-";
-
-    const date = new Date(str.replace(" ", "T"));
-    return date.toLocaleString("it-IT");
-}
+// function formatDateTime(str) {
+//     if (!str) return "-";
+//
+//     const date = new Date(str.replace(" ", "T"));
+//     return date.toLocaleString("it-IT");
+// }

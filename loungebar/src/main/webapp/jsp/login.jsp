@@ -29,7 +29,7 @@
         </form>
         
         <br>
-        <a href="${pageContext.request.contextPath}/">Back to home</a>
+        <a class="back-link" href="${pageContext.request.contextPath}/">Back to home</a>
     </div>
 </body>
 </html>

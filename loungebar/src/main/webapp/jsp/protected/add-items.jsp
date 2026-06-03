@@ -21,16 +21,17 @@
     <body>
 
         <div class="page-wrapper page-wrapper--narrow">
-            
-            <!-- <div class="${empty message.errorCode ? 'success' : 'error'}">
-            <strong>${message.message}</strong>
-            <c:if test="${not empty message.errorCode}">
-                <p>Error Code: ${message.errorCode}</p>
-                <p>Technical Details: ${message.errorDetails}</p>
-            </c:if>
-        </div> -->
+
+
+            <div class="${not empty orderItemList ? 'success' : 'error'}">
+                <strong>${not empty orderItemList ? message.message : "No order pending for this table."}</strong>
+                <c:if test="${not empty message.errorCode}">
+                    <p>Error Code: ${message.errorCode}</p>
+                    <p>Technical Details: ${message.errorDetails}</p>
+                </c:if>
+            </div>
         
-            <h1>Manage Order</h1>
+            <h1>Review my Order</h1>
         
             <p class="page-subtitle">Add items to your order</p>
 
@@ -65,7 +66,7 @@
             </div>
             
             <div>
-                <a href="<c:url value="/home"/>">Back to Home</a>
+                <a class="back-link" href="<c:url value="/home"/>">Back to Home</a>
             </div>
         </div>
 

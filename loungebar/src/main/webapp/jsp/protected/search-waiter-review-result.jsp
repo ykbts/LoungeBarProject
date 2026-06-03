@@ -48,7 +48,7 @@
         </c:otherwise>
     </c:choose>
 
-    <p><a href="<c:url value="/home"/>">Back to Home</a></p>
+    <p><a class="back-link" href="<c:url value="/home"/>">Back to Home</a></p>
 
 </div>
 </body>

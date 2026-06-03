@@ -295,23 +295,38 @@ input.form-control:focus {
     margin: 0.5rem 0 1.4rem;
 }
 
+
 .back-link,
 p.back-link a,
 p a {
     display: inline-block;
+    position: fixed;
+    top: 3%;
+    right: 5%;
+    z-index: 100;
     margin-top: 1.5rem;
+    padding: .3rem;
+    background: var(--white);
+    border: 1px solid var(--navy-200);
     color: var(--navy-700);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.15);
     font-weight: 500;
     letter-spacing: 0.5px;
     text-decoration: none;
     font-size: 1rem;
-    transition: color var(--transition);
+    transition: color var(--transition), box-shadow var(--transition);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .back-link:hover,
 p.back-link a:hover,
 p a:hover {
     color: var(--navy-900);
+    box-shadow: 0 4px 14px rgba(10, 22, 40, 0.39);
 }
 
 .result-card {
@@ -405,25 +420,6 @@ p a:hover {
     }
 }
 
-/* Home button */
-a[href$="/home"] {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1000;
-    margin: 0;
-    padding: 0.5rem 1rem;
-    background: var(--white);
-    border: 1px solid var(--navy-200);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.15);
-
-    max-width: calc(100vw - 2rem);
-    box-sizing: border-box;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 
 @media (max-width: 480px) {
     a[href$="/home"] {

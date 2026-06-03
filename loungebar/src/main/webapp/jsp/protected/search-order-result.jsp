@@ -71,7 +71,7 @@
         </c:if>
 
         <br/>
-        <a href="${pageContext.request.contextPath}/home">Back to Home</a>
+        <a class="back-link" href="${pageContext.request.contextPath}/home">Back to Home</a>
 
         <script type="text/javascript" src="<c:url value='/js/update-order.js'/>"></script>
     </body>
