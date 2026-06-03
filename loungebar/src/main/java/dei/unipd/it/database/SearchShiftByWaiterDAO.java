@@ -71,7 +71,7 @@ public final class SearchShiftByWaiterDAO extends AbstractDAO<List<Shift>> {
                 ));
             }
 
-            LOGGER.info("Shifts successfully retrieved for waiter: %s", waiterID);
+            LOGGER.info("Shifts successfully retrieved for waiter: {}", waiterID);
 
         } finally {
             if (rs != null) {

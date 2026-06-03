@@ -16,15 +16,9 @@
 }
 
 
-/* h1::after {
-    content: '';
-    display: block;
-    height: 3px;
-    width: 60%;
-    background: linear-gradient(90deg, var(--navy-800), transparent);
-    margin-top: .35rem;
-    border-radius: 2px;
-} */
+h1 {
+    margin-top: 1.5rem;
+}
 
 
 hr {

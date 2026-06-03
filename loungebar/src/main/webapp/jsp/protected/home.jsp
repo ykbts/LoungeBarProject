@@ -177,7 +177,7 @@
 
             </div>
             <div class="logout-wrap">
-                <a href="<c:url value='/logout'/>"><button>&#8592; Logout</button></a>
+                <a href="<c:url value='/logout'/>"><button>Logout</button></a>
             </div>
         </c:when>
 

@@ -44,7 +44,7 @@ body {
     background-color: var(--off-white);
     color: var(--navy-900);
     line-height: 1.7;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 h1 {

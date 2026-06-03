@@ -36,7 +36,7 @@ public class RestDispatcherServlet extends AbstractDatabaseServlet {
 
             // iterate over the registered processors
             for (ResourceProcessor processor : processors) {
-                LOGGER.info("%s called.", processor);
+                LOGGER.info("{} called.", processor.getClass().getSimpleName());
 
                 if (processor.process(req, resp, getConnection()))
                     return;

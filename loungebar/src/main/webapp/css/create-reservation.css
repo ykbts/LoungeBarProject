@@ -1,0 +1,71 @@
+.page-subtitle {
+    letter-spacing: 0.8px;
+}
+
+.form-group label {
+    font-size: 1rem;
+}
+
+.btn-primary {
+    width: 100%;
+    letter-spacing: .08rem;
+}
+
+.back-link {
+    position: fixed;
+    top: 2%;
+    right: 5%;
+}
+
+.form-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-block .form-group {
+    width: 47%;
+}
+
+.result-card {
+    margin-top: 2.5rem;
+    padding: 1.2rem 2.5rem;
+    display: none;
+}
+
+.result-card.visible {
+    display: block;
+    animation: fadeSlideIn var(--transition);
+}
+
+.reservation-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: 'EB Garamond', Georgia, serif;
+    margin-bottom: 1rem;
+}
+
+.reservation-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: .5rem;
+    padding: 0 0.7rem;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 530px) {
+
+    .form-block .form-group {
+        width: 100%;
+    }
+}

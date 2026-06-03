@@ -107,8 +107,8 @@ public class ProtectedResourceFilter implements Filter {
 
                 // try to authenticate the user
                 //forwarding the request to the login page
-                LOGGER.info("Forwarding the request to the login page");
-                req.getRequestDispatcher("/jsp/login.jsp").forward(req,res);
+                LOGGER.info("Forwarding the request to the index page");
+                req.getRequestDispatcher("/jsp/index.jsp").forward(req,res);
                 return;
             } else {
 
@@ -126,7 +126,7 @@ public class ProtectedResourceFilter implements Filter {
                     // try to authenticate the user
                     //forwarding the request to the login page
                     LOGGER.info("Forwarding the request to the login page");
-                    req.getRequestDispatcher("/jsp/login.jsp").forward(req,res);
+                    req.getRequestDispatcher("/jsp/index.jsp").forward(req,res);
                     return;
                 }
             }

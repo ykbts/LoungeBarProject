@@ -38,8 +38,10 @@ public final class SearchOrderServlet extends AbstractDatabaseServlet {
 
         LogContext.setIPAddress(req.getRemoteAddr());  
         LogContext.setAction(Actions.SEARCH_ORDER);
+
         Message m= null;
         List<Orders> ol = null;
+
         try {
         // Get id of the waiter from the session
         HttpSession session = req.getSession(false);
@@ -53,6 +55,8 @@ public final class SearchOrderServlet extends AbstractDatabaseServlet {
                     .access().getOutputParam();
 
             m = new Message("Orders successfully retrieved.");
+            LOGGER.info("Orders successfully retrieved.");
+
         }
 
     } catch (SQLException ex) {

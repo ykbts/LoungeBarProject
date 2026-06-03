@@ -1,0 +1,137 @@
+.page-subtitle {
+    letter-spacing: 0.8px;
+}
+
+.form-group label {
+    font-size: 1rem;
+}
+
+.form-group select {
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--navy-200);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+    color: var(--navy-900);
+    background: var(--white);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--navy-400);
+    box-shadow: 0 0 0 4px rgba(46, 95, 163, 0.15);
+}
+
+
+.form-group input[readonly] {
+    background: var(--off-white);
+    color: var(--navy-400);
+    cursor: not-allowed;
+    border-color: var(--navy-100);
+}
+
+.star-rating {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+.star-rating input[type="radio"] {
+     display: none; 
+}
+
+.star-rating label {
+    padding: 0 1rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: color .2s;
+}
+
+.star-rating label:hover,
+.star-rating label.active {
+   color: #fac310;
+}
+
+textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--navy-200);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+    color: var(--navy-900);
+    background: var(--white);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--navy-400);
+    box-shadow: 0 0 0 4px rgba(46, 95, 163, 0.15);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    letter-spacing: 0.6px;
+}
+
+.back-link {
+    position: fixed;
+    top: 2%;
+    right: 5%;
+}
+
+.result-card {
+    margin-top: 2.5rem;
+    padding: 1.2rem 2.5rem;
+    display: none;
+}
+
+.result-card.visible {
+    display: block;
+    animation: fadeSlideIn var(--transition);
+}
+
+.review-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: 'EB Garamond', Georgia, serif;
+    margin-bottom: 1rem;
+}
+
+.review-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: .5rem;
+    padding: 0 0.7rem;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy-800);
+    letter-spacing: normal;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    padding-top: 3.5rem;
+}

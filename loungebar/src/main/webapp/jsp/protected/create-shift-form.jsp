@@ -40,9 +40,8 @@
 
         <button type="submit">Create Shift</button>
     </form>
-
-    <p><a href="<c:url value="/home"/>">&larr; Back to Home</a></p>
-</div>
+    </div>
+    <p><a href="<c:url value="/home"/>">Back to Home</a></p>
 
 <script>
     const now = new Date();
