@@ -1,21 +1,18 @@
 .page-wrapper {
     width: 100%;
     min-height: 100vh;
-    padding: 2rem 1.5rem;
+    padding: 3rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.table-centered {
-    width: 100%;
-    max-width: 800px;
+.page-wrapper--narrow {
+    max-width: 550px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
 }
 
-.page-heading {
+.page-wrapper h1 {
     font-family: 'EB Garamond', Georgia, serif;
     font-size: 2.2rem;
     font-weight: 500;
@@ -28,71 +25,160 @@
     font-size: 1.05rem;
     color: var(--navy-600);
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
-.supply-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+/* Schedina Risultato Base */
+.result-card {
     background: var(--white);
     border: 1px solid var(--navy-100);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 24px rgba(10, 22, 40, 0.08);
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 24px rgba(10, 22, 40, 0.14);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Variazione Successo (Verde) */
+.result-card.success {
+    border-top: 4px solid #1a7a4a;
+}
+
+.result-card.success .result-icon {
+    background: rgba(26, 122, 74, 0.1);
+    color: #1a7a4a;
+}
+
+.result-card.success .result-icon svg {
+    stroke: #1a7a4a;
+}
+
+/* Variazione Errore (Rosso) */
+.result-card.error {
+    border-top: 4px solid var(--error-color);
+}
+
+.result-card.error .result-icon {
+    background: var(--error-bg);
+    color: var(--error-color);
+}
+
+.result-card.error .result-icon svg {
+    stroke: var(--error-color);
+}
+
+/* Intestazione interna alla schedina */
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
     margin-bottom: 2rem;
 }
 
-.supply-table th {
-    background-color: var(--navy-700);
-    color: var(--white);
-    font-weight: 600;
-    text-align: left;
-    padding: 1rem 1.5rem;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-}
-
-.supply-table td {
-    padding: 1rem 1.5rem;
-    color: var(--navy-900);
-    font-size: 0.95rem;
-    border-bottom: 1px solid var(--navy-100);
-}
-
-.supply-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.supply-table tbody tr:nth-child(even) {
-    background-color: rgba(10, 22, 40, 0.02);
-}
-
-.supply-table tbody tr:hover {
-    background-color: var(--navy-100);
-    transition: background-color var(--transition);
-}
-
-.table-links {
+.result-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.table-links a {
-    color: var(--navy-700);
-    text-decoration: none;
-    font-weight: 500;
+.result-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.result-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--navy-900);
+    margin: 0 0 0.2rem 0;
+}
+
+.result-message {
     font-size: 0.95rem;
+    color: var(--navy-600);
+    margin: 0;
+}
+
+/* Tabella dettagli interna alla scheda (Rifornimento / Supply) */
+.supply-details {
+    background: rgba(10, 22, 40, 0.02);
+    border: 1px solid var(--navy-100);
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.supply-details table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.supply-details td {
+    padding: 0.6rem 0;
+    font-size: 0.95rem;
+}
+
+.supply-details tr td:first-child {
+    color: var(--navy-600);
+    font-weight: 500;
+    width: 40%;
+}
+
+.supply-details tr td:last-child {
+    color: var(--navy-900);
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Badge ID specifico */
+.supply-id-badge {
+    background: var(--navy-100);
+    color: var(--navy-700);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* Bottoni e link di Azione */
+.result-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.result-actions .btn-primary,
+.result-actions .btn-secondary {
+    width: 100%;
+}
+
+.result-actions p {
+    margin: 0;
+}
+
+.result-actions a[href*="/home"] {
+    color: var(--navy-600);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
     transition: color var(--transition);
 }
 
-.table-links a:hover {
-    color: var(--navy-900);
+.result-actions a[href*="/home"]:hover {
+    color: var(--navy-800);
     text-decoration: underline;
 }
 
+/* Regola speciale per il bottone Home fisso in alto a destra */
 .fixed-home-btn {
     position: fixed;
     top: 1.5rem;
@@ -117,7 +203,6 @@
 .fixed-home-btn:hover {
     background: var(--navy-100);
     border-color: var(--navy-400);
-    color: var(--navy-800);
 }
 
 @media (max-width: 48rem) {
@@ -127,17 +212,7 @@
         align-self: flex-end;
     }
 
-    .page-wrapper {
-        padding: 1rem 0.75rem;
-    }
-
-    .table-centered {
-        overflow-x: auto;
-    }
-
-    .table-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.2rem;
+    .result-card {
+        padding: 1.5rem;
     }
 }
