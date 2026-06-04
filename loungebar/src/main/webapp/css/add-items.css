@@ -1,13 +1,3 @@
-/* 
-body {
-    font-weight: 300;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
-
-
-
 
 h2 {
     font-weight: 500;
@@ -38,7 +28,7 @@ form {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 20px 30px;
-    align-items: end;
+    align-items: center;
 }
 
  label {
@@ -74,8 +64,11 @@ form {
 }
 
 .inputs:hover {
-  outline: none;
-  border-color: var(--navy-400);
+  border-color: var(--navy-200);
+}
+
+input:focus {
+    box-shadow: none;
 }
 
 
@@ -91,7 +84,6 @@ button {
     border: 1px solid var(--navy-700);
     border-radius: 6px;
     letter-spacing: 0.16em;
-    box-shadow: 0 2px 8px  rgba(10, 22, 40, 0.541);
     grid-column: 1 / -1;
     text-transform: uppercase;
     cursor: pointer;
@@ -158,33 +150,24 @@ li {
     animation: slideIn var(--transition);
 }
 
-.item-name {
-    color: var(--navy-600);
-}
-
 .stepper-input {
     display: inline-flex;
-    align-items: center;
-    border: .5px solid #ccc;
+    align-items: stretch;
     border-radius: 6px;
-    overflow: hidden;
 }
 
-/*.stepper-input input[type="number"] {*/
-/*    width: 100%;*/
-/*    text-align: center;*/
-/*    font-size: 16px;*/
-/*    font-weight: 500;*/
-/*    border: none;*/
-/*    outline: none;*/
-/*}*/
+.stepper-input input {
+    border: 2px solid var(--navy-100);
+    border-radius: 0;
+}
 
 .stepper-btn {
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: auto;
     background: #f5f5f5;
     border: 2px solid var(--navy-100);
     border-radius: 6px;
+    margin: 0;
     font-size: 20px;
     cursor: pointer;
     color: #333;
@@ -193,21 +176,21 @@ li {
 }
 
 .minus {
-    border-right: 3px solid var(--navy-100);
+    border-right: 1px solid var(--navy-100);
     border-radius: 6px 0 0 6px;
 }
 
 .plus {
-    border-left: 3px solid var(--navy-100);
+    border-left: 1px solid var(--navy-100);
     border-radius: 0 6px 6px 0;
 }
 
 .stepper-btn:hover {
-    background: var(--navy-200);
+    background: #e8e8e8;
 }
 
 .stepper-btn:active {
-    background: var(--navy-400);
+    background: var(--navy-100);
 }
 
 .stepper-btn:disabled {

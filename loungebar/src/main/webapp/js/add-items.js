@@ -3,6 +3,7 @@ const ENDPOINT = "/loungebar/rest/items";
 
 async function addItem() {
 
+    // retrieve dato from form
     const form = document.getElementById('addItemForm');
 
     const payload = ({
@@ -13,6 +14,7 @@ async function addItem() {
         }
     });
 
+    // send request
     try {
         console.log(JSON.stringify(payload));
 
@@ -32,27 +34,51 @@ async function addItem() {
             return;
         }
 
+        // parse response
         const data = await response.json();
 
         const item = data.orderItem;
         console.log(item);
 
-        const li = document.createElement('li');
-        // li.textContent = `${item.drinkName} x ${item.quantity} `;
-        const name = document.createElement('span');
-        name.textContent = item.drinkName;
+        const itemList = document.getElementById('itemList');
 
-        const qty = document.createElement('span');
-        qty.textContent = `x ${item.quantity}`;
+        // find <li> with same drinkName
+        const items = itemList.querySelectorAll('li');
+        let existingItem = null;
 
-        li.appendChild(name);
-        li.appendChild(qty);
-        document.getElementById('itemList').appendChild(li);
+        items.forEach(li => {
+            if (li.querySelector('.item-name').textContent === item.drinkName) {
+                existingItem = li;
+            }
+        });
+
+        // if exists, update; otherwise, insert
+        if (existingItem) {
+
+            existingItem.querySelector('.item-qty').textContent = `x ${item.quantity}`;
+        }
+        else {
+            const li = document.createElement('li');
+
+            const name = document.createElement('span');
+            name.classList.add('item-name');
+            name.textContent = item.drinkName;
+
+            const qty = document.createElement('span');
+            name.classList.add('item-qty');
+            qty.textContent = `x ${item.quantity}`;
+
+            li.appendChild(name);
+            li.appendChild(qty);
+            itemList.appendChild(li);
+        }
 
     } catch (err) {
         console.error("Fetch error: ", err);
     }
 }
+
+
 
 function step(fieldId, delta) {
     const input = document.getElementById(fieldId);
@@ -60,9 +86,11 @@ function step(fieldId, delta) {
     const max = parseInt(input.max);
     const current = parseInt(input.value) || min;
     input.value = Math.min(max, Math.max(min, current + delta));
+
     updateStepperButtons(input);
 }
 
+// for the input: if I insert a value out of permitted range, fix the input to closest valid input
 function clamp(input) {
     const val = parseInt(input.value);
     const min = parseFloat(input.min);
@@ -73,6 +101,7 @@ function clamp(input) {
     updateStepperButtons(input);
 }
 
+// update the STATE of the buttons (enabled/disabled)
 function updateStepperButtons(input) {
     const val = parseInt(input.value);
     const container = input.closest('.stepper-input');

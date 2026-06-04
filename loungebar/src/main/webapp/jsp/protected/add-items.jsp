@@ -14,9 +14,9 @@
         <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
         <link rel="stylesheet" href="<c:url value='/css/components.css'/>">
         <link rel="stylesheet" href="<c:url value='/css/add-items.css'/>">
-        <!-- <link rel="stylesheet" href="../../css/base.css">
+        <link rel="stylesheet" href="../../css/base.css">
         <link rel="stylesheet" href="../../css/components.css">
-        <link rel="stylesheet" href="../../css/add-items.css"> -->
+        <link rel="stylesheet" href="../../css/add-items.css">
     </head>
     <body>
 
@@ -46,16 +46,14 @@
                     </c:forEach>
                 </select>
 
-                <div class="form-group">
-                    <label for="quantity">Quantity:</label>
-                    <div class="stepper-input">
-                        <button type="button" class="stepper-btn minus" onclick="step('quantity', -1)">−</button>
-                        <input class="inputs form-control" type="number" id="quantity" name="quantity" value="1" min="1" max="10" oninput="clamp(this)">
-                        <button type="button" class="stepper-btn plus" onclick="step('quantity', +1)">+</button>
-                    </div>
-
-                    <button class="btn" type="button" onclick="addItem()">Add to order</button>
+                <label for="quantity">Quantity:</label>
+                <div class="stepper-input">
+                    <button type="button" class="stepper-btn minus" onclick="step('quantity', -1)">−</button>
+                    <input class="inputs form-control" type="number" id="quantity" name="quantity" value="1" min="1" max="10" oninput="clamp(this)">
+                    <button type="button" class="stepper-btn plus" onclick="step('quantity', +1)">+</button>
                 </div>
+
+                <button class="btn" type="button" onclick="addItem()">Add to order</button>
 
             </form>
             
@@ -65,7 +63,10 @@
                 <h3>Order Summary:</h3>
                 <ul class="item-list" id="itemList">
                     <c:forEach var="item" items="${order}">
-                        <li> ${item.drinkName} &nbsp &nbsp &nbsp x ${item.quantity} </li>
+                        <li>
+                            <span class="item-name">${item.drinkName}</span>
+                            <span class="item-qty">x ${item.quantity}</span>
+                        </li>
                     </c:forEach>
                 </ul>
             </div>

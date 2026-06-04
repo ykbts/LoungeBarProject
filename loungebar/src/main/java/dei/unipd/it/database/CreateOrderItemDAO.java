@@ -18,7 +18,10 @@ public class CreateOrderItemDAO extends AbstractDAO<OrderItem> {
 
     /** * SQL statement used to insert a new order item and return the created record.
      */
-    private static final String STATEMENT = "INSERT INTO lounge.OrderItem (drink_name, orderID, quantity) VALUES (?, ?, ?) RETURNING *";
+    private static final String STATEMENT = "INSERT INTO lounge.OrderItem (drink_name, orderID, quantity) VALUES (?, ?, ?)" +
+            "ON CONFLICT (drink_name, orderID) " +
+            "DO UPDATE SET quantity = lounge.OrderItem.quantity + EXCLUDED.quantity" +
+            " RETURNING *";
 
     /**
      * The order item data to be persisted.
