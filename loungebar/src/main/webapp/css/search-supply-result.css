@@ -56,3 +56,8 @@
 body {
     padding-top: 3.5rem;
 }
+
+.back-link.search {
+    right: unset;
+    left: 5%;
+}

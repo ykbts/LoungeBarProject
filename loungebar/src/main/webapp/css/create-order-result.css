@@ -58,6 +58,8 @@
     border-bottom: 1px solid var(--navy-100);
     color: var(--navy-700);
     font-size: 0.92rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .order-details li:last-child {
@@ -87,14 +89,19 @@
     color: var(--navy-900);
 }
 
+body {
+    padding-top: 3.5rem;
+}
+
+.back-link.order {
+    right: unset;
+    left: 5%;
+}
+
 @media (max-width: 768px) {
     .success,
     .error,
     .order-details {
         padding: 1.5rem;
     }
-}
-
-body {
-    padding-top: 3.5rem;
 }

@@ -52,6 +52,8 @@ form {
 }
 
 .items-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -63,6 +65,7 @@ form {
     border: 2px solid var(--navy-100);
     border-radius: 6px;
     padding: 10px 15px;
+    outline: none;
     font-family: 'DM Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 300;
@@ -104,10 +107,10 @@ button {
     font-weight: 500;
     letter-spacing: 1px;
     color: var(--white);
-    background: linear-gradient(135deg, var(--navy-700), var(--navy-600));
+    background: var(--navy-600);
     border: none;
     border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.35);
+    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.25);
     cursor: pointer;
     text-decoration: none;
     transition:
@@ -127,11 +130,9 @@ button:active {
     transform: scale(0.95);
 }
 
- /* remove that shitty arrow
+/*remove that shitty arrow */
 input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button { display: none; } */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button { opacity: 0.3; }
+input[type="number"]::-webkit-outer-spin-button { display: none; }
 
 
 .item-list {
@@ -141,6 +142,7 @@ input[type="number"]::-webkit-outer-spin-button { opacity: 0.3; }
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: .7rem;
     color: var(--white);
 }
 
@@ -151,7 +153,8 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    gap: 2rem;
     animation: slideIn var(--transition);
 }
 
@@ -159,25 +162,58 @@ li {
     color: var(--navy-600);
 }
 
-a {
-    position: fixed;
-    top: 2%;
-    right: 5%;
-    margin-top: 40px;
-    padding: 0 1rem;
-    border-radius: 15px;
-    color: var(--navy-700);
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color var(--transition), background-color var(--transition);
+.stepper-input {
+    display: inline-flex;
+    align-items: center;
+    border: .5px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
-a:hover {
-  color: var(--navy-400);
-  background-color: var(--navy-100);
+/*.stepper-input input[type="number"] {*/
+/*    width: 100%;*/
+/*    text-align: center;*/
+/*    font-size: 16px;*/
+/*    font-weight: 500;*/
+/*    border: none;*/
+/*    outline: none;*/
+/*}*/
+
+.stepper-btn {
+    width: 40px;
+    height: 40px;
+    background: #f5f5f5;
+    border: 2px solid var(--navy-100);
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    transition: background 0.25s;
+    user-select: none;
+}
+
+.minus {
+    border-right: 3px solid var(--navy-100);
+    border-radius: 6px 0 0 6px;
+}
+
+.plus {
+    border-left: 3px solid var(--navy-100);
+    border-radius: 0 6px 6px 0;
+}
+
+.stepper-btn:hover {
+    background: var(--navy-200);
+}
+
+.stepper-btn:active {
+    background: var(--navy-400);
+}
+
+.stepper-btn:disabled {
+    color: #bbb;
+    cursor: not-allowed;
+    background: #f5f5f5;
 }
 
 

@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,11 +8,11 @@
 
         <title>Orders of the Bar</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<%--    <link rel="stylesheet" href="<c:url value='/css/base.css'/>">--%>
-<%--    <link rel="stylesheet" href="<c:url value="/css/search-order-result.css"/>">--%>
-    <link rel="stylesheet" href="<c:url value='/css/search-order-result.css'/>">
-</head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="stylesheet" href="<c:url value='/css/base.css'/>">
+        <link rel="stylesheet" href="<c:url value='/css/components.css'/>">
+        <link rel="stylesheet" href="<c:url value='/css/search-order-result.css'/>">
+    </head>
 
     <body>
         <div class="title">
@@ -39,7 +41,8 @@
                                             ${order.id}
                                     </a>
                                 </td>
-                                <td>${order.dateTime}</td>
+                                <td>${fn:replace(fn:substring(order.dateTime, 0, 16), 'T', ' ')}</td>
+<%--                                <td>${order.dateTime}</td>--%>
                                 <td>${order.waiterID}</td>
                                 <td id="status-cell-${order.id}">${order.status}</td>
                                 <td>${order.tableID}</td>

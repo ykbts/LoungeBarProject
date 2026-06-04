@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -30,7 +32,7 @@
                 <li><strong>Table:</strong> ${order.tableID}</li>
                 <li><strong>Waiter:</strong> ${order.waiterID}</li>
                 <li><strong>Status:</strong> ${order.status}</li>
-                <li><strong>Date:</strong> ${order.dateTime}</li>
+                <li><strong>Date:</strong> ${fn:replace(fn:substring(order.dateTime, 0, 16), 'T', ' ')}</li>
             </ul>
         </div>
 
@@ -43,8 +45,8 @@
     </c:if>
 
     <br>
-    <a href="${pageContext.request.contextPath}/home">Back to Home</a>
-    <a href="${pageContext.request.contextPath}/jsp/protected/create-order.jsp">Create Another Order</a>
+    <a class="back-link" href="${pageContext.request.contextPath}/home">Back to Home</a>
+    <a class="back-link order" href="${pageContext.request.contextPath}/jsp/protected/create-order.jsp">Create Another Order</a>
 
 </div>
 </body>

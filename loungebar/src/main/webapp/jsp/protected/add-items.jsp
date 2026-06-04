@@ -45,13 +45,18 @@
                         <option value="${product.name}">${product.name} &nbsp &nbsp  €${product.price}</option>
                     </c:forEach>
                 </select>
-            
 
-                <label for="quantity">Quantity:</label>
-                <input class="inputs form-control" type="number" id="quantity" name="quantity" value="1" min="1">
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <div class="stepper-input">
+                        <button type="button" class="stepper-btn minus" onclick="step('quantity', -1)">−</button>
+                        <input class="inputs form-control" type="number" id="quantity" name="quantity" value="1" min="1" max="10" oninput="clamp(this)">
+                        <button type="button" class="stepper-btn plus" onclick="step('quantity', +1)">+</button>
+                    </div>
 
-                <button class="btn" type="button" onclick="addItem()">Add to order</button>
-                
+                    <button class="btn" type="button" onclick="addItem()">Add to order</button>
+                </div>
+
             </form>
             
             <br>

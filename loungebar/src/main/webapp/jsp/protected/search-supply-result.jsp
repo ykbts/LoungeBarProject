@@ -13,8 +13,6 @@
 </head>
 <body>
 
-<a href="<c:url value="/home"/>" class="fixed-home-btn">Home</a>
-
 <div class="page-wrapper">
 
     <div class="table-centered">
@@ -46,8 +44,8 @@
             <p class="page-subtitle">The inventory is empty or no supplies match your filters.</p>
         </c:if>
 
-    <p><a href="<c:url value="/supply/search"/>">Back to Search</a></p>
-    <p><a href="<c:url value="/home"/>">Back to Home</a></p>
+    <p><a class="back-link search" href="<c:url value="/supply/search"/>">Back to Search</a></p>
+    <p><a class="back-link" href="<c:url value="/home"/>">Back to Home</a></p>
 
     </div>
 </div>

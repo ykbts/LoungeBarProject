@@ -12,7 +12,6 @@ body {
     padding: 2.5rem 2rem;
 }
 
-/* Title */
 .title {
     display: flex;
     flex-direction: column;
@@ -42,7 +41,7 @@ h1::after {
     border-radius: 2px;
 }
 
-/* Orders table */
+
 .table {
     width: 100%;
     max-width: 1000px;
@@ -62,7 +61,7 @@ h1::after {
     vertical-align: middle;
 }
 
-/* Header */
+
 .table thead th {
     background: linear-gradient(135deg, #112a5c, #1a3a72);
     color: #ffffff;
@@ -73,7 +72,7 @@ h1::after {
     border-color: #1a3a72;
 }
 
-/* Rows */
+
 .table tbody tr {
     transition: background 0.4s ease;
 }
@@ -93,7 +92,7 @@ h1::after {
     color: #112a5c;
 }
 
-/* Links */
+
 .table a {
     color: #112a5c;
     font-weight: 600;
@@ -123,7 +122,6 @@ h1::after {
     box-shadow: 0 0 0 4px rgba(46, 95, 163, 0.15);
 }
 
-/* Confirm button */
 .table button {
     padding: 0.5rem 1.1rem;
     font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
@@ -153,7 +151,7 @@ h1::after {
     cursor: not-allowed;
 }
 
-/* Empty state */
+
 body > p {
     max-width: 1000px;
     margin: 1.5rem auto 0;
@@ -161,16 +159,6 @@ body > p {
     font-size: 0.95rem;
 }
 
-/* Back link */
-body > a {
-    display: inline-block;
-    margin-top: 1.5rem;
-    color: #112a5c;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    transition: color 0.4s ease;
-}
 
 body > a:hover {
     color: #0a1628;
@@ -192,18 +180,4 @@ body > a:hover {
         padding: 8px 10px;
         font-size: 0.85rem;
     }
-}
-
-/* Home button */
-a[href$="/home"] {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1000;
-    margin: 0;
-    padding: 0.5rem 1rem;
-    background: #ffffff;
-    border: 1px solid #7fa4d2;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(10, 22, 40, 0.15);
 }

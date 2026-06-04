@@ -30,7 +30,7 @@
 
                     <div class="form-group">
                         <label for="tableInput">Table Number:</label>
-                        <input type="number" name="tableID" id="tableInput" placeholder="Ej: 5">
+                        <input type="number" name="tableID" id="tableInput">
                     </div>
 
                     <input type="hidden" name="dateTime" id="dateTimeInput">

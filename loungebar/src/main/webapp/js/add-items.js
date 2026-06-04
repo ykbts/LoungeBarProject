@@ -38,7 +38,15 @@ async function addItem() {
         console.log(item);
 
         const li = document.createElement('li');
-        li.textContent = `${item.drinkName} &nbsp &nbsp &nbsp x ${item.quantity} `;
+        // li.textContent = `${item.drinkName} x ${item.quantity} `;
+        const name = document.createElement('span');
+        name.textContent = item.drinkName;
+
+        const qty = document.createElement('span');
+        qty.textContent = `x ${item.quantity}`;
+
+        li.appendChild(name);
+        li.appendChild(qty);
         document.getElementById('itemList').appendChild(li);
 
     } catch (err) {
@@ -46,10 +54,36 @@ async function addItem() {
     }
 }
 
-
-function renderItems(items) {
-
-    for (const item of items) {
-
-    }
+function step(fieldId, delta) {
+    const input = document.getElementById(fieldId);
+    const min = parseInt(input.min);
+    const max = parseInt(input.max);
+    const current = parseInt(input.value) || min;
+    input.value = Math.min(max, Math.max(min, current + delta));
+    updateStepperButtons(input);
 }
+
+function clamp(input) {
+    const val = parseInt(input.value);
+    const min = parseFloat(input.min);
+    const max = parseFloat(input.max);
+    if (!isNaN(val)) {
+        input.value = Math.min(max, Math.max(min, val));
+    }
+    updateStepperButtons(input);
+}
+
+function updateStepperButtons(input) {
+    const val = parseInt(input.value);
+    const container = input.closest('.stepper-input');
+    const [btnMinus, btnPlus] = container.querySelectorAll('.stepper-btn');
+    btnMinus.disabled = val <= parseInt(input.min);
+    btnPlus.disabled  = val >= parseInt(input.max);
+}
+
+// set buttons state on window loaded
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.stepper-input input').forEach(input => {
+        updateStepperButtons(input);
+    });
+});
