@@ -1,21 +1,47 @@
 -- ##########################################################
 --      SUPPLY POPULATION
--- ##########################################################
-INSERT INTO lounge.Supply (name, units_available) VALUES
-('Coca Cola', 100), ('Coca Cola Zero', 100), ('Tonic Water', 90),
-('Lemon Soda', 90), ('Soda Water', 80), ('Sparkling Water', 60),
-('Still Water', 70), ('Lemon Juice Bottle', 40), ('Strawberry Juice Bottle', 35),
-('Orange Juice Bottle', 55), ('Pineapple Juice Bottle', 45), ('Gin Mare', 1),
-('Gin Malfy', 50), ('Gin Hendricks', 50), ('Gin Bombay', 50),
-('Vodka Beluga', 50), ('Vodka Belvedere', 50), ('Vodka Grey Goose', 50),
-('Vodka Keglevich', 50), ('Rum Don Papa', 50), ('Rum Ron Zacapa', 50),
-('Rum Diplomatico', 50), ('Tequila', 50), ('Amaro del Capo', 50),
-('Amaro Jefferson', 50), ('Amaro Jagermeister', 50), ('Whiskey Oban', 50),
-('Whiskey Jack Daniels', 50), ('Whiskey Jim Beam', 50), ('Red Wine', 100),
-('White Wine', 100), ('Prosecco', 100), ('Beer Lager Draft', 50),
-('Beer IPA Draft', 50), ('Coffee Classic', 200), ('Coffee Decaffeinated', 200),
-('Sugar Sachet', 300), ('Straws', 500), ('Napkins', 400), ('Ice Cubes Bag', 20);
-
+-- #########################################################
+INSERT INTO lounge.Supply (name, units_available, type) VALUES
+('Coca Cola', 100, 'DISCRETE'),
+('Coca Cola Zero', 100, 'DISCRETE'),
+('Tonic Water', 90, 'DISCRETE'),
+('Lemon Soda', 90, 'DISCRETE'),
+('Soda Water', 80, 'DISCRETE'),
+('Sparkling Water', 60, 'DISCRETE'),
+('Still Water', 70, 'DISCRETE'),
+('Lemon Juice Bottle', 40, 'BOTTLE_1L'),
+('Strawberry Juice Bottle', 35, 'BOTTLE_1L'),
+('Orange Juice Bottle', 55, 'BOTTLE_1L'),
+('Pineapple Juice Bottle', 45, 'BOTTLE_1L'),
+('Gin Mare', 100, 'BOTTLE_0_7L'),
+('Gin Malfy', 50, 'BOTTLE_0_7L'),
+('Gin Hendricks', 50, 'BOTTLE_0_7L'),
+('Gin Bombay', 50, 'BOTTLE_0_7L'),
+('Vodka Beluga', 50, 'BOTTLE_0_7L'),
+('Vodka Belvedere', 50, 'BOTTLE_0_7L'),
+('Vodka Grey Goose', 50, 'BOTTLE_0_7L'),
+('Vodka Keglevich', 50, 'BOTTLE_0_7L'),
+('Rum Don Papa', 50, 'BOTTLE_0_7L'),
+('Rum Ron Zacapa', 50, 'BOTTLE_0_7L'),
+('Rum Diplomatico', 50, 'BOTTLE_0_7L'),
+('Tequila', 50, 'BOTTLE_0_7L'),
+('Amaro del Capo', 50, 'BOTTLE_0_7L'),
+('Amaro Jefferson', 50, 'BOTTLE_0_7L'),
+('Amaro Jagermeister', 50, 'BOTTLE_0_7L'),
+('Whiskey Oban', 50, 'BOTTLE_0_7L'),
+('Whiskey Jack Daniels', 50, 'BOTTLE_0_7L'),
+('Whiskey Jim Beam', 50, 'BOTTLE_0_7L'),
+('Red Wine', 100, 'BOTTLE_0_7L'),
+('White Wine', 100, 'BOTTLE_0_7L'),
+('Prosecco', 100, 'BOTTLE_0_7L'),
+('Beer Lager Draft', 50, 'DISCRETE'),
+('Beer IPA Draft', 50, 'DISCRETE'),
+('Coffee Classic', 200, 'DISCRETE'),
+('Coffee Decaffeinated', 200, 'DISCRETE'),
+('Sugar Sachet', 300, 'DISCRETE'),
+('Straws', 500, 'DISCRETE'),
+('Napkins', 400, 'DISCRETE'),
+('Ice Cubes Bag', 20, 'DISCRETE');
 -- ##########################################################
 --      DRINK POPULATION
 -- ##########################################################
@@ -54,7 +80,18 @@ INSERT INTO lounge.Composition (drink_name, supply_name, amount) VALUES
 ('Caffè Decaffeinato', 'Coffee Decaffeinated', 1), ('Caffè Decaffeinato', 'Sugar Sachet', 1), ('Caffè Decaffeinato', 'Napkins', 1),
 ('Acqua Naturale', 'Still Water', 1), ('Acqua Frizzante', 'Sparkling Water', 1), ('Coca Cola Can', 'Coca Cola', 1),
 ('Red Wine Glass', 'Red Wine', 1), ('White Wine Glass', 'White Wine', 1), ('Prosecco Glass', 'Prosecco', 1),
-('Lager Beer Draft', 'Beer Lager Draft', 1), ('IPA Beer Draft', 'Beer IPA Draft', 1), ('Orange Juice', 'Orange Juice Bottle', 1), ('Orange Juice', 'Straws', 1);
+('Lager Beer Draft', 'Beer Lager Draft', 1), ('IPA Beer Draft', 'Beer IPA Draft', 1), ('Orange Juice', 'Orange Juice Bottle', 1), ('Orange Juice', 'Straws', 1),
+('Old Fashioned', 'Whiskey Jack Daniels', 2), ('Old Fashioned', 'Ice Cubes Bag', 1),
+('Amaretto Sour', 'Amaro Jefferson', 2), ('Amaretto Sour', 'Ice Cubes Bag', 1),
+('Negroni', 'Gin Mare', 2), ('Negroni', 'Ice Cubes Bag', 1),
+('Americano', 'Amaro del Capo', 2), ('Americano', 'Ice Cubes Bag', 1),
+('Paloma', 'Tequila', 2), ('Paloma', 'Ice Cubes Bag', 1),
+('Moscow Mule', 'Vodka Belvedere', 2), ('Moscow Mule', 'Ice Cubes Bag', 1),
+('Gin Fizz', 'Gin Hendricks', 2), ('Gin Fizz', 'Ice Cubes Bag', 1),
+('Long Island Iced Tea', 'Vodka Belvedere', 1), ('Long Island Iced Tea', 'Ice Cubes Bag', 1),
+('Sex on the Beach', 'Vodka Grey Goose', 2), ('Sex on the Beach', 'Ice Cubes Bag', 1),
+('Tequila Sunrise', 'Tequila', 2), ('Tequila Sunrise', 'Ice Cubes Bag', 1),
+('Caipirinha', 'Tequila', 2), ('Caipirinha', 'Ice Cubes Bag', 1);;
 
 -- ##########################################################
 --      TABLES POPULATION
