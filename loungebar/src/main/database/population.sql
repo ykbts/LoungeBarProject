@@ -13,7 +13,7 @@ INSERT INTO lounge.Supply (name, units_available, type) VALUES
 ('Strawberry Juice Bottle', 35, 'BOTTLE_1L'),
 ('Orange Juice Bottle', 55, 'BOTTLE_1L'),
 ('Pineapple Juice Bottle', 45, 'BOTTLE_1L'),
-('Gin Mare', 1, 'BOTTLE_0_7L'),
+('Gin Mare', 100, 'BOTTLE_0_7L'),
 ('Gin Malfy', 50, 'BOTTLE_0_7L'),
 ('Gin Hendricks', 50, 'BOTTLE_0_7L'),
 ('Gin Bombay', 50, 'BOTTLE_0_7L'),
@@ -80,7 +80,18 @@ INSERT INTO lounge.Composition (drink_name, supply_name, amount) VALUES
 ('Caffè Decaffeinato', 'Coffee Decaffeinated', 1), ('Caffè Decaffeinato', 'Sugar Sachet', 1), ('Caffè Decaffeinato', 'Napkins', 1),
 ('Acqua Naturale', 'Still Water', 1), ('Acqua Frizzante', 'Sparkling Water', 1), ('Coca Cola Can', 'Coca Cola', 1),
 ('Red Wine Glass', 'Red Wine', 1), ('White Wine Glass', 'White Wine', 1), ('Prosecco Glass', 'Prosecco', 1),
-('Lager Beer Draft', 'Beer Lager Draft', 1), ('IPA Beer Draft', 'Beer IPA Draft', 1), ('Orange Juice', 'Orange Juice Bottle', 1), ('Orange Juice', 'Straws', 1);
+('Lager Beer Draft', 'Beer Lager Draft', 1), ('IPA Beer Draft', 'Beer IPA Draft', 1), ('Orange Juice', 'Orange Juice Bottle', 1), ('Orange Juice', 'Straws', 1),
+('Old Fashioned', 'Whiskey Jack Daniels', 2), ('Old Fashioned', 'Ice Cubes Bag', 1),
+('Amaretto Sour', 'Amaro Jefferson', 2), ('Amaretto Sour', 'Ice Cubes Bag', 1),
+('Negroni', 'Gin Mare', 2), ('Negroni', 'Ice Cubes Bag', 1),
+('Americano', 'Amaro del Capo', 2), ('Americano', 'Ice Cubes Bag', 1),
+('Paloma', 'Tequila', 2), ('Paloma', 'Ice Cubes Bag', 1),
+('Moscow Mule', 'Vodka Belvedere', 2), ('Moscow Mule', 'Ice Cubes Bag', 1),
+('Gin Fizz', 'Gin Hendricks', 2), ('Gin Fizz', 'Ice Cubes Bag', 1),
+('Long Island Iced Tea', 'Vodka Belvedere', 1), ('Long Island Iced Tea', 'Ice Cubes Bag', 1),
+('Sex on the Beach', 'Vodka Grey Goose', 2), ('Sex on the Beach', 'Ice Cubes Bag', 1),
+('Tequila Sunrise', 'Tequila', 2), ('Tequila Sunrise', 'Ice Cubes Bag', 1),
+('Caipirinha', 'Tequila', 2), ('Caipirinha', 'Ice Cubes Bag', 1);;
 
 -- ##########################################################
 --      TABLES POPULATION

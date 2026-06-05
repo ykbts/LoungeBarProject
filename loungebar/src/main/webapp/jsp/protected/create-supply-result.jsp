@@ -7,6 +7,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LoungeBar - Create Supply Result</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/base.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/components.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/create-supply-result.css">
+
     </head>
 
     <body>
@@ -23,7 +27,9 @@
         </c:if>
 
         <hr/>
-        <p><a href="<c:url value="/jsp/protected/search-supply-form.jsp"/>">Add another supply</a></p>
+            <div class="result-actions">
+                <a href="<c:url value="/jsp/protected/search-supply-form.jsp"/>" class="btn-secondary">Add Another Supply</a>
+            </div>
         <p><a href="<c:url value="/home"/>">Back to Home</a></p>
     </body>
 </html>
