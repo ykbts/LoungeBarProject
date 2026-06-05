@@ -3,14 +3,23 @@ const ENDPOINT = "/loungebar/rest/items";
 
 async function addItem() {
 
-    // retrieve dato from form
+    // retrieve data from form
     const form = document.getElementById('addItemForm');
+
+    const name = form.querySelector('[name="productID"]').value;
+    const id = form.querySelector('[name="orderID"]').value;
+    const quantity = form.querySelector('[name="quantity"]').value;
+
+    if (!name || !quantity) {
+        alert("Fulfill all fields!");
+        return;
+    }
 
     const payload = ({
         orderItem: {
-            drinkName: form.querySelector('[name="productID"]').value,
-            orderID:   parseInt(form.querySelector('[name="orderID"]').value),
-            quantity:  parseInt(form.querySelector('[name="quantity"]').value)
+            drinkName: name,
+            orderID:   parseInt(id),
+            quantity:  parseInt(quantity)
         }
     });
 

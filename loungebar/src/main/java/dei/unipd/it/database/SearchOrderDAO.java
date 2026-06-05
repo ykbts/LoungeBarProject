@@ -16,7 +16,7 @@ public final class SearchOrderDAO extends AbstractDAO<List<Orders>> {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "SELECT * FROM lounge.Orders ORDER BY id DESC";
+    private static final String STATEMENT = "SELECT * FROM lounge.Orders";
 
     private final long id;
     private final LocalDateTime dateTime;
@@ -71,6 +71,7 @@ public final class SearchOrderDAO extends AbstractDAO<List<Orders>> {
                 }
             }
         }
+        sb.append(" ORDER BY id DESC");
         sb.append(";");
 
 

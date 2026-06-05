@@ -1,10 +1,12 @@
 package dei.unipd.it.servlets;
 
+import dei.unipd.it.database.SearchOrderDAO;
 import dei.unipd.it.database.SearchOrderItemsByTableDAO;
 import dei.unipd.it.resources.Actions;
 import dei.unipd.it.resources.LogContext;
 import dei.unipd.it.resources.Message;
 import dei.unipd.it.resources.OrderItem;
+import dei.unipd.it.resources.Orders;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,8 +16,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "SearchOrderItemByTableServlet", value = "/order/myOrder")
-public final class SearchOrderItemByTableServlet extends AbstractDatabaseServlet {
+@WebServlet(name = "SearchOrderByTableServlet", value = "/order/myOrder")
+public final class SearchOrderByTableServlet extends AbstractDatabaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,15 +36,21 @@ public final class SearchOrderItemByTableServlet extends AbstractDatabaseServlet
         LogContext.setAction(Actions.SEARCH_MY_ORDER);
 
         List<OrderItem> orderItemList = null;
+        Orders order = null;
         Message m = null;
 
         try {
             int table = Integer.parseInt(req.getParameter("table"));
 
+            // search for ORDERITEMLIST
             orderItemList = new SearchOrderItemsByTableDAO(getConnection(), table).access().getOutputParam();
+            LOGGER.info("Order's ITEMS successfully searched for table: {}", table);
+            
+            // search for ORDER
+            order = new SearchOrderDAO(getConnection(), -1, null, "PENDING", null, null, table).access().getOutputParam().get(0);
+            LOGGER.info("PENDING Order ({}) successfully searched for table: {}", order.getId() ,table);
 
-            LOGGER.info("Items successfully searched for table: {}", table);
-            m = new Message("Items successfully searched");
+            m = new Message("Order successfully searched");
 
         }
         catch (SQLException ex) {
@@ -50,10 +58,11 @@ public final class SearchOrderItemByTableServlet extends AbstractDatabaseServlet
             m = new Message("Unexpected error while accessing the database", "E200",
                     ex.getMessage());
 
-            LOGGER.error("Unexpected error while accessing the database searching for ORDER_ITEMS", ex);
+            LOGGER.error("Unexpected error while accessing the database searching for ORDER", ex);
         }
 
         try {
+            req.setAttribute("orderID", order != null ? order.getId() : -1);
             req.setAttribute("orderItemList", orderItemList);
             req.setAttribute("message", m);
 

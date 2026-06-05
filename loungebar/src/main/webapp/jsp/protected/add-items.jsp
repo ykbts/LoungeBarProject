@@ -21,15 +21,6 @@
     <body>
 
         <div class="page-wrapper page-wrapper--narrow">
-
-
-            <div class="${not empty orderItemList ? 'success' : 'error'}">
-                <strong>${not empty orderItemList ? message.message : "No order pending for this table."}</strong>
-                <c:if test="${not empty message.errorCode}">
-                    <p>Error Code: ${message.errorCode}</p>
-                    <p>Technical Details: ${message.errorDetails}</p>
-                </c:if>
-            </div>
         
             <h1>Review my Order</h1>
         
@@ -37,7 +28,7 @@
 
             <form id="addItemForm">
                 
-                <input type="hidden" name="orderID" value="${param.orderID}">
+                <input type="hidden" name="orderID" value="${orderID}">
 
                 <label for="productList">Product:</label>
                 <select class="inputs form-control" id="productList" name="productID">

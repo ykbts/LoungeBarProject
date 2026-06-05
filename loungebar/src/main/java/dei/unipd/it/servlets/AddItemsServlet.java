@@ -26,6 +26,7 @@ public final class AddItemsServlet extends AbstractDatabaseServlet {
         List<Drink> menu = null;
         List<OrderItem> order = null;
         Message m = null;
+        int id = -1;
 
         try {
 
@@ -34,7 +35,7 @@ public final class AddItemsServlet extends AbstractDatabaseServlet {
             LOGGER.info("Drinks successfully listed.");
 
             // list all the client order items
-            int id = Integer.parseInt(req.getParameter("orderID"));
+            id = Integer.parseInt(req.getParameter("orderID"));
             order = new SearchOrderItemDAO(getConnection(), null, id, -1).access().getOutputParam();
             LOGGER.info("Order successfully listed.");
 
@@ -47,6 +48,7 @@ public final class AddItemsServlet extends AbstractDatabaseServlet {
         }
 
         try {
+            req.setAttribute("orderID", id);
             req.setAttribute("menu", menu);
             req.setAttribute("order", order);
             req.setAttribute("message", m);
