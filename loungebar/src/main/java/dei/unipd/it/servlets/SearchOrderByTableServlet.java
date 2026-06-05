@@ -45,10 +45,12 @@ public final class SearchOrderByTableServlet extends AbstractDatabaseServlet {
             // search for ORDERITEMLIST
             orderItemList = new SearchOrderItemsByTableDAO(getConnection(), table).access().getOutputParam();
             LOGGER.info("Order's ITEMS successfully searched for table: {}", table);
-            
-            // search for ORDER
-            order = new SearchOrderDAO(getConnection(), -1, null, "PENDING", null, null, table).access().getOutputParam().get(0);
-            LOGGER.info("PENDING Order ({}) successfully searched for table: {}", order.getId() ,table);
+
+            if (!orderItemList.isEmpty()) {
+                // search for ORDER
+                order = new SearchOrderDAO(getConnection(), -1, null, "PENDING", null, null, table).access().getOutputParam().get(0);
+                LOGGER.info("PENDING Order ({}) successfully searched for table: {}", order.getId() ,table);
+            }
 
             m = new Message("Order successfully searched");
 

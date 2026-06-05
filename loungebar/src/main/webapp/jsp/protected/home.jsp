@@ -64,7 +64,7 @@
                         </svg>
                     </div>
                     <h3>My orders</h3>
-                    <p class="card-desc">Track your current and past orders at the bar</p>
+                    <p class="card-desc">Track your current order at the bar</p>
                     <div class="card-footer">
                         <a href="${pageContext.request.contextPath}/order/myOrder">
                             <button type="button">View orders</button>
